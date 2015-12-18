@@ -5,7 +5,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Dictionaries/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionaries/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionaries/Dictionary-ES-MX.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="{x:Type Window}">
