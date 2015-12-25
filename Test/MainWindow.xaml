@@ -1,0 +1,24 @@
+﻿<Window x:Class="Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"
+        xmlns:GxControls="clr-namespace:Gestionix.POS;assembly=GxCustomControlsLib">
+    <Window.Resources>
+        <Style TargetType="{x:Type GxControls:HintTextBox}">
+            <Setter Property="BorderBrush" Value="Red" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style TargetType="{x:Type GxControls:CurrencyHintTextBox}">
+            <Setter Property="BorderBrush" Value="Blue" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <TextBox Name="TxtN" Text="X" Width="150" />
+        <GxControls:HintTextBox Name="TxtS" Width="200" HintText="sobres" FontSize="18" Text="algo" />
+        <GxControls:CurrencyHintTextBox Name="TxtC" Width="150" HintText="0.00" DecimalValue="1366.69"  />
+        <TextBlock Text="{Binding ElementName=TxtN, Path=Text}" />
+        <TextBlock Text="{Binding ElementName=TxtS, Path=Text}" />
+        <TextBlock Text="{Binding ElementName=TxtC, Path=Text}" />
+    </StackPanel>
+</Window>

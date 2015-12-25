@@ -1,0 +1,59 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Gestionix.POS">
+    
+    <Style TargetType="{x:Type local:HintTextBox}">        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HintTextBox}">
+                    <Border Name="PART_Border" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="White" Padding="5" >
+                        <Grid>
+                            <TextBlock Name="PART_Watermark" Text="{TemplateBinding HintText}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="LightGray" Margin="3,0"/>
+                            <TextBox Name="PART_Writeable" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" VerticalAlignment="Stretch" Background="Transparent" Margin="0" 
+                                     Text="{Binding Text, 
+                                            Mode=TwoWay, 
+                                            UpdateSourceTrigger=PropertyChanged,  
+                                            RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"
+                                     TextWrapping="{TemplateBinding TextWrapping}" 
+                                     BorderThickness="0"                                     
+                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=PART_Writeable, Path=Text.IsEmpty}" Value="False">
+                            <Setter TargetName="PART_Watermark" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:CurrencyHintTextBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HintTextBox}">
+                    <Border Name="PART_Border" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="White" Padding="5" >
+                        <Grid>
+                            <TextBlock Name="PART_Watermark" Text="{TemplateBinding HintText}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="LightGray" Margin="3,0"/>
+                            <TextBox Name="PART_Writeable" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" VerticalAlignment="Stretch" Background="Transparent" Margin="0" 
+                                     Text="{Binding Text, 
+                                            Mode=TwoWay, 
+                                            UpdateSourceTrigger=PropertyChanged,  
+                                            RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"
+                                     TextWrapping="{TemplateBinding TextWrapping}" 
+                                     BorderThickness="0"
+                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>                            
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=PART_Writeable, Path=Text.IsEmpty}" Value="False">
+                            <Setter TargetName="PART_Watermark" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
