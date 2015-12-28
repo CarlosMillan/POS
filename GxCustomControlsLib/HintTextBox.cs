@@ -54,7 +54,6 @@ namespace Gestionix.POS
         {
             get { return (string)GetValue(HintTextProperty); }
             set { SetValue(HintTextProperty, value); }
-
         }
  
         static HintTextBox()

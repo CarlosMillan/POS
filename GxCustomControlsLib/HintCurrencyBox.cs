@@ -45,9 +45,9 @@ namespace Gestionix.POS
     ///     <MyNamespace:CurrencyHintTextBox/>
     ///
     /// </summary>
-    public class CurrencyHintTextBox : HintTextBox
+    public class HintCurrencyBox : HintTextBox
     {
-        public static readonly DependencyProperty DecimalValueProperty = DependencyProperty.Register("DecimalValue", typeof(decimal), typeof(CurrencyHintTextBox), new PropertyMetadata(null));
+        public static readonly DependencyProperty DecimalValueProperty = DependencyProperty.Register("DecimalValue", typeof(decimal), typeof(HintCurrencyBox), new PropertyMetadata(null));
 
         [Description("Decimal value")]
         public decimal DecimalValue
@@ -56,9 +56,9 @@ namespace Gestionix.POS
             set { SetValue(DecimalValueProperty, value); }
         }
 
-        static CurrencyHintTextBox()
+        static HintCurrencyBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CurrencyHintTextBox), new FrameworkPropertyMetadata(typeof(CurrencyHintTextBox)));            
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(HintCurrencyBox), new FrameworkPropertyMetadata(typeof(HintCurrencyBox)));            
         }
 
         public override void OnApplyTemplate()
@@ -76,16 +76,23 @@ namespace Gestionix.POS
         protected override void OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
             base.OnPreviewGotKeyboardFocus(e);
-            Text = Text.RawDecimal();
+            string NewString = Text.RawDecimal();
+
+            if (Text != NewString)
+                Text = NewString;
         }
 
         protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
             base.OnPreviewLostKeyboardFocus(e);
             decimal Value;
-            Decimal.TryParse(Text, out Value);
+            string StringValue = Text.RawDecimal();
+            Decimal.TryParse(StringValue, out Value);
             DecimalValue = Value;
-            Text = DecimalValue.FormatCurrency();
+
+            if (!String.IsNullOrEmpty(StringValue))
+                Text = DecimalValue.FormatCurrency();
+            else Text = StringValue;
         }
     }
 }

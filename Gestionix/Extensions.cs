@@ -8,12 +8,12 @@ namespace Gestionix
     {
         public static string RawDecimal(this string obj)
         {
-            string ClearText = obj.Replace("$", String.Empty).Replace(",", String.Empty);
+            string ClearedText = obj.Replace("$", String.Empty).Replace(",", String.Empty).Trim().Replace(" ", String.Empty);
 
-            if (!Expressions.IsDecimal.IsMatch(ClearText))
-                throw new FormatException("It must be decimal number");
+            if (!Expressions.IsDecimal.IsMatch(ClearedText))
+                ClearedText = String.Empty;
 
-            return ClearText;
+            return ClearedText;
         }
 
         /// <summary>
