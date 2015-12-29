@@ -34,9 +34,42 @@ namespace Gestionix
         /// <param name="number">number</param>
         /// <param name="number">precision</param>
         [DebuggerStepThrough]
-        public static string FormatCurrency<T>(this T number, int precision)
+        public static string FormatCurrency<T>(this T number, int scale)
         {
-            return string.Format(CultureInfo.CurrentCulture, String.Concat("{0:", String.Concat("C" + precision), "}"), number);
+            return string.Format(CultureInfo.CurrentCulture, String.Concat("{0:C", scale, "}"), number);
+        }
+
+        /// <summary>
+        /// Convert T object to formatted number.
+        /// <para>Remove .00 and add Comma each 3 digits.</para>
+        /// </summary>
+        /// <param name="number">number</param>
+        [DebuggerStepThrough]
+        public static string FormatNumber<T>(this T number)
+        {
+            return number.FormatNumber(2);
+        }
+
+        [DebuggerStepThrough]
+        public static string FormatNumber<T>(this T number, int scale)
+        {
+            return string.Format(CultureInfo.InvariantCulture, String.Concat("{0:n", scale ,"}"), number).Replace(".00", "");
+        }
+
+        /// <summary>
+        /// Convert T object to formatted number.
+        /// </summary>
+        /// <param name="number">number</param>
+        [DebuggerStepThrough]
+        public static string FormatDecimal<T>(this T number)
+        {
+            return number.FormatDecimal(2);
+        }
+
+        [DebuggerStepThrough]
+        public static string FormatDecimal<T>(this T number, int scale)
+        {
+            return string.Format(CultureInfo.InvariantCulture, String.Concat("{0:n", scale, "}"), number);
         }
     }
 }

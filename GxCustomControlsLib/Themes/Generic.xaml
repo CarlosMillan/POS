@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Gestionix.POS">
 
+    <!--INPUT TEXT-->
     <Style x:Key="HintTextBoxBaseStyle" TargetType="{x:Type TextBox}">
         <Setter Property="Template">
             <Setter.Value>
@@ -42,23 +43,26 @@
                         <Grid>
                             <TextBlock Name="PART_Watermark" Text="{TemplateBinding HintText}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="LightGray" Margin="3,0"/>
                             <PasswordBox Name="PART_Writeable" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" VerticalAlignment="Stretch" Background="Transparent" Margin="0" 
-                                         BorderThickness="0"                  
+                                         BorderThickness="0"    
+                                         local:PasswordHelper.Attach="True"
+                                         local:PasswordHelper.Password="{Binding Text,
+                                                                         Mode=TwoWay, 
+                                                                         UpdateSourceTrigger=PropertyChanged,
+                                                                         RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"
                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
-                                <!--<PasswordBox.Style>
-                                    <Style>
-                                        <Setter Property="local:PasswordBoxMonitor.IsMonitoring" Value="True"/>
-                                    </Style>
-                                </PasswordBox.Style>-->
                             </PasswordBox>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsEmpty, ElementName=PART_Writeable}" Value="True">
-                            <Setter TargetName="PART_Watermark" Property="Visibility" Value="Visible" />
+                        <DataTrigger Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Self}}" Value="False">
+                            <Setter TargetName="PART_Watermark" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type local:HintNumericBox}" BasedOn="{StaticResource HintTextBoxBaseStyle}" />
+    <!--INPUT TEXT END-->
 </ResourceDictionary>

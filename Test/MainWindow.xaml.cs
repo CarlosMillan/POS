@@ -27,7 +27,7 @@ namespace Test
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Keyboard.Focus(TxtC);
+            //Keyboard.Focus(TxtNu);
         }
     }
 }

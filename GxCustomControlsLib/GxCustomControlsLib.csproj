@@ -56,9 +56,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HintCurrencyBox.cs" />
-    <Compile Include="HintPasswordBox.cs" />
-    <Compile Include="HintTextBox.cs" />
+    <Compile Include="InputText\HintCurrencyBox.cs" />
+    <Compile Include="InputText\HintNumericBox.cs" />
+    <Compile Include="InputText\HintPasswordBox.cs" />
+    <Compile Include="InputText\HintTextBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
