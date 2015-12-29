@@ -27,8 +27,8 @@
         <TextBox Name="TxtN" Text="X" Width="150" Margin="5"/>
         <GxControls:HintTextBox Name="TxtS" Width="200" HintText="sobres" FontSize="18" Text="algo" Margin="5" />
         <GxControls:HintPasswordBox Name="TxtP" Width="150" HintText="password-d" Margin="5" />
-        <GxControls:HintNumericBox Name="TxtNu" Width="150" HintText="numeric" Margin="5" Scale="3" />
-        <GxControls:HintCurrencyBox Name="TxtC" Width="150" HintText="currency" Margin="5" Scale="4"/>
+        <GxControls:HintNumericBox Name="TxtNu" Width="150" HintText="numeric" Margin="5"/>
+        <GxControls:HintCurrencyBox Name="TxtC" Width="150" HintText="currency" Margin="5"/>
         <TextBlock Text="{Binding ElementName=TxtN, Path=Text}" />
         <TextBlock Text="{Binding ElementName=TxtS, Path=Text}" />
         <TextBlock Text="{Binding ElementName=TxtC, Path=Text}" />

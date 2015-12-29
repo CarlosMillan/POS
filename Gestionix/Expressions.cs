@@ -18,7 +18,7 @@ namespace Gestionix
         public static readonly Regex IsPostalCode = new Regex(@"^[0-9]{5}$", RegexOptions.Compiled);
         public static readonly Regex IsPhone = new Regex(@"^[\d- \(\)]{7,20}$");
         public static readonly Regex IsNumber = new Regex(@"\d");
-        public static readonly Regex IsDecimal = new Regex(@"^[-]{0,1}(\d*.)?\d+$", RegexOptions.Compiled);
+        public static readonly Regex IsDecimal = new Regex(@"^[-]{0,1}(\d*.)?\d*$", RegexOptions.Compiled);
         public static readonly Regex IsCurrency = new Regex(@"^\${0,1}\d*(\.{0,1}\d{0,2})$", RegexOptions.Compiled);
     }
 }

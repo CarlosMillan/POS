@@ -35,6 +35,7 @@ namespace Gestionix.POS
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            if (Scale == 0) SetValue(ScaleProperty, 2);
             Text = ValidateInput(Text, FormatNumberInput);
         }
 
