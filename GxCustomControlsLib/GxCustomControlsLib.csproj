@@ -24,15 +24,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,12 +57,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InputText\HintCurrencyBox.cs" />
-    <Compile Include="InputText\HintNumericBox.cs" />
-    <Compile Include="InputText\HintPasswordBox.cs" />
-    <Compile Include="InputText\HintTextBox.cs" />
+    <Compile Include="Input\HintCurrencyBox.cs" />
+    <Compile Include="Input\HintNumericBox.cs" />
+    <Compile Include="Input\HintPasswordBox.cs" />
+    <Compile Include="Input\HintSearchBox.cs" />
+    <Compile Include="Input\HintTextBox.cs" />
+    <Compile Include="Animated\ProgressRing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

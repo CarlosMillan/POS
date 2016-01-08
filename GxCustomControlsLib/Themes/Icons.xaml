@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="MagnifyingGlassTemplateIcon">
+        <Viewbox Stretch="Uniform">
+            <Canvas Name="svg3356" Width="52" Height="52">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Canvas.Resources/>
+                <Ellipse Canvas.Left="159.9" Width="8.6" Canvas.Top="-61.5" Height="8.5" Name="path4203"/>
+                <Path Name="path4205" Fill="#FF818589">
+                    <Path.Data>
+                        <PathGeometry Figures="M 32.78125 1.5585938 A 18.291463 18.163993 0 0 0 14.492188 19.724609 A 18.291463 18.163993 0 0 0 32.78125 37.888672 A 18.291463 18.163993 0 0 0 51.074219 19.724609 A 18.291463 18.163993 0 0 0 32.78125 1.5585938 z M 32.722656 7.015625 A 12.973497 12.883087 0 0 1 45.695312 19.898438 A 12.973497 12.883087 0 0 1 32.722656 32.78125 A 12.973497 12.883087 0 0 1 19.748047 19.898438 A 12.973497 12.883087 0 0 1 32.722656 7.015625 z M 16.802734 31.992188 C 15.78773 31.992188 14.773843 32.380015 13.996094 33.152344 L 2.2421875 44.824219 C 0.68668999 46.368876 0.68668999 48.855733 2.2421875 50.400391 C 3.797685 51.945048 6.3019244 51.945048 7.8574219 50.400391 L 19.611328 38.728516 C 21.166826 37.183858 21.166826 34.697001 19.611328 33.152344 C 18.833579 32.380015 17.817739 31.992188 16.802734 31.992188 z " FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+                <Canvas Name="layer1">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="-96.125"/>
+                    </Canvas.RenderTransform>
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="CrossTemplateIcon">
+        <Viewbox Stretch="Uniform">
+            <Canvas Name="svg2" Width="49.999997" Height="49.999997">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Canvas.Resources/>
+                <Canvas Name="layer1">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="-1002.3622"/>
+                    </Canvas.RenderTransform>
+                    <Path Name="rect3375" Fill="#FF000000">
+                        <Path.Data>
+                            <PathGeometry Figures="m 14.118626 1015.7454 c -0.406996 0 -0.814223 0.1562 -1.126085 0.4687 -0.623722 0.6251 -0.623722 1.6316 0 2.2566 l 9.299215 9.3183 -9.322993 9.3036 c -0.625019 0.6237 -0.625019 1.6279 0 2.2517 0.625018 0.6237 1.63125 0.6237 2.256268 0 l 9.318348 -9.299 9.328736 9.3481 c 0.623721 0.6251 1.627895 0.6251 2.251618 0 0.623722 -0.625 0.623722 -1.6315 0 -2.2565 l -9.324086 -9.3435 9.34814 -9.3285 c 0.625018 -0.6237 0.625018 -1.6279 0 -2.2516 -0.625019 -0.6237 -1.63125 -0.6237 -2.256269 0 l -9.34322 9.3238 -9.303861 -9.323 c -0.311862 -0.3125 -0.718815 -0.4687 -1.125811 -0.4687 z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+</ResourceDictionary>
