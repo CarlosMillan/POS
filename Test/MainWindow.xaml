@@ -58,8 +58,9 @@
                 <GxControls:HintNumericBox Name="TxtNu" Width="150" HintText="0" Margin="5" TextAlignment="Right"/>
                 <GxControls:HintCurrencyBox Name="TxtC" Width="150" HintText="$0.00" Margin="5" TextAlignment="Right"/>
                 <GxControls:HintTextBox Name="TxtA" Width="250" HintText="area de texto" FontSize="18" Margin="5" Height="100" TextWrapping="Wrap" />
-                <GxControls:HintSearchBox Name="TxtSeatch" Height="80" HintText="Buscar" VerticalContentAlignment="Center" FontSize="30" Margin="5" KeyDown="TxtSeatch_KeyDown" />
+                <GxControls:HintSearchBox Name="TxtSeatch" Height="80" HintText="Buscar" VerticalContentAlignment="Center" FontSize="30" Margin="5" KeyDown="TxtSeatch_KeyDown" Search="TxtSeatch_Search" />
                 <GxControls:HintSearchBox Name="TxtSeatchSmall" Height="30" HintText="Buscar más" VerticalContentAlignment="Center" Margin="5" KeyDown="TxtSeatch_KeyDown"/>                  
+                <TextBlock x:Name="TxtSearchingResult" FontSize="15"/>
             </StackPanel>
         </TabItem>
         <TabItem Header="SVG">

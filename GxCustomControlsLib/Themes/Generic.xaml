@@ -108,8 +108,12 @@
                                     TextWrapping="{TemplateBinding TextWrapping}" 
                                     BorderThickness="0"
                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
-                            
-                            <ContentControl Grid.Column="1" Name="PART_PrimaryIcon" Template="{StaticResource MagnifyingGlassTemplateIcon}" IsTabStop="False"/>
+                                                        
+                            <Button Name="PART_PrimaryIcon">
+                                <Button.Content>
+                                    <ContentControl Template="{StaticResource MagnifyingGlassTemplateIcon}" IsTabStop="False"/>
+                                </Button.Content>    
+                            </Button>
                             <Button Name="PART_SecundaryIcon">
                                 <Button.Content>
                                     <ContentControl Template="{StaticResource CrossTemplateIcon}" IsTabStop="False"/>
@@ -122,13 +126,11 @@
                         <DataTrigger Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="PART_Watermark" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_SecundaryIcon" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_PrimaryIcon" Property="Visibility" Value="Hidden" />
-                            <!--<Setter TargetName="PART_SearchingIndicator" Property="Visibility" Value="Hidden" />-->
+                            <Setter TargetName="PART_PrimaryIcon" Property="Visibility" Value="Hidden" />                            
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="PART_PrimaryIcon" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_SecundaryIcon" Property="Visibility" Value="Hidden" />
-                            <!--<Setter TargetName="PART_SearchingIndicator" Property="Visibility" Value="Hidden" />-->
+                            <Setter TargetName="PART_SecundaryIcon" Property="Visibility" Value="Hidden" />                            
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsFocused, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="PART_Writeable" Property="FocusManager.FocusedElement" Value="{Binding ElementName=PART_Writeable}" />
