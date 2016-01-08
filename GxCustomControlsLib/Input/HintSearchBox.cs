@@ -18,7 +18,7 @@ namespace Gestionix.POS
 {
     public class HintSearchBox : HintTextBox
     {
-        public static readonly DependencyProperty IsSearchingProperty = DependencyProperty.Register("IsSearching", typeof(bool), typeof(HintSearchBox), new FrameworkPropertyMetadata(OnIsSearchingPropertyChanged));
+        public static readonly DependencyProperty IsSearchingProperty = DependencyProperty.Register("IsSearching", typeof(bool), typeof(HintSearchBox), new PropertyMetadata(false));
         
         public bool IsSearching
         {
@@ -34,10 +34,10 @@ namespace Gestionix.POS
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Button CloseActionButton = this.GetTemplateChild("PART_SecundaryIcon") as Button;            
-            CloseActionButton.Click += CloseActionButton_Click;
+            Button CloseActionButton = this.GetTemplateChild("PART_SecundaryIcon") as Button;
+            CloseActionButton.Click += CloseActionButton_Click;           
         }
-
+             
         private void CloseActionButton_Click(object sender, RoutedEventArgs e)
         {
             TextBox TextBoxSearch = this.GetTemplateChild("PART_Writeable") as TextBox;
@@ -50,12 +50,6 @@ namespace Gestionix.POS
 
             if (e.Key == Key.Enter)            
                 IsSearching = true;            
-        }
-
-        private static void OnIsSearchingPropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
-        {
-            //if (!Boolean.Parse(e.NewValue.ToString()))
-            //    ((HintTextBox)source).IsReadOnly = false;
         }
     }    
 }

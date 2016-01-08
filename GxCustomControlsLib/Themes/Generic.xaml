@@ -123,20 +123,20 @@
                             <Setter TargetName="PART_Watermark" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_SecundaryIcon" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_PrimaryIcon" Property="Visibility" Value="Hidden" />
-                            <Setter TargetName="PART_SearchingIndicator" Property="Visibility" Value="Hidden" />
+                            <!--<Setter TargetName="PART_SearchingIndicator" Property="Visibility" Value="Hidden" />-->
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="PART_PrimaryIcon" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_SecundaryIcon" Property="Visibility" Value="Hidden" />
-                            <Setter TargetName="PART_SearchingIndicator" Property="Visibility" Value="Hidden" />
+                            <!--<Setter TargetName="PART_SearchingIndicator" Property="Visibility" Value="Hidden" />-->
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsFocused, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="PART_Writeable" Property="FocusManager.FocusedElement" Value="{Binding ElementName=PART_Writeable}" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding IsSearching, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter TargetName="PART_SearchingIndicator" Property="Visibility" Value="Visible" />
+                        <DataTrigger Binding="{Binding IsSearching, RelativeSource={RelativeSource Self}}" Value="True">                            
                             <Setter TargetName="PART_SecundaryIcon" Property="Visibility" Value="Hidden" />
                             <Setter TargetName="PART_PrimaryIcon" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="PART_SearchingIndicator" Property="IsActivated" Value="True" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

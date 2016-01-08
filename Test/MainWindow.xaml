@@ -78,9 +78,10 @@
             </StackPanel>
         </TabItem>
         <TabItem Header="Animated">
-            <StackPanel>
-                <GxControls:ProgressRing x:Name="RingTest" Width="50" Height="50" IsActivate="True"/>
-                <ToggleButton Click="ToggleButton_Click" Content="activate/desactivate"/>
+            <StackPanel Background="LightBlue">
+                <GxControls:ProgressRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>
+                <Button Content="desactivate" Click="ToggleButton_Click" />
+                <Button Content="activate" Click="Button_Click" />
             </StackPanel>
         </TabItem>
     </TabControl>

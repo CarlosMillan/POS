@@ -41,13 +41,13 @@ namespace Test
 
         void bwtest_DoWork(object sender, DoWorkEventArgs e)
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
             e.Result = e.Argument;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Keyboard.Focus(TxtSeatch);
+            //Keyboard.Focus(TxtSeatch);
         }
 
         private void TxtSeatch_KeyDown(object sender, KeyEventArgs e)
@@ -61,7 +61,12 @@ namespace Test
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {
-            RingTest.IsActivate = ((System.Windows.Controls.Primitives.ToggleButton)e.Source).IsChecked ?? false;
+            RingTest.IsActivated = false;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RingTest.IsActivated = true;
         }
     }
 }

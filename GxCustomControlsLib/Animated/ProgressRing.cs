@@ -19,21 +19,24 @@ namespace Gestionix.POS
 {    
     public class ProgressRing : Control
     {
-        private const int DEFAULT_PARTICLES = 6;
+        private const int DEFAULT_PARTICLES = 5;
         private const int SIZE_PARTICLE_PERCENTAGE = 13;                // 10% of Canvas size
         private const int HUNDRED_PERCENTAGE = 100;
-        private const int FIRST_FRAME_DEGREES = 150;                  
-        private const int SECOND_FRAME_DEGREES = 360;                   
-        private const int FRAMES_BY_PARTICLES = 2;                      // First frame goes to 0° - 180°, second frame goes to 180° - 360°
-        private const double FIRST_FRAME_SECONDS_DURATION = 1.3;
-        private const double SECOND_FRAME_SECONDS_DURATION = .4;
-        private const double WAITING_TIME_FRAME_SECONDS_DURATION = .2;  // Time to wait between particles
+        private const int FIRST_FRAME_DEGREES = 70;                  
+        private const int SECOND_FRAME_DEGREES = 150;
+        private const int THIRD_FRAME_DEGREES = 360;                   
+        private const int FRAMES_BY_PARTICLES = 3;                      // First frame goes to 0° - 70°, second frame goes to 70° - 150°, third goes to 150° - 360°
+        private const double FIRST_FRAME_SECONDS_DURATION = .3;
+        private const double SECOND_FRAME_SECONDS_DURATION = .7;
+        private const double THIRD_FRAME_SECONDS_DURATION = .4;
+        private const double WAITING_TIME_FRAME_SECONDS_DURATION = .18;  // Time to wait between particles
 
         private Canvas _container;
+        private bool _pending;
 
         public static readonly DependencyProperty ParticleColorProperty = DependencyProperty.Register("ParticleColor", typeof(Brush), typeof(ProgressRing), new PropertyMetadata(null));
         public static readonly DependencyProperty ParticlesProperty = DependencyProperty.Register("Particles", typeof(int), typeof(ProgressRing), new PropertyMetadata(null));
-        public static readonly DependencyProperty IsActivateProperty = DependencyProperty.Register("IsActivate", typeof(bool), typeof(ProgressRing), new FrameworkPropertyMetadata(OnIsActivatePropertyChanged));
+        public static readonly DependencyProperty IsActivatedProperty = DependencyProperty.Register("IsActivated", typeof(bool), typeof(ProgressRing), new FrameworkPropertyMetadata(false, OnIsActivatePropertyChanged));
 
         [Description("Color particle")]
         public Brush ParticleColor
@@ -50,39 +53,35 @@ namespace Gestionix.POS
         }
 
         [Description("Activate progress ring")]
-        public bool IsActivate
+        public bool IsActivated
         {
-            get { return (bool)GetValue(IsActivateProperty); }
-            set { SetValue(IsActivateProperty, value); }
+            get { return (bool)GetValue(IsActivatedProperty); }
+            set { SetValue(IsActivatedProperty, value); }
         }
 
         static ProgressRing()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressRing), new FrameworkPropertyMetadata(typeof(ProgressRing)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressRing), new FrameworkPropertyMetadata(typeof(ProgressRing)));            
         }
-
+        
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _container = this.GetTemplateChild("PART_Container") as Canvas;                        
-
-            if (Particles == 0)
-                Particles = DEFAULT_PARTICLES;
-
-            if (ParticleColor == null)
-                ParticleColor = Brushes.Black;
-           
-            for (int ParticlesCount = 0; ParticlesCount < Particles; ParticlesCount++)
-            {
-                Ellipse EllipseParticle = new Ellipse();
-                EllipseParticle.Fill = ParticleColor;
-                EllipseParticle.Width = EllipseParticle.Height = (_container.Width * SIZE_PARTICLE_PERCENTAGE) / HUNDRED_PERCENTAGE;                
-                _container.Children.Add(EllipseParticle);                
-            }
-            
-            Visibility = Visibility.Hidden;
+            _container = this.GetTemplateChild("PART_Container") as Canvas;
+            _container.Loaded += _container_Loaded;
+            InitializeParticles();
         }
 
+        private void _container_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_pending)
+            {
+                _pending = false;
+                IsActivated = true;
+            }
+            else Visibility = Visibility.Hidden;
+        }
+        
         private static void OnIsActivatePropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             if (Boolean.Parse(e.NewValue.ToString()))
@@ -90,44 +89,81 @@ namespace Gestionix.POS
             else if (!Boolean.Parse(e.NewValue.ToString()))
                 ((ProgressRing)source).StopAnimation();
         }
+        
+        private void InitializeParticles()
+        {
+            if (_container != null)
+            {
+                if (Particles == 0)
+                    Particles = DEFAULT_PARTICLES;
+
+                if (ParticleColor == null)
+                    ParticleColor = Brushes.Black;
+
+                for (int ParticlesCount = 0; ParticlesCount < Particles; ParticlesCount++)
+                {
+                    Ellipse EllipseParticle = new Ellipse();
+                    EllipseParticle.Fill = ParticleColor;
+                    EllipseParticle.Width = EllipseParticle.Height = (_container.Width * SIZE_PARTICLE_PERCENTAGE) / HUNDRED_PERCENTAGE;
+                    _container.Children.Add(EllipseParticle);
+                }
+            }
+        }
 
         public void StartAnimation()
         {
-            TimeSpan BegintTimeSpan = TimeSpan.FromSeconds(0);
-            KeyTime FirstFrame = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(FIRST_FRAME_SECONDS_DURATION));
-            KeyTime SecondFrame = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(FIRST_FRAME_SECONDS_DURATION + SECOND_FRAME_SECONDS_DURATION));            
-
-            foreach (UIElement Element in _container.Children)
+            if (_container != null)
             {
-                Ellipse Particle = (Ellipse)Element;
-                RotateTransform RotateT = new RotateTransform();
-                DoubleAnimationUsingKeyFrames DoubleAnimationKeyFrames = new DoubleAnimationUsingKeyFrames();
-                DoubleAnimationKeyFrames.BeginTime = BegintTimeSpan;
-                DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(FIRST_FRAME_DEGREES, FirstFrame));
-                DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(SECOND_FRAME_DEGREES, SecondFrame));
-                TransformGroup GroupT = new TransformGroup();
-                RotateT.CenterX = _container.ActualWidth / 2;
-                RotateT.CenterY = _container.ActualHeight / 2;
-                Particle.RenderTransform = RotateT;
-                TranslateTransform TranslateT = new TranslateTransform();
-                TranslateT.X = 0;
-                TranslateT.Y = _container.ActualHeight / 2;
-                Particle.RenderTransformOrigin = new Point(0, 0);
-                GroupT.Children.Add(TranslateT);
-                GroupT.Children.Add(RotateT);
-                Particle.RenderTransform = GroupT;
-                DoubleAnimationKeyFrames.RepeatBehavior = RepeatBehavior.Forever;
-                RotateT.BeginAnimation(RotateTransform.AngleProperty, DoubleAnimationKeyFrames);                
-                BegintTimeSpan = BegintTimeSpan.Add(TimeSpan.FromSeconds(WAITING_TIME_FRAME_SECONDS_DURATION));
+                TimeSpan BegintTimeSpan = TimeSpan.FromSeconds(0);
+                KeyTime FirstFrame = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(FIRST_FRAME_SECONDS_DURATION));
+                KeyTime SecondFrame = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(FIRST_FRAME_SECONDS_DURATION + SECOND_FRAME_SECONDS_DURATION));
+                KeyTime ThirdFrame = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(FIRST_FRAME_SECONDS_DURATION + SECOND_FRAME_SECONDS_DURATION + THIRD_FRAME_SECONDS_DURATION));
+
+                foreach (UIElement Element in _container.Children)
+                {
+                    Ellipse Particle = (Ellipse)Element;
+                    RotateTransform RotateT = new RotateTransform();
+                    DoubleAnimationUsingKeyFrames DoubleAnimationKeyFrames = new DoubleAnimationUsingKeyFrames();
+                    DoubleAnimationKeyFrames.BeginTime = BegintTimeSpan;
+                    DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(FIRST_FRAME_DEGREES, FirstFrame));
+                    DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(SECOND_FRAME_DEGREES, SecondFrame));
+                    DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(THIRD_FRAME_DEGREES, ThirdFrame));
+                    TransformGroup GroupT = new TransformGroup();
+                    RotateT.CenterX = _container.ActualWidth / 2;
+                    RotateT.CenterY = _container.ActualHeight / 2;
+                    Particle.RenderTransform = RotateT;
+                    TranslateTransform TranslateT = new TranslateTransform();
+                    TranslateT.X = 0;
+                    TranslateT.Y = _container.ActualHeight / 2;
+                    Particle.RenderTransformOrigin = new Point(0, 0);
+                    GroupT.Children.Add(TranslateT);
+                    GroupT.Children.Add(RotateT);
+                    Particle.RenderTransform = GroupT;
+                    DoubleAnimationKeyFrames.RepeatBehavior = RepeatBehavior.Forever;
+                    RotateT.BeginAnimation(RotateTransform.AngleProperty, DoubleAnimationKeyFrames);
+                    BegintTimeSpan = BegintTimeSpan.Add(TimeSpan.FromSeconds(WAITING_TIME_FRAME_SECONDS_DURATION));
+                }
+
+                Visibility = Visibility.Visible;
             }
-            
-            Visibility = Visibility.Visible;
+            else
+            {
+                if (IsActivated) _pending = true;
+                else _pending = false;
+
+                IsActivated = false;
+            }
         }
 
         public void StopAnimation()
         {
-            _container.Children.Clear();
-            OnApplyTemplate();            
+            if (_container != null)
+            {
+                _container.Children.Clear();
+                OnApplyTemplate();                
+            }
+
+            Visibility = Visibility.Hidden;
         }
     }
 }
