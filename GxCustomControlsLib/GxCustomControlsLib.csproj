@@ -38,6 +38,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -63,6 +64,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Input\HintComboBox.cs" />
     <Compile Include="Input\HintCurrencyBox.cs" />
     <Compile Include="Input\HintNumericBox.cs" />
     <Compile Include="Input\HintPasswordBox.cs" />
