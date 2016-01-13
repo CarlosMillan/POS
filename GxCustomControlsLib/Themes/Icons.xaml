@@ -46,7 +46,7 @@
     
     <ControlTemplate x:Key="DownArrowTemplateIcon">
         <Viewbox Stretch="Uniform">
-            <Canvas Name="svg2" Width="50" Height="50">
+            <Canvas Name="svg2" Width="50.000001" Height="50.000001">
                 <Canvas.RenderTransform>
                     <TranslateTransform X="0" Y="0"/>
                 </Canvas.RenderTransform>
@@ -57,12 +57,11 @@
                     </Canvas.RenderTransform>
                     <Path Name="path4141" Fill="#FF000000">
                         <Path.Data>
-                            <PathGeometry Figures="M 13.684269 1027.5415 2.5 1007.6577 l 22.337367 -0.023 c 12.285551 -0.012 22.354869 0 22.376262 0.016 0.03416 0.034 -22.146157 39.5515 -22.289225 39.7114 -0.03073 0.034 -5.088787 -8.8854 -11.240135 -19.8215 z" FillRule="NonZero"/>
+                            <PathGeometry Figures="M 15.005234 1027.38 5 1019.8764 l 19.982585 -0.01 c 10.99042 -0.01 19.99824 0 20.01738 0.01 0.03055 0.014 -19.811533 14.9254 -19.939518 14.9858 -0.0275 0.014 -4.552331 -3.353 -10.055213 -7.48 z" FillRule="NonZero"/>
                         </Path.Data>
                     </Path>
                 </Canvas>
             </Canvas>
         </Viewbox>
-
     </ControlTemplate>
 </ResourceDictionary>

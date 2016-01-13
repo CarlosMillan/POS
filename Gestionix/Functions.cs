@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,6 @@ using System.Threading.Tasks;
 namespace Gestionix
 {
     public static class Functions
-    {        
+    {
     }
 }

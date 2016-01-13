@@ -33,6 +33,15 @@ namespace Test
             bwtest.RunWorkerCompleted += bwtest_RunWorkerCompleted;
             bwtest.WorkerReportsProgress = true;
             bwtest.ProgressChanged += bwtest_ProgressChanged;
+
+            List<String> names = new List<string>();
+            names.Add("WPF rocks ú");
+            names.Add("WCF rocks");
+            names.Add("XAML is fun");
+            names.Add("WPF rules");
+            names.Add("WCF rules");
+            names.Add("WinForms not");
+            Cmb.ItemsSource = names;
         }
 
         void bwtest_ProgressChanged(object sender, ProgressChangedEventArgs e)
