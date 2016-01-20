@@ -29,7 +29,7 @@ namespace Gestionix.POS
         private const double FIRST_FRAME_SECONDS_DURATION = .3;
         private const double SECOND_FRAME_SECONDS_DURATION = .7;
         private const double THIRD_FRAME_SECONDS_DURATION = .4;
-        private const double WAITING_TIME_FRAME_SECONDS_DURATION = .18;  // Time to wait between particles
+        private const double WAITING_TIME_FRAME_SECONDS_DURATION = .18;  // Time to wait between particles in seconds
 
         private Canvas _container;
         private bool _pending;
@@ -121,26 +121,40 @@ namespace Gestionix.POS
 
                 foreach (UIElement Element in _container.Children)
                 {
+                    /*Necessary instances*/
                     Ellipse Particle = (Ellipse)Element;
+                    TransformGroup GroupT = new TransformGroup();
                     RotateTransform RotateT = new RotateTransform();
+                    TranslateTransform TranslateT = new TranslateTransform();
                     DoubleAnimationUsingKeyFrames DoubleAnimationKeyFrames = new DoubleAnimationUsingKeyFrames();
+
+                    /*Point of reference to animate the particle*/
+                    Particle.RenderTransformOrigin = new Point(0, 0);
+
+                    /*The article ratates in three frames*/
                     DoubleAnimationKeyFrames.BeginTime = BegintTimeSpan;
                     DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(FIRST_FRAME_DEGREES, FirstFrame));
                     DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(SECOND_FRAME_DEGREES, SecondFrame));
                     DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(THIRD_FRAME_DEGREES, ThirdFrame));
-                    TransformGroup GroupT = new TransformGroup();
+                    
+                    /*Around this point the particles will rotate*/
                     RotateT.CenterX = _container.ActualWidth / 2;
                     RotateT.CenterY = _container.ActualHeight / 2;
-                    Particle.RenderTransform = RotateT;
-                    TranslateTransform TranslateT = new TranslateTransform();
+
+                    /*This is initial point*/
                     TranslateT.X = 0;
                     TranslateT.Y = _container.ActualHeight / 2;
-                    Particle.RenderTransformOrigin = new Point(0, 0);
+
+                    /*Group render transforms*/
                     GroupT.Children.Add(TranslateT);
                     GroupT.Children.Add(RotateT);
                     Particle.RenderTransform = GroupT;
+
+                    /*Starts animation*/
                     DoubleAnimationKeyFrames.RepeatBehavior = RepeatBehavior.Forever;
                     RotateT.BeginAnimation(RotateTransform.AngleProperty, DoubleAnimationKeyFrames);
+
+                    /*Delay between particles*/
                     BegintTimeSpan = BegintTimeSpan.Add(TimeSpan.FromSeconds(WAITING_TIME_FRAME_SECONDS_DURATION));
                 }
 

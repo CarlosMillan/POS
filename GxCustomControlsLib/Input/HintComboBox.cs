@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -103,30 +104,10 @@ namespace Gestionix.POS
                 return true;
             }
 
-            // Case insensitive search     
-            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("es-MX");
-            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("es-MX");            
-            int aa = string.Compare("MillÁn ñ", "mIllan ñ", System.Globalization.CultureInfo.CurrentCulture, System.Globalization.CompareOptions.IgnoreNonSpace | System.Globalization.CompareOptions.IgnoreCase);
-            bool ys = CompareIgnoreAccents("MilLán n", "millan ñ");
-            return value.ToString().ToLower().RemoveDiacritics().Contains(this.Text.ToLower().RemoveDiacritics());            
+            // Case insensitive search
+            int Contains = System.Globalization.CultureInfo.CurrentCulture.CompareInfo.IndexOf(value.ToString(), this.Text, System.Globalization.CompareOptions.IgnoreCase);
+            return Contains >= 0 ? true : false;        
         }
-
-        private static bool CompareIgnoreAccents(string s1, string s2)
-        {
-            string s_1 = RemoveAccents(s1);
-            string s_2 = RemoveAccents(s2);
-            return string.Compare(
-                s_1, s_2, StringComparison.CurrentCultureIgnoreCase) == 0;
-        }
-
-        private static string RemoveAccents(string s)
-        {
-            Encoding destEncoding = Encoding.GetEncoding("iso-8859-8");
-
-            return destEncoding.GetString(
-                Encoding.Convert(Encoding.UTF8, destEncoding, Encoding.UTF8.GetBytes(s)));
-        }
-
 
         /// <summary>
         /// Confirm or cancel the selection when Tab, Enter, or Escape are hit. 
@@ -157,7 +138,8 @@ namespace Gestionix.POS
                 if (e.Key == Key.Down)
                 {
                     // Arrow Down -> Open DropDown
-                    this.IsDropDownOpen = true;
+                    if(this.IsDropDownOpen)
+                        this.SelectedIndex = 0;
                 }
 
                 base.OnPreviewKeyDown(e);
@@ -177,11 +159,7 @@ namespace Gestionix.POS
         /// </remarks>
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            if (e.Key == Key.Up || e.Key == Key.Down)
-            {
-                
-            }
-            else if (e.Key == Key.Tab || e.Key == Key.Enter)
+            if (e.Key == Key.Tab || e.Key == Key.Enter)
             {
                 // Explicit Select -> Clear Filter
                 this.ClearFilter();
@@ -195,12 +173,15 @@ namespace Gestionix.POS
                     // apply the filter if the text is long enough
                     if (this.Text.Length > 0)
                     {
-                        this.RefreshFilter();
-                        this.IsDropDownOpen = true;
+                        //this.RefreshFilter();
+                        //this.IsDropDownOpen = true;
 
-                        // Unselect
-                        this.EditableTextBox.SelectionStart = int.MaxValue;
+                        //// Unselect
+                        //this.EditableTextBox.SelectionStart = int.MaxValue;
+                        AsyncFilter();
                     }
+                    else
+                        this.IsDropDownOpen = false;
                 }
 
                 base.OnKeyUp(e);
@@ -208,6 +189,15 @@ namespace Gestionix.POS
                 // Update Filter Value
                 this.currentFilter = this.Text;
             }
+        }
+
+        public async void AsyncFilter()
+        {
+            this.RefreshFilter();
+            this.IsDropDownOpen = true;
+
+            // Unselect
+            //this.EditableTextBox.SelectionStart = int.MaxValue;
         }
 
         /// <summary>

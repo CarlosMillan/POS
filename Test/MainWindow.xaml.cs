@@ -35,12 +35,12 @@ namespace Test
             bwtest.ProgressChanged += bwtest_ProgressChanged;
 
             List<String> names = new List<string>();
-            names.Add("WPF rocks ú");
-            names.Add("WCF rocks");
-            names.Add("XAML is fun");
-            names.Add("WPF rules");
-            names.Add("WCF rules");
-            names.Add("WinForms not");
+            names.Add("Transferencia");
+            names.Add("Vales");
+            names.Add("Tarjeta de crédito o débito");
+            names.Add("American Express");
+            names.Add("Efectivo");
+            names.Add("Otro");
             Cmb.ItemsSource = names;
         }
 

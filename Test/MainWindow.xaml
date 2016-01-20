@@ -4,7 +4,7 @@
         xmlns:GxControls="clr-namespace:Gestionix.POS;assembly=GxCustomControlsLib"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="Test.MainWindow"
         Title="MainWindow" Height="680" Width="525"
-        Loaded="Window_Loaded" FocusManager.FocusedElement="{Binding ElementName=TxtS}"
+        Loaded="Window_Loaded" FocusManager.FocusedElement="{Binding ElementName=Cmb}"
         FontFamily="Segoe UI">
     <Window.Resources>
         <Style TargetType="{x:Type GxControls:HintTextBox}">
@@ -486,7 +486,7 @@
                 <GxControls:HintSearchBox x:Name="TxtSeatchSmall" Height="30" HintText="Buscar más" VerticalContentAlignment="Center" Margin="5" KeyDown="TxtSeatch_KeyDown"/>
                 <TextBlock x:Name="TxtSearchingResult" FontSize="15"/>
                 <GxControls:HintComboBox x:Name="Cmb"  Margin="5" Height="50" BorderBrush="Blue" BorderThickness="1" HintText="Busca algo en este ComboBox" FontSize="15"
-                                         IsEditable="True" IsTextSearchEnabled="True">
+                                         IsEditable="True">
                     <!--<ComboBoxItem Content="Abatta 1"/>
                     <ComboBoxItem Content="Barcode 2"/>
                     <ComboBoxItem Content="Zion 3"/>-->
