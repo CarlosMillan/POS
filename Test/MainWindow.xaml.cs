@@ -42,6 +42,10 @@ namespace Test
             names.Add("Efectivo");
             names.Add("Otro");
             Cmb.ItemsSource = names;
+
+            System.Globalization.CultureInfo C = System.Globalization.CultureInfo.CreateSpecificCulture("es-MX");
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = C;
+            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = C;
         }
 
         void bwtest_ProgressChanged(object sender, ProgressChangedEventArgs e)

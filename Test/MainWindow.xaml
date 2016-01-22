@@ -486,7 +486,7 @@
                 <GxControls:HintSearchBox x:Name="TxtSeatchSmall" Height="30" HintText="Buscar más" VerticalContentAlignment="Center" Margin="5" KeyDown="TxtSeatch_KeyDown"/>
                 <TextBlock x:Name="TxtSearchingResult" FontSize="15"/>
                 <GxControls:HintComboBox x:Name="Cmb"  Margin="5" Height="50" BorderBrush="Blue" BorderThickness="1" HintText="Busca algo en este ComboBox" FontSize="15"
-                                         IsEditable="True">
+                                         IsEditable="True" IsTextSearchEnabled="False">
                     <!--<ComboBoxItem Content="Abatta 1"/>
                     <ComboBoxItem Content="Barcode 2"/>
                     <ComboBoxItem Content="Zion 3"/>-->

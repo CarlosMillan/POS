@@ -55,6 +55,14 @@ namespace Gestionix.POS
             }
         }
 
+        protected ToggleButton ToggleButton
+        {
+            get
+            {
+                return this.GetTemplateChild("PART_ToggleButton") as ToggleButton;
+            }
+        }
+
         
         static HintComboBox()
         {
@@ -105,7 +113,7 @@ namespace Gestionix.POS
             }
 
             // Case insensitive search
-            int Contains = System.Globalization.CultureInfo.CurrentCulture.CompareInfo.IndexOf(value.ToString(), this.Text, System.Globalization.CompareOptions.IgnoreCase);
+            int Contains = System.Globalization.CultureInfo.CurrentCulture.CompareInfo.IndexOf(value.ToString(), this.Text, System.Globalization.CompareOptions.OrdinalIgnoreCase);
             return Contains >= 0 ? true : false;        
         }
 
@@ -135,11 +143,13 @@ namespace Gestionix.POS
             }
             else
             {
-                if (e.Key == Key.Down)
+                if (e.Key == Key.Down || e.Key == Key.Up)
                 {
                     // Arrow Down -> Open DropDown
-                    if(this.IsDropDownOpen)
-                        this.SelectedIndex = 0;
+                    if (!this.IsDropDownOpen)
+                        this.IsDropDownOpen = true;
+
+                    //this.SelectedIndex = 0;
                 }
 
                 base.OnPreviewKeyDown(e);
@@ -194,10 +204,12 @@ namespace Gestionix.POS
         public async void AsyncFilter()
         {
             this.RefreshFilter();
-            this.IsDropDownOpen = true;
 
-            // Unselect
-            //this.EditableTextBox.SelectionStart = int.MaxValue;
+            if(this.Items.Count > 0)
+                this.IsDropDownOpen = true;
+
+             //Unselect
+            this.EditableTextBox.SelectionStart = int.MaxValue;
         }
 
         /// <summary>
@@ -206,16 +218,22 @@ namespace Gestionix.POS
         /// <param name="e">A KeyBoardFocusChangedEventArgs.</param>
         protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
-            if (this.IsTextSearchEnabled)
+            if (this.IsEditable)
             {
                 this.ClearFilter();
                 int temp = this.SelectedIndex;
                 this.SelectedIndex = -1;
-                this.Text = string.Empty;
+                this.Text = String.Empty;
                 this.SelectedIndex = temp;
             }
+        }
 
-            base.OnPreviewLostKeyboardFocus(e);
+        protected override void OnSelectionChanged(SelectionChangedEventArgs e)
+        {
+            if (this.SelectedIndex > -1)
+                this.EditableTextBox.Text = this.SelectedValue.ToString();
+
+            this.EditableTextBox.SelectionStart = int.MaxValue;
         }
 
         ////

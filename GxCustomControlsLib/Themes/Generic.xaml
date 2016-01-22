@@ -271,7 +271,8 @@
                                             </Border>
                                         </Themes:SystemDropShadowChrome>
                                     </Popup>
-                                    <ToggleButton x:Name="toggleButton" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="1" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <ToggleButton x:Name="PART_ToggleButton" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="1" 
+                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
                                         <ToggleButton.Style>
                                             <Style TargetType="{x:Type ToggleButton}">
                                                 <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -302,7 +303,7 @@
                                     <Border x:Name="Border" Background="White" Margin="{TemplateBinding BorderThickness}">
                                         <local:HintTextBox x:Name="PART_EditableTextBox" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                                            HintText="{Binding HintText, RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="0">
-                                            <!--<local:HintTextBox.Style>
+                                        <!--<local:HintTextBox.Style>
                                                 <Style TargetType="{x:Type local:HintTextBox}">
                                                     <Setter Property="OverridesDefaultStyle" Value="True"/>
                                                     <Setter Property="AllowDrop" Value="True"/>
