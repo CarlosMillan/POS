@@ -62,7 +62,6 @@ namespace Gestionix.POS
                 return this.GetTemplateChild("PART_ToggleButton") as ToggleButton;
             }
         }
-
         
         static HintComboBox()
         {
@@ -149,7 +148,7 @@ namespace Gestionix.POS
                     if (!this.IsDropDownOpen)
                         this.IsDropDownOpen = true;
 
-                    //this.SelectedIndex = 0;
+                    //this.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                 }
 
                 base.OnPreviewKeyDown(e);
@@ -183,11 +182,6 @@ namespace Gestionix.POS
                     // apply the filter if the text is long enough
                     if (this.Text.Length > 0)
                     {
-                        //this.RefreshFilter();
-                        //this.IsDropDownOpen = true;
-
-                        //// Unselect
-                        //this.EditableTextBox.SelectionStart = int.MaxValue;
                         AsyncFilter();
                     }
                     else
@@ -218,7 +212,7 @@ namespace Gestionix.POS
         /// <param name="e">A KeyBoardFocusChangedEventArgs.</param>
         protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
-            if (this.IsEditable)
+            if (this.IsEditable && e.KeyboardDevice.FocusedElement.GetType() == typeof(TextBox))
             {
                 this.ClearFilter();
                 int temp = this.SelectedIndex;
@@ -259,6 +253,6 @@ namespace Gestionix.POS
         {
             this.currentFilter = string.Empty;
             this.RefreshFilter();
-        } 
+        }
     }
 }
