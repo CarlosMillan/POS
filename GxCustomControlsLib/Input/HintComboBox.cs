@@ -146,7 +146,10 @@ namespace Gestionix.POS
                 {
                     // Arrow Down -> Open DropDown
                     if (!this.IsDropDownOpen)
+                    {
+                        ClearFilter();
                         this.IsDropDownOpen = true;
+                    }
 
                     //this.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                 }
@@ -212,22 +215,31 @@ namespace Gestionix.POS
         /// <param name="e">A KeyBoardFocusChangedEventArgs.</param>
         protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
-            if (this.IsEditable && e.KeyboardDevice.FocusedElement.GetType() == typeof(TextBox))
+            if (this.IsEditable)
             {
-                this.ClearFilter();
-                int temp = this.SelectedIndex;
-                this.SelectedIndex = -1;
-                this.Text = String.Empty;
-                this.SelectedIndex = temp;
+                if (e.KeyboardDevice.FocusedElement.GetType() == typeof(TextBox))
+                {
+                    this.ClearFilter();
+                    int temp = this.SelectedIndex;
+                    this.SelectedIndex = -1;
+                    this.Text = String.Empty;
+                    this.SelectedIndex = temp;
+                }
+                //else if (e.KeyboardDevice.FocusedElement.GetType() == typeof(ToggleButton))
+                //{
+                //    this.EditableTextBox.Clear();
+                //}
             }
         }
 
         protected override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
             if (this.SelectedIndex > -1)
-                this.EditableTextBox.Text = this.SelectedValue.ToString();
-
-            this.EditableTextBox.SelectionStart = int.MaxValue;
+            {
+                if (this.EditableTextBox != null)                
+                    this.EditableTextBox.Text = this.SelectedValue.ToString();               
+                else base.OnSelectionChanged(e);
+            }
         }
 
         ////
@@ -251,7 +263,7 @@ namespace Gestionix.POS
         /// </summary>
         private void ClearFilter()
         {
-            this.currentFilter = string.Empty;
+            this.currentFilter = String.Empty;
             this.RefreshFilter();
         }
     }
