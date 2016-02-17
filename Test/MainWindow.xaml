@@ -491,13 +491,12 @@
                     <ComboBoxItem Content="Barcode 2"/>
                     <ComboBoxItem Content="Zion 3"/>-->
                 </GxControls:HintComboBox>
-                <GxControls:HintComboBox x:Name="Cmb1" Margin="5" Height="30" BorderBrush="Blue" BorderThickness="1" Text="ok"
-                                         >
+                <GxControls:HintComboBox x:Name="Cmb1" Margin="5" Height="30" BorderBrush="Blue" BorderThickness="1">
                     <ComboBoxItem Content="opción 1"/>
                     <ComboBoxItem Content="opcioón 2"/>
                     <ComboBoxItem Content="opción 3"/>
                 </GxControls:HintComboBox>
-                <!--<ComboBox >
+                <!--<ComboBox IsEditable="True" Style="{DynamicResource ComboBoxStyle1}">
                     <ComboBoxItem IsSelected="True" Content="opción 1"/>
                     <ComboBoxItem Content="opcioón 2"/>
                     <ComboBoxItem Content="opción 3"/>

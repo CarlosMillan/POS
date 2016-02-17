@@ -30,15 +30,8 @@ namespace Gestionix.POS
             set { SetValue(HintTextProperty, value); }
         }
 
-        /// <summary>
-        /// Caches the previous value of the filter.
-        /// </summary>
-        private string oldFilter = string.Empty;
-
-        /// <summary>
-        /// Holds the current value of the filter.
-        /// </summary>
-        private string currentFilter = string.Empty;
+        protected string OldFilter = String.Empty;
+        protected string Filter = String.Empty;
 
         /// <summary>
         /// Gets a reference to the internal editable textbox.
@@ -54,20 +47,11 @@ namespace Gestionix.POS
                 return this.GetTemplateChild("PART_EditableTextBox") as TextBox;
             }
         }
-
-        protected ToggleButton ToggleButton
-        {
-            get
-            {
-                return this.GetTemplateChild("PART_ToggleButton") as ToggleButton;
-            }
-        }
         
         static HintComboBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(HintComboBox), new FrameworkPropertyMetadata(typeof(HintComboBox)));
         }
-
 
         /// <summary>
         /// Keep the filter if the ItemsSource is explicitly changed.
@@ -91,7 +75,6 @@ namespace Gestionix.POS
             base.OnItemsSourceChanged(oldValue, newValue);
         }
 
-
         /// <summary>
         /// The Filter predicate that will be applied to each row in the ItemsSource.
         /// </summary>
@@ -106,13 +89,13 @@ namespace Gestionix.POS
             }
 
             // No text, no filter
-            if (this.Text.Length == 0)
+            if (Filter.Length == 0)
             {
                 return true;
             }
 
             // Case insensitive search
-            int Contains = System.Globalization.CultureInfo.CurrentCulture.CompareInfo.IndexOf(value.ToString(), this.Text, System.Globalization.CompareOptions.OrdinalIgnoreCase);
+            int Contains = System.Globalization.CultureInfo.CurrentCulture.CompareInfo.IndexOf(value.ToString(), Filter, System.Globalization.CompareOptions.OrdinalIgnoreCase);
             return Contains >= 0 ? true : false;        
         }
 
@@ -137,8 +120,7 @@ namespace Gestionix.POS
             {
                 // Escape -> Close DropDown and redisplay Filter
                 this.IsDropDownOpen = false;
-                this.SelectedIndex = -1;
-                this.Text = this.currentFilter;
+                this.SelectedIndex = -1;                
             }
             else
             {
@@ -146,19 +128,20 @@ namespace Gestionix.POS
                 {
                     // Arrow Down -> Open DropDown
                     if (!this.IsDropDownOpen)
-                    {
-                        ClearFilter();
                         this.IsDropDownOpen = true;
+                    else
+                    {
+                        if (e.Key == Key.Up)
+                            SelectUpItem();
+                        else if (e.Key == Key.Down)
+                            SelectDownItem();
                     }
-
-                    //this.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                 }
 
                 base.OnPreviewKeyDown(e);
             }
 
-            // Cache text
-            this.oldFilter = this.Text;
+            OldFilter = this.Text;
         }
 
         /// <summary>
@@ -171,30 +154,15 @@ namespace Gestionix.POS
         /// </remarks>
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            if (e.Key == Key.Tab || e.Key == Key.Enter)
+            if (OldFilter != this.Text)
             {
-                // Explicit Select -> Clear Filter
-                this.ClearFilter();
-            }
-            else
-            {
-                // The text was changed
-                if (this.Text != this.oldFilter)
+                if (this.Text.Length > 0)
                 {
-                    // Clear the filter if the text is empty,
-                    // apply the filter if the text is long enough
-                    if (this.Text.Length > 0)
-                    {
-                        AsyncFilter();
-                    }
-                    else
-                        this.IsDropDownOpen = false;
+                    Filter = this.Text;
+                    AsyncFilter();
                 }
 
                 base.OnKeyUp(e);
-
-                // Update Filter Value
-                this.currentFilter = this.Text;
             }
         }
 
@@ -205,8 +173,8 @@ namespace Gestionix.POS
             if(this.Items.Count > 0)
                 this.IsDropDownOpen = true;
 
-             //Unselect
-            this.EditableTextBox.SelectionStart = int.MaxValue;
+            if (this.EditableTextBox != null)
+                this.EditableTextBox.SelectionStart = this.Text.Length;
         }
 
         /// <summary>
@@ -219,16 +187,19 @@ namespace Gestionix.POS
             {
                 if (e.KeyboardDevice.FocusedElement.GetType() == typeof(TextBox))
                 {
-                    this.ClearFilter();
-                    int temp = this.SelectedIndex;
-                    this.SelectedIndex = -1;
-                    this.Text = String.Empty;
-                    this.SelectedIndex = temp;
+                    if (this.SelectedIndex == -1)
+                    {
+                        Filter = String.Empty;
+                        this.Text = String.Empty;
+                    }
+
+                    this.IsDropDownOpen = false;
+                    //this.ClearFilter();
+                    //int temp = this.SelectedIndex;
+                    //this.SelectedIndex = -1;
+                    //this.Text = String.Empty;
+                    //this.SelectedIndex = temp;
                 }
-                //else if (e.KeyboardDevice.FocusedElement.GetType() == typeof(ToggleButton))
-                //{
-                //    this.EditableTextBox.Clear();
-                //}
             }
         }
 
@@ -236,12 +207,13 @@ namespace Gestionix.POS
         {
             if (this.SelectedIndex > -1)
             {
-                if (this.EditableTextBox != null)                
-                    this.EditableTextBox.Text = this.SelectedValue.ToString();               
+                if (this.EditableTextBox != null)
+                    this.EditableTextBox.Text = this.SelectedValue.ToString();
                 else base.OnSelectionChanged(e);
             }
-        }
+            else this.EditableTextBox.Text = Filter;
 
+        }        
         ////
         // Helpers
         ////
@@ -258,13 +230,25 @@ namespace Gestionix.POS
             }
         }
 
-        /// <summary>
-        /// Clear the Filter.
-        /// </summary>
-        private void ClearFilter()
+
+        private void SelectDownItem()
         {
-            this.currentFilter = String.Empty;
-            this.RefreshFilter();
+            int DownIndex = this.SelectedIndex + 1;
+
+            if (DownIndex >= this.Items.Count)
+                DownIndex = -1;
+
+            this.SelectedIndex = DownIndex;            
+        }
+
+        private void SelectUpItem()
+        {
+            int UpIndex = this.SelectedIndex - 1;
+
+            if (UpIndex < -1)
+                UpIndex = this.Items.Count - 1;
+
+            this.SelectedIndex = UpIndex;
         }
     }
 }

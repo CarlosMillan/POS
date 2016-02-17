@@ -303,24 +303,6 @@
                                     <Border x:Name="Border" Background="White" Margin="{TemplateBinding BorderThickness}">
                                         <local:HintTextBox x:Name="PART_EditableTextBox" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                                            HintText="{Binding HintText, RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="0">
-                                        <!--<local:HintTextBox.Style>
-                                                <Style TargetType="{x:Type local:HintTextBox}">
-                                                    <Setter Property="OverridesDefaultStyle" Value="True"/>
-                                                    <Setter Property="AllowDrop" Value="True"/>
-                                                    <Setter Property="MinWidth" Value="100"/>
-                                                    <Setter Property="MinHeight" Value="0"/>
-                                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                                                    <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-                                                    <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="{x:Type local:HintTextBox}">
-                                                                <ScrollViewer x:Name="PART_ContentHost" Background="Transparent" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </local:HintTextBox.Style>-->
                                          </local:HintTextBox>
                                     </Border>
                                 </Grid>
