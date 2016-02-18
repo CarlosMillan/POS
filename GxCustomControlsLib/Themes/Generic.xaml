@@ -326,9 +326,6 @@
                                     <Setter Property="Canvas.Top" TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
                                     <Setter Property="Canvas.Left" TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
                                 </Trigger>
-                                <!--<Trigger Property="IsFocused" SourceName="PART_EditableTextBox" Value="True">
-                                    <Setter TargetName="Border" Property="Background" Value="#ffffcc" />
-                                </Trigger>-->
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>

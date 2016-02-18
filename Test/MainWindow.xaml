@@ -476,8 +476,8 @@
     <TabControl>
         <TabItem Header="InputText">
             <StackPanel>
-                <TextBox/>
-                <GxControls:HintTextBox x:Name="TxtS" Width="280" HintText="Sugerencia de cuadro de texto" FontSize="18" Margin="5" />
+                <TextBox x:Name="TxtNormal" TextChanged="TextBox_TextChanged"/>
+                <GxControls:HintTextBox x:Name="TxtS" Width="280" HintText="Sugerencia de cuadro de texto" FontSize="18" Margin="5" TextChanged="TxtS_TextChanged" />
                 <GxControls:HintPasswordBox x:Name="TxtP" Width="150" HintText="Contraseña" Margin="5" />
                 <GxControls:HintNumericBox x:Name="TxtNu" Width="150" HintText="0" Margin="5" TextAlignment="Right"/>
                 <GxControls:HintCurrencyBox x:Name="TxtC" Width="150" HintText="$0.00" Margin="5" TextAlignment="Right"/>

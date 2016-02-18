@@ -40,13 +40,15 @@ namespace Gestionix.POS
         /// <remarks>
         /// We need this to get access to the Selection.
         /// </remarks>
-        protected TextBox EditableTextBox
+        protected HintTextBox EditableTextBox
         {
             get
             {
-                return this.GetTemplateChild("PART_EditableTextBox") as TextBox;
+                return this.GetTemplateChild("PART_EditableTextBox") as HintTextBox;
             }
         }
+
+        private int count = -1;
         
         static HintComboBox()
         {
@@ -156,11 +158,8 @@ namespace Gestionix.POS
         {
             if (OldFilter != this.Text)
             {
-                if (this.Text.Length > 0)
-                {
-                    Filter = this.Text;
-                    AsyncFilter();
-                }
+                Filter = this.Text;
+                AsyncFilter();
 
                 base.OnKeyUp(e);
             }
@@ -170,11 +169,8 @@ namespace Gestionix.POS
         {
             this.RefreshFilter();
 
-            if(this.Items.Count > 0)
+            if (this.Items.Count > 0 && !this.IsDropDownOpen)
                 this.IsDropDownOpen = true;
-
-            if (this.EditableTextBox != null)
-                this.EditableTextBox.SelectionStart = this.Text.Length;
         }
 
         /// <summary>
@@ -192,28 +188,24 @@ namespace Gestionix.POS
                         Filter = String.Empty;
                         this.Text = String.Empty;
                     }
-
-                    this.IsDropDownOpen = false;
-                    //this.ClearFilter();
-                    //int temp = this.SelectedIndex;
-                    //this.SelectedIndex = -1;
-                    //this.Text = String.Empty;
-                    //this.SelectedIndex = temp;
                 }
             }
         }
 
         protected override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
-            if (this.SelectedIndex > -1)
+            if (this.IsEditable)
             {
-                if (this.EditableTextBox != null)
+                if (this.SelectedIndex > -1)
                     this.EditableTextBox.Text = this.SelectedValue.ToString();
-                else base.OnSelectionChanged(e);
-            }
-            else this.EditableTextBox.Text = Filter;
+                else this.EditableTextBox.Text = Filter;
 
-        }        
+                this.EditableTextBox.BindableSelectionStart = this.EditableTextBox.Text.Length;
+            }
+            else
+                base.OnSelectionChanged(e);
+        }
+
         ////
         // Helpers
         ////
@@ -229,7 +221,6 @@ namespace Gestionix.POS
                 view.Refresh();
             }
         }
-
 
         private void SelectDownItem()
         {

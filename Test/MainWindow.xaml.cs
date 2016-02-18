@@ -100,5 +100,17 @@ namespace Test
         {
             bwtest.RunWorkerAsync(sender as HintSearchBox);
         }
+
+        private void TxtS_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TxtS.BindableSelectionStart = 1;
+            TxtS.BindableSelectionLength = 0;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TxtNormal.SelectionStart = 1;
+            TxtNormal.SelectionLength = 0;
+        }
     }
 }
