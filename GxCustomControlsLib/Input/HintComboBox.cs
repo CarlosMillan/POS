@@ -159,13 +159,17 @@ namespace Gestionix.POS
             if (OldFilter != this.Text)
             {
                 Filter = this.Text;
-                AsyncFilter();
 
-                base.OnKeyUp(e);
+                if (this.SelectedIndex > -1)
+                    this.SelectedIndex = -1;
+
+                AsyncFilter();
             }
+
+            base.OnKeyUp(e);
         }
 
-        public async void AsyncFilter()
+        public void AsyncFilter()
         {
             this.RefreshFilter();
 
@@ -200,7 +204,8 @@ namespace Gestionix.POS
                     this.EditableTextBox.Text = this.SelectedValue.ToString();
                 else this.EditableTextBox.Text = Filter;
 
-                this.EditableTextBox.BindableSelectionStart = this.EditableTextBox.Text.Length;
+                if(Filter != this.Text)
+                    this.EditableTextBox.BindableSelectionStart = this.EditableTextBox.Text.Length;
             }
             else
                 base.OnSelectionChanged(e);
