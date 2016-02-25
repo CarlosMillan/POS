@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Gestionix;
 
 namespace Test
 {
@@ -28,6 +29,7 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
+            
             bwtest = new BackgroundWorker();
             bwtest.DoWork += bwtest_DoWork;
             bwtest.RunWorkerCompleted += bwtest_RunWorkerCompleted;
@@ -46,6 +48,8 @@ namespace Test
             System.Globalization.CultureInfo C = System.Globalization.CultureInfo.CreateSpecificCulture("es-MX");
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = C;
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = C;
+
+            GestionixPOSCulture.SetPOSCulture(SupportedCultures.MEXICO);
         }
 
         void bwtest_ProgressChanged(object sender, ProgressChangedEventArgs e)

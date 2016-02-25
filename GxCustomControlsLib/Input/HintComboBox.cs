@@ -32,6 +32,7 @@ namespace Gestionix.POS
 
         protected string OldFilter = String.Empty;
         protected string Filter = String.Empty;
+        protected string NormalizedFilter = String.Empty;
 
         /// <summary>
         /// Gets a reference to the internal editable textbox.
@@ -47,8 +48,6 @@ namespace Gestionix.POS
                 return this.GetTemplateChild("PART_EditableTextBox") as HintTextBox;
             }
         }
-
-        private int count = -1;
         
         static HintComboBox()
         {
@@ -95,9 +94,11 @@ namespace Gestionix.POS
             {
                 return true;
             }
-
+            
             // Case insensitive search
-            int Contains = System.Globalization.CultureInfo.CurrentCulture.CompareInfo.IndexOf(value.ToString(), Filter, System.Globalization.CompareOptions.OrdinalIgnoreCase);
+            int Contains = System.Globalization.CultureInfo.InvariantCulture.CompareInfo.IndexOf(value.ToString().RemoveAccents(),
+                                                                                                 NormalizedFilter,
+                                                                                                 System.Globalization.CompareOptions.OrdinalIgnoreCase);
             return Contains >= 0 ? true : false;        
         }
 
@@ -159,17 +160,18 @@ namespace Gestionix.POS
             if (OldFilter != this.Text)
             {
                 Filter = this.Text;
+                NormalizedFilter = Filter.RemoveAccents();
 
                 if (this.SelectedIndex > -1)
                     this.SelectedIndex = -1;
 
-                AsyncFilter();
+                ApplyFilter();
             }
 
             base.OnKeyUp(e);
         }
 
-        public void AsyncFilter()
+        public void ApplyFilter()
         {
             this.RefreshFilter();
 
@@ -227,6 +229,9 @@ namespace Gestionix.POS
             }
         }
 
+        /// <summary>
+        /// Select item in ItemSource when Down key is pressed
+        /// </summary>
         private void SelectDownItem()
         {
             int DownIndex = this.SelectedIndex + 1;
@@ -237,6 +242,9 @@ namespace Gestionix.POS
             this.SelectedIndex = DownIndex;            
         }
 
+        /// <summary>
+        /// Select item in ItemSource when Up key is pressed
+        /// </summary>
         private void SelectUpItem()
         {
             int UpIndex = this.SelectedIndex - 1;

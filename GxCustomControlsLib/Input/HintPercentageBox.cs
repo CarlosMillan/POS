@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,33 +15,33 @@ using System.Windows.Shapes;
 
 namespace Gestionix.POS
 {
-    public class HintCurrencyBox : HintNumericBox
+    public class HintPercentageBox : HintNumericBox
     {
-        static HintCurrencyBox()
+        static HintPercentageBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(HintCurrencyBox), new FrameworkPropertyMetadata(typeof(HintCurrencyBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(HintPercentageBox), new FrameworkPropertyMetadata(typeof(HintPercentageBox)));
         }
 
         public override void OnApplyTemplate()
         {
             if (Scale == 0) SetValue(ScaleProperty, 2);
-            Text = ValidateInput(Text, FormatCurrencyInput);
+            Text = ValidateInput(Text, FormatPercentageInput);
         }
 
         protected override void OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
-            GotFocus(Text.CurrencyFormatToDecimal());
+            GotFocus(Text.PercentageFormatToDecimal());
         }
 
         protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
-            Text = ValidateInput(Text, FormatCurrencyInput);
+            Text = ValidateInput(Text, FormatPercentageInput);
         }
 
-        private string FormatCurrencyInput(string a, decimal v)
+        private string FormatPercentageInput(string a, decimal v)
         {
             if (!String.IsNullOrEmpty(a))
-                return v.FormatCurrency(Scale);
+                return v.FormatPercentage(Scale);
             else return a;
         }
     }

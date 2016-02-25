@@ -25,6 +25,11 @@
             <Setter Property="BorderThickness" Value="1" />
         </Style>
 
+        <Style TargetType="{x:Type GxControls:HintPercentageBox}">
+            <Setter Property="BorderBrush" Value="Green" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
         <Style TargetType="{x:Type GxControls:HintSearchBox}">
             <Setter Property="BorderBrush" Value="Brown" />
             <Setter Property="BorderThickness" Value="1" />
@@ -480,7 +485,8 @@
                 <GxControls:HintTextBox x:Name="TxtS" Width="280" HintText="Sugerencia de cuadro de texto" FontSize="18" Margin="5" TextChanged="TxtS_TextChanged" />
                 <GxControls:HintPasswordBox x:Name="TxtP" Width="150" HintText="Contraseña" Margin="5" />
                 <GxControls:HintNumericBox x:Name="TxtNu" Width="150" HintText="0" Margin="5" TextAlignment="Right"/>
-                <GxControls:HintCurrencyBox x:Name="TxtC" Width="150" HintText="$0.00" Margin="5" TextAlignment="Right"/>
+                <GxControls:HintCurrencyBox x:Name="TxtC" Width="150" HintText="$0.00" Margin="5" TextAlignment="Right" Scale="3"/>
+                <GxControls:HintPercentageBox x:Name="TxtPer" Width="150" HintText="0%" Margin="5" TextAlignment="Right"/>
                 <GxControls:HintTextBox x:Name="TxtA" Width="250" HintText="area de texto" FontSize="18" Margin="5" Height="100" TextWrapping="Wrap" />
                 <GxControls:HintSearchBox x:Name="TxtSeatch" Height="80" HintText="Buscar" VerticalContentAlignment="Center" FontSize="30" Margin="5" KeyDown="TxtSeatch_KeyDown" Search="TxtSeatch_Search" />
                 <GxControls:HintSearchBox x:Name="TxtSeatchSmall" Height="30" HintText="Buscar más" VerticalContentAlignment="Center" Margin="5" KeyDown="TxtSeatch_KeyDown"/>

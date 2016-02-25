@@ -79,6 +79,8 @@
 
     <Style TargetType="{x:Type local:HintNumericBox}" BasedOn="{StaticResource HintTextBoxBaseStyle}" />
 
+    <Style TargetType="{x:Type local:HintPercentageBox}" BasedOn="{StaticResource HintTextBoxBaseStyle}" />
+
     <Style TargetType="{x:Type local:HintSearchBox}">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Template">

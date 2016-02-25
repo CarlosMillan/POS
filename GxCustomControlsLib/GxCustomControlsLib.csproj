@@ -68,6 +68,7 @@
     <Compile Include="Input\HintCurrencyBox.cs" />
     <Compile Include="Input\HintNumericBox.cs" />
     <Compile Include="Input\HintPasswordBox.cs" />
+    <Compile Include="Input\HintPercentageBox.cs" />
     <Compile Include="Input\HintSearchBox.cs" />
     <Compile Include="Input\HintTextBox.cs" />
     <Compile Include="Animated\ProgressRing.cs" />

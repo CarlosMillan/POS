@@ -18,7 +18,7 @@ namespace Gestionix.POS
 {
     public class HintNumericBox : HintTextBox
     {
-        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(int), typeof(HintNumericBox), new PropertyMetadata(null));
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(int), typeof(HintNumericBox), new PropertyMetadata(null));        
 
         [Description("Scale decimal")]
         public int Scale
@@ -48,24 +48,30 @@ namespace Gestionix.POS
         protected override void OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
             base.OnPreviewGotKeyboardFocus(e);
-            string NewString = Text.RawDecimal();
-
-            if (Text != NewString)
-                Text = NewString;
+            GotFocus(Text.DecimalFormatToDecimal());
         }
 
         protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
-            base.OnPreviewLostKeyboardFocus(e);
+            base.OnPreviewLostKeyboardFocus(e);            
             Text = ValidateInput(Text, FormatNumberInput);
         }
 
         protected string ValidateInput(string input, Func<string, decimal, string> convertfunc)
         {
-            decimal Value;
-            string StringValue = input.RawDecimal();
-            Decimal.TryParse(StringValue, out Value);
-            return convertfunc(StringValue, Value);
+            return convertfunc(input, input.DecimalFormatToDecimal());
+        }
+
+        protected new void GotFocus(decimal value)
+        {
+            if (!String.IsNullOrWhiteSpace(Text))
+            {
+                decimal DecimalValue = value;
+                string NewString = DecimalValue.DecimalToString();
+
+                if (Text != NewString)
+                    Text = NewString;
+            }
         }
 
         private string FormatNumberInput(string a, decimal v)
