@@ -22,12 +22,20 @@ namespace Gestionix.POS
     public class HintComboBox : ComboBox
     {
         public static readonly DependencyProperty HintTextProperty = DependencyProperty.Register("HintText", typeof(string), typeof(HintComboBox), new PropertyMetadata(null));
+        public static readonly DependencyProperty TypedFilterProperty = DependencyProperty.Register("TypedFilter", typeof(string), typeof(HintComboBox), new PropertyMetadata(null));
 
         [Description("Suggested text")]
         public string HintText
         {
             get { return (string)GetValue(HintTextProperty); }
             set { SetValue(HintTextProperty, value); }
+        }
+
+        [Description("Typed filter")]
+        public string TypedFilter
+        {
+            get { return (string)GetValue(TypedFilterProperty); }
+            set { SetValue(TypedFilterProperty, value); }
         }
 
         protected string OldFilter = String.Empty;
@@ -161,6 +169,7 @@ namespace Gestionix.POS
             {
                 Filter = this.Text;
                 NormalizedFilter = Filter.RemoveAccents();
+                SetValue(TypedFilterProperty, NormalizedFilter);
 
                 if (this.SelectedIndex > -1)
                     this.SelectedIndex = -1;

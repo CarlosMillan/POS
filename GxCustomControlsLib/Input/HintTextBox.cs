@@ -48,20 +48,8 @@ namespace Gestionix.POS
     public class HintTextBox : TextBox
     {
         public static readonly DependencyProperty HintTextProperty = DependencyProperty.Register("HintText", typeof(string), typeof(HintTextBox), new PropertyMetadata(null));
-
-        public static readonly DependencyProperty BindableSelectionStartProperty =
-        DependencyProperty.Register(
-        "BindableSelectionStart",
-        typeof(int),
-        typeof(HintTextBox),
-        new PropertyMetadata(OnBindableSelectionStartChanged));
-
-        public static readonly DependencyProperty BindableSelectionLengthProperty =
-            DependencyProperty.Register(
-            "BindableSelectionLength",
-            typeof(int),
-            typeof(HintTextBox),
-            new PropertyMetadata(OnBindableSelectionLengthChanged));
+        public static readonly DependencyProperty BindableSelectionStartProperty = DependencyProperty.Register("BindableSelectionStart",typeof(int),typeof(HintTextBox),new PropertyMetadata(OnBindableSelectionStartChanged));
+        public static readonly DependencyProperty BindableSelectionLengthProperty =DependencyProperty.Register("BindableSelectionLength",typeof(int),typeof(HintTextBox),new PropertyMetadata(OnBindableSelectionLengthChanged));
 
         private bool changeFromUI;
 
@@ -74,36 +62,19 @@ namespace Gestionix.POS
 
         public int BindableSelectionStart
         {
-            get
-            {
-                return (int)this.GetValue(BindableSelectionStartProperty);
-            }
-
-            set
-            {
-                this.SetValue(BindableSelectionStartProperty, value);
-            }
+            get { return (int)this.GetValue(BindableSelectionStartProperty); }
+            set{ this.SetValue(BindableSelectionStartProperty, value);}
         }
 
         public int BindableSelectionLength
         {
-            get
-            {
-                return (int)this.GetValue(BindableSelectionLengthProperty);
-            }
-
-            set
-            {
-                this.SetValue(BindableSelectionLengthProperty, value);
-            }
+            get{ return (int)this.GetValue(BindableSelectionLengthProperty);}
+            set{this.SetValue(BindableSelectionLengthProperty, value);}
         }
 
         public TextBox WritableTextBox
         {
-            get
-            {
-                return this.GetTemplateChild("PART_Writeable") as TextBox;
-            }
+            get{return this.GetTemplateChild("PART_Writeable") as TextBox;}
         }
  
         static HintTextBox()

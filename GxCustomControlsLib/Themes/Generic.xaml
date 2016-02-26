@@ -9,10 +9,12 @@
     </ResourceDictionary.MergedDictionaries>
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    
+
     <!--INPUT TEXT-->
     <Style x:Key="HintTextBoxBaseStyle" TargetType="{x:Type TextBox}">   
-        <Setter Property="IsTabStop" Value="False"/>                    
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:HintTextBox}">
@@ -48,6 +50,8 @@
 
     <Style TargetType="{x:Type local:HintPasswordBox}">
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:HintPasswordBox}">
@@ -83,6 +87,8 @@
 
     <Style TargetType="{x:Type local:HintSearchBox}">
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:HintSearchBox}">
@@ -148,21 +154,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--INPUT TEXT END-->
-
-    <!-- ANIMATED -->   
-    <Style TargetType="{x:Type local:ProgressRing}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ProgressRing}">
-                    <Viewbox Stretch="Uniform">
-                        <Canvas x:Name="PART_Container" Width="50" Height="50"/>
-                    </Viewbox>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <!-- ANIMATED END -->
 
     <Style TargetType="{x:Type local:HintComboBox}">
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -170,9 +161,11 @@
         <Setter Property="Padding" Value="6,3,5,3"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
-        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>       
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="IsTextSearchEnabled" Value="False"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
@@ -212,7 +205,7 @@
                                                     </Border>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" TargetName="templateRoot" Value="LightGray"/>
+                                                            <Setter Property="Background" TargetName="templateRoot" Value="LightBlue"/>
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
@@ -290,10 +283,10 @@
                                                             </Border>
                                                             <ControlTemplate.Triggers>
                                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="Background" TargetName="templateRoot" Value="LightGray"/>
+                                                                    <Setter Property="Background" TargetName="templateRoot" Value="LightBlue"/>
                                                                 </Trigger>
                                                                 <Trigger Property="IsFocused" Value="True">
-                                                                    <Setter Property="Background" TargetName="templateRoot" Value="LightGray"/>
+                                                                    <Setter Property="Background" TargetName="templateRoot" Value="LightBlue"/>
                                                                 </Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
@@ -305,7 +298,7 @@
                                     <Border x:Name="Border" Background="White" Margin="{TemplateBinding BorderThickness}">
                                         <local:HintTextBox x:Name="PART_EditableTextBox" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                                            HintText="{Binding HintText, RelativeSource={RelativeSource TemplatedParent}}" BorderThickness="0">
-                                         </local:HintTextBox>
+                                        </local:HintTextBox>
                                     </Border>
                                 </Grid>
                             </Border>
@@ -335,4 +328,19 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!--INPUT TEXT END-->
+
+    <!-- ANIMATED -->   
+    <Style TargetType="{x:Type local:ProgressRing}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ProgressRing}">
+                    <Viewbox Stretch="Uniform">
+                        <Canvas x:Name="PART_Container" Width="50" Height="50"/>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- ANIMATED END -->    
 </ResourceDictionary>
