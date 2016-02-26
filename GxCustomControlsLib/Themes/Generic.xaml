@@ -28,6 +28,7 @@
                                             RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"
                                      TextWrapping="{TemplateBinding TextWrapping}" 
                                      BorderThickness="0"
+                                     AcceptsReturn="{TemplateBinding AcceptsReturn}"
                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
                         </Grid>
                     </Border>
