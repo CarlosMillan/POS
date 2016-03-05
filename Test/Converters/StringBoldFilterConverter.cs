@@ -17,7 +17,7 @@ namespace Test.Converters
                 if (values != null && values.Length == 2)
                 {                    
                     string Base = values[0].ToString();
-                    string Filter = values[1].ToString();
+                    string Filter = values[1] == null ? String.Empty : values[1].ToString();
 
                     int Contains = System.Globalization.CultureInfo.InvariantCulture.CompareInfo.IndexOf(Base.RemoveAccents(),
                                                                                      Filter,

@@ -62,6 +62,14 @@ namespace Gestionix.POS
             DefaultStyleKeyProperty.OverrideMetadata(typeof(HintComboBox), new FrameworkPropertyMetadata(typeof(HintComboBox)));
         }
 
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if(EditableTextBox != null)
+                EditableTextBox.PreviewLostKeyboardFocus += EditableTextBox_PreviewLostKeyboardFocus;
+        }
+
         /// <summary>
         /// Keep the filter if the ItemsSource is explicitly changed.
         /// </summary>
@@ -98,7 +106,7 @@ namespace Gestionix.POS
             }
 
             // No text, no filter
-            if (Filter.Length == 0)
+            if (NormalizedFilter.Length == 0)
             {
                 return true;
             }
@@ -165,7 +173,7 @@ namespace Gestionix.POS
         /// </remarks>
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            if (OldFilter != this.Text)
+            if (OldFilter != this.Text)               
             {
                 Filter = this.Text;
                 NormalizedFilter = Filter.RemoveAccents();
@@ -192,17 +200,19 @@ namespace Gestionix.POS
         /// Make sure the text corresponds to the selection when leaving the control.
         /// </summary>
         /// <param name="e">A KeyBoardFocusChangedEventArgs.</param>
-        protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
+        //protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
+        //{
+
+        //}
+
+        void EditableTextBox_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             if (this.IsEditable)
             {
-                if (e.KeyboardDevice.FocusedElement.GetType() == typeof(TextBox))
+                if (this.SelectedIndex == -1)
                 {
-                    if (this.SelectedIndex == -1)
-                    {
-                        Filter = String.Empty;
-                        this.Text = String.Empty;
-                    }
+                    Filter = String.Empty;
+                    this.Text = String.Empty;
                 }
             }
         }
