@@ -200,11 +200,6 @@ namespace Gestionix.POS
         /// Make sure the text corresponds to the selection when leaving the control.
         /// </summary>
         /// <param name="e">A KeyBoardFocusChangedEventArgs.</param>
-        //protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
-        //{
-
-        //}
-
         void EditableTextBox_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             if (this.IsEditable)
@@ -230,6 +225,20 @@ namespace Gestionix.POS
             }
             else
                 base.OnSelectionChanged(e);
+        }
+
+        protected override void OnDropDownOpened(EventArgs e)
+        {
+            if (this.Text == String.Empty)
+            {
+                Filter = String.Empty;
+                NormalizedFilter = String.Empty;
+                this.OldFilter = String.Empty;
+                SetValue(TypedFilterProperty, String.Empty);
+                RefreshFilter();
+            }
+
+            base.OnDropDownOpened(e);
         }
 
         ////

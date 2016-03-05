@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestionix.POS.Core", "Gesti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestionix.POS", "Gestioniox.POS\Gestionix.POS.csproj", "{ECDDA150-CE5F-459F-A95C-40896C93D3E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GxCustomControlsLib", "GxCustomControlsLib\GxCustomControlsLib.csproj", "{2F884167-6901-4E6A-B1E2-B75BFBE9F606}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GxWPFControlsLib", "GxCustomControlsLib\GxWPFControlsLib.csproj", "{2F884167-6901-4E6A-B1E2-B75BFBE9F606}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{C2946A34-AC50-4FE9-A492-A3A33EF3A3D3}"
 EndProject

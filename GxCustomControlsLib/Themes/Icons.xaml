@@ -64,4 +64,103 @@
             </Canvas>
         </Viewbox>
     </ControlTemplate>
+    
+    <ControlTemplate x:Key="AlertIcon">
+        <Viewbox Stretch="Uniform">
+            <Canvas Name="svg2" Width="50" Height="50">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Canvas.Resources/>
+                <Canvas Name="layer1">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="-1002.3622"/>
+                    </Canvas.RenderTransform>
+                    <Canvas Name="g4165">
+                        <Path Name="path4136" Fill="#FFBD182D" StrokeThickness="0.5" StrokeMiterLimit="4">
+                            <Path.Data>
+                                <PathGeometry Figures="m 49 1027.3619 a 24 24 0 0 1 -24 24 24 24 0 0 1 -24 -24 24 24 0 0 1 24 -24 24 24 0 0 1 24 24 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                        <Path Name="rect4139" Fill="#FFFFFFFF" StrokeThickness="0.5" StrokeMiterLimit="4">
+                            <Path.Data>
+                                <PathGeometry Figures="m 20.011963 6.75 9.976074 0 C 29.994664 6.75 30 6.7553357 30 6.7619634 L 30 30.988037 C 30 30.994664 29.994664 31 29.988037 31 l -9.976074 0 C 20.005336 31 20 30.994664 20 30.988037 L 20 6.7619634 C 20 6.7553357 20.005336 6.75 20.011963 6.75 Z" FillRule="NonZero"/>
+                            </Path.Data>
+                            <Path.RenderTransform>
+                                <TranslateTransform X="0" Y="1002.3622"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Name="path4142" Fill="#FFFFFFFF" StrokeThickness="0.5" StrokeMiterLimit="4">
+                            <Path.Data>
+                                <PathGeometry Figures="m 30 1040.3622 a 5 5 0 0 1 -5 5 5 5 0 0 1 -5 -5 5 5 0 0 1 5 -5 5 5 0 0 1 5 5 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="SuccessIcon">
+        <Viewbox  Stretch="Uniform">
+            <Canvas Name="svg4718" Width="50" Height="50">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Canvas.Resources/>
+                <Canvas Name="layer1">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="-1002.3622"/>
+                    </Canvas.RenderTransform>
+                    <Canvas Name="g5281">
+                        <Path Name="path5269" Fill="#FF6AA752" StrokeThickness="0.5" StrokeMiterLimit="4">
+                            <Path.Data>
+                                <PathGeometry Figures="m 49 1027.3622 a 24 24 0 0 1 -24 24 24 24 0 0 1 -24 -24 24 24 0 0 1 24 -24 24 24 0 0 1 24 24 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                        <Path Name="rect5271" Fill="#FFFFFFFF" StrokeThickness="0.5" StrokeMiterLimit="4">
+                            <Path.Data>
+                                <PathGeometry Figures="m 35.243905 1013.9405 c -0.0067 -0.01 -0.01641 -0.01 -0.02348 0 l -15.73865 15.7386 -6.026981 -6.027 c -0.0067 -0.01 -0.01641 -0.01 -0.02348 0 l -7.0462091 7.0462 c -0.00495 0 -0.0081 0.017 -0.00138 0.023 l 13.0579971 13.058 c 0.0067 0.01 0.01779 0.01 0.02486 0 l 1.595134 -1.5951 0.01519 0.015 c 0.0067 0.01 0.01779 0.01 0.02486 0 l 21.189725 -21.1898 c 0.005 0 0.0053 -0.017 -0.0014 -0.023 l -7.046209 -7.0462 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="InformativeIcon">
+        <Viewbox Stretch="Uniform">
+            <Canvas Name="svg2" Width="50" Height="50">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Canvas.Resources/>
+                <!--Unknown tag: sodipodi:namedview-->
+                <!--Unknown tag: metadata-->
+                <Canvas Name="layer1">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="-1002.3622"/>
+                    </Canvas.RenderTransform>
+                    <Path Name="path4136" Fill="#FF78AEE5" StrokeThickness="0.5" StrokeMiterLimit="4">
+                        <Path.Data>
+                            <PathGeometry Figures="m 49 1027.3619 a 24 24 0 0 1 -24 24 24 24 0 0 1 -24 -24 24 24 0 0 1 24 -24 24 24 0 0 1 24 24 z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Canvas Name="g5843">
+                        <Path Name="rect4139" Fill="#FFFFFFFF" StrokeThickness="0.5" StrokeMiterLimit="4">
+                            <Path.Data>
+                                <PathGeometry Figures="m 20.011963 1021.1122 9.976074 0 c 0.0066 0 0.01196 0.01 0.01196 0.012 l 0 24.226 c 0 0.01 -0.0053 0.012 -0.01196 0.012 l -9.976074 0 c -0.0066 0 -0.01196 -0.01 -0.01196 -0.012 l 0 -24.226 c 0 -0.01 0.0053 -0.012 0.01196 -0.012 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                        <Path Name="path4142" Fill="#FFFFFFFF" StrokeThickness="0.5" StrokeMiterLimit="4">
+                            <Path.Data>
+                                <PathGeometry Figures="m 30 1013.3622 a 5 5 0 0 1 -5 5 5 5 0 0 1 -5 -5 5 5 0 0 1 5 -5 5 5 0 0 1 5 5 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
 </ResourceDictionary>

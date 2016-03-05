@@ -1,8 +1,7 @@
-﻿<Window
+﻿<Window x:Class="Test.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:GxControls="clr-namespace:Gestionix.POS;assembly=GxCustomControlsLib"
-        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="Test.MainWindow"
+        xmlns:GxControls="clr-namespace:Gestionix.POS;assembly=GxWPFControlsLib"        
         Title="MainWindow" Height="680" Width="525"
         Loaded="Window_Loaded" FocusManager.FocusedElement="{Binding ElementName=Cmb}"
         xmlns:converters="clr-namespace:Test.Converters"
@@ -84,6 +83,11 @@
                 <GxControls:ProgressRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>
                 <Button Content="desactivate" Click="ToggleButton_Click" />
                 <Button Content="activate" Click="Button_Click" />
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="UserControls" IsSelected="True">
+            <StackPanel>
+                <GxControls:InformationMessage Margin="30" Type="Success" />
             </StackPanel>
         </TabItem>
     </TabControl>
