@@ -24,7 +24,7 @@ namespace Gestionix.POS
 
         public override void OnApplyTemplate()
         {
-            if (Scale == 0) SetValue(ScaleProperty, 2);
+            base.OnApplyTemplate();
             Text = ValidateInput(Text, FormatPercentageInput);
         }
 

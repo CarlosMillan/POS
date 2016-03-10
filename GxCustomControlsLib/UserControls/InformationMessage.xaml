@@ -11,6 +11,8 @@
                 <ResourceDictionary Source="pack://application:,,,/GxWPFControlsLib;component/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
+            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+            
             <Style TargetType="{x:Type Button}" x:Key="Quit">
                 <Setter Property="Cursor" Value="Hand"/>                
                 <Setter Property="Template">
@@ -33,7 +35,9 @@
             <DataTemplate>
                 <BulletDecorator Width="Auto">
                     <BulletDecorator.Bullet>
-                            <Ellipse Fill="{Binding InformationMessageBrush, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Width="5" Height="5" VerticalAlignment="Center"/>
+                            <Ellipse Fill="{Binding InformationMessageBrush, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Width="5" Height="5" 
+                                     VerticalAlignment="Center" Visibility="{Binding ShowBullets, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}
+                                                                             ,Converter={StaticResource VisibilityConverter}}"/>
                     </BulletDecorator.Bullet>
                         <TextBlock FontSize="13" Foreground="{Binding InformationMessageBrush, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Text="{Binding}" Margin="5,0,0,0" TextWrapping="Wrap" />
                 </BulletDecorator>

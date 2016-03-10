@@ -8,6 +8,8 @@
     <!--BLUE-->
     <SolidColorBrush x:Key="Blue1" Color="#3399FF" />
     <SolidColorBrush x:Key="Blue2" Color="#E6F4FD" />
+    <SolidColorBrush x:Key="Blue3" Color="#7EB4EA" />
+    <SolidColorBrush x:Key="Blue4" Color="#569DE5" />
 
     <!--GREEN-->
     <SolidColorBrush x:Key="Green1" Color="#47771F" />

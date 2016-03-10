@@ -6,13 +6,14 @@
     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/GxWPFControlsLib;component/Themes/Icons.xaml" />        
+        <ResourceDictionary Source="pack://application:,,,/GxWPFControlsLib;component/Themes/Icons.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GxWPFControlsLib;component/Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
     <!--INPUT TEXT-->
-    <Style x:Key="HintTextBoxBaseStyle" TargetType="{x:Type TextBox}">   
+    <!--<Style x:Key="HintTextBoxBaseStyle" TargetType="{x:Type TextBox}">   
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -44,13 +45,50 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>-->
+  
+    <Style x:Key="HintTextBoxBaseStyle" TargetType="{x:Type local:HintTextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HintTextBox}">
+                    <Border Name="PART_Border" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <Border.Background>
+                            <VisualBrush x:Name="CueBannerBrush" AlignmentX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintTextHorizontalAligment}" 
+                                         AlignmentY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintTextVerticalAligment}" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintText}" Background="Transparent" 
+                                               Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintTextBrush}" Padding="7,5"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Border.Background>
+                        
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text.IsEmpty}" Value="False">
+                            <Setter TargetName="PART_Border" Property="Background" Value="{x:Null}" />
+                        </DataTrigger>                        
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="PART_Border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{StaticResource Blue3}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{StaticResource Blue4}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="{x:Type local:HintTextBox}" BasedOn="{StaticResource HintTextBoxBaseStyle}"/>
 
-    <Style TargetType="{x:Type local:HintCurrencyBox}" BasedOn="{StaticResource HintTextBoxBaseStyle}" />
-
-    <Style TargetType="{x:Type local:HintPasswordBox}">
+    <Style TargetType="{x:Type local:HintPasswordBox}" >
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -77,6 +115,15 @@
                         <DataTrigger Binding="{Binding IsFocused, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="PART_Writeable" Property="FocusManager.FocusedElement" Value="{Binding ElementName=PART_Writeable}" />
                         </DataTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="PART_Border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{StaticResource Blue3}"/>
+                        </Trigger>
+                        <Trigger SourceName="PART_Writeable" Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{StaticResource Blue4}"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -85,6 +132,8 @@
 
     <Style TargetType="{x:Type local:HintNumericBox}" BasedOn="{StaticResource HintTextBoxBaseStyle}" />
 
+    <Style TargetType="{x:Type local:HintCurrencyBox}" BasedOn="{StaticResource HintTextBoxBaseStyle}" />
+       
     <Style TargetType="{x:Type local:HintPercentageBox}" BasedOn="{StaticResource HintTextBoxBaseStyle}" />
 
     <Style TargetType="{x:Type local:HintSearchBox}">
@@ -109,16 +158,15 @@
                                     <Setter Property="Cursor" Value="Hand" />
                                 </Style>
                             </Grid.Resources>
-                            
-                            <TextBlock Grid.Column="0" Name="PART_Watermark" Text="{TemplateBinding HintText}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="LightGray" Margin="3,0" TextTrimming="CharacterEllipsis" />
-                            <TextBox Grid.Column="0" Name="PART_Writeable" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" VerticalAlignment="Stretch" Background="Transparent" Margin="0"
-                                    Text="{Binding Text, 
-                                        Mode=TwoWay, 
-                                        UpdateSourceTrigger=PropertyChanged,  
-                                        RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"
-                                    TextWrapping="{TemplateBinding TextWrapping}" 
-                                    BorderThickness="0"
-                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+
+                            <local:HintTextBox Grid.Column="0" Name="PART_Writeable" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" VerticalAlignment="Stretch" Background="Transparent" Margin="0" 
+                                               Text="{Binding Text, 
+                                                Mode=TwoWay, 
+                                                UpdateSourceTrigger=PropertyChanged,  
+                                                RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"                                                
+                                                BorderThickness="0"
+                                                HintText="{TemplateBinding HintText}"
+                                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
                                                         
                             <Button Name="PART_PrimaryIcon">
                                 <Button.Content>
@@ -134,8 +182,7 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter TargetName="PART_Watermark" Property="Visibility" Value="Collapsed" />
+                        <DataTrigger Binding="{Binding Text.IsEmpty, RelativeSource={RelativeSource Self}}" Value="False">                            
                             <Setter TargetName="PART_SecundaryIcon" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_PrimaryIcon" Property="Visibility" Value="Hidden" />                            
                         </DataTrigger>
@@ -151,6 +198,15 @@
                             <Setter TargetName="PART_PrimaryIcon" Property="Visibility" Value="Hidden" />
                             <Setter TargetName="PART_SearchingIndicator" Property="IsActivated" Value="True" />
                         </DataTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="PART_Border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{StaticResource Blue3}"/>
+                        </Trigger>
+                        <Trigger SourceName="PART_Writeable" Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{StaticResource Blue4}"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -248,7 +304,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ComboBox}">
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Border x:Name="PART_Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                 <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -322,6 +378,15 @@
                                 <Trigger Property="CanContentScroll" SourceName="DropDownScrollViewer" Value="False">
                                     <Setter Property="Canvas.Top" TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
                                     <Setter Property="Canvas.Left" TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" TargetName="PART_Border" Value="0.56"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" TargetName="PART_Border" Value="{StaticResource Blue3}"/>
+                                </Trigger>
+                                <Trigger SourceName="PART_EditableTextBox" Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="BorderBrush" TargetName="PART_Border" Value="{StaticResource Blue4}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

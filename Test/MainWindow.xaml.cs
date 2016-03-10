@@ -107,8 +107,17 @@ namespace Test
 
         private void TxtS_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //TxtS.BindableSelectionStart = 1;
-            //TxtS.BindableSelectionLength = 0;
+            Console.WriteLine("entró al textchanged");
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Console.WriteLine("entró al textchanged visualbrush");
+        }
+
+        private void TxtP_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Console.WriteLine("entró a password");
         }
     }
 }

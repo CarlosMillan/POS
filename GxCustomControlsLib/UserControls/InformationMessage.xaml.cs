@@ -53,7 +53,13 @@ namespace Gestionix.POS
         public ObservableCollection<string> MessageContent
         {
             get { return _messagecontent; }
-        }        
+        }
+
+        private bool _showbullets;
+        public bool ShowBullets
+        {
+            get { return _showbullets; }            
+        }
 
         public InformationMessage()
         {
@@ -66,7 +72,7 @@ namespace Gestionix.POS
             //_messagecontent.Add("nnaa !");
             InitializeComponent();
             this.DataContext = this;
-
+            _showbullets = _messagecontent.Count > 1;
             SetInformationMessageColor();            
         }
 

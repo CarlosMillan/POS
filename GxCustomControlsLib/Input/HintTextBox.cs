@@ -48,6 +48,9 @@ namespace Gestionix.POS
     public class HintTextBox : TextBox
     {
         public static readonly DependencyProperty HintTextProperty = DependencyProperty.Register("HintText", typeof(string), typeof(HintTextBox), new PropertyMetadata(null));
+        public static readonly DependencyProperty HintTextBrushProperty = DependencyProperty.Register("HintTextBrush", typeof(Brush), typeof(HintTextBox), new PropertyMetadata(Brushes.LightGray));
+        public static readonly DependencyProperty HintTextVerticalAligmentProperty = DependencyProperty.Register("HintTextVerticalAligment", typeof(AlignmentY), typeof(HintTextBox), new PropertyMetadata(AlignmentY.Center));
+        public static readonly DependencyProperty HintTextHorizontalAligmentProperty = DependencyProperty.Register("HintTextHorizontalAligment", typeof(AlignmentX), typeof(HintTextBox), new PropertyMetadata(AlignmentX.Left));
         public static readonly DependencyProperty BindableSelectionStartProperty = DependencyProperty.Register("BindableSelectionStart",typeof(int),typeof(HintTextBox),new PropertyMetadata(OnBindableSelectionStartChanged));
         public static readonly DependencyProperty BindableSelectionLengthProperty =DependencyProperty.Register("BindableSelectionLength",typeof(int),typeof(HintTextBox),new PropertyMetadata(OnBindableSelectionLengthChanged));
 
@@ -58,6 +61,24 @@ namespace Gestionix.POS
         {
             get { return (string)GetValue(HintTextProperty); }
             set { SetValue(HintTextProperty, value); }
+        }
+
+        public Brush HintTextBrush
+        {
+            get { return (Brush)GetValue(HintTextBrushProperty); }
+            set { SetValue(HintTextBrushProperty, value); }
+        }
+
+        public AlignmentY HintTextVerticalAligment
+        {
+            get { return (AlignmentY)GetValue(HintTextVerticalAligmentProperty); }
+            set { SetValue(HintTextVerticalAligmentProperty, value); }
+        }
+
+        public AlignmentX HintTextHorizontalAligment
+        {
+            get { return (AlignmentX)GetValue(HintTextHorizontalAligmentProperty); }
+            set { SetValue(HintTextHorizontalAligmentProperty, value); }
         }
 
         public int BindableSelectionStart
@@ -71,12 +92,7 @@ namespace Gestionix.POS
             get{ return (int)this.GetValue(BindableSelectionLengthProperty);}
             set{this.SetValue(BindableSelectionLengthProperty, value);}
         }
-
-        public TextBox WritableTextBox
-        {
-            get{return this.GetTemplateChild("PART_Writeable") as TextBox;}
-        }
- 
+         
         static HintTextBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(HintTextBox), new FrameworkPropertyMetadata(typeof(HintTextBox)));
@@ -85,6 +101,23 @@ namespace Gestionix.POS
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
+            #region Adjust HintText position
+            if (this.VerticalContentAlignment == System.Windows.VerticalAlignment.Top)
+                SetValue(HintTextVerticalAligmentProperty, AlignmentY.Top);
+            else if (this.VerticalContentAlignment == System.Windows.VerticalAlignment.Bottom)
+                SetValue(HintTextVerticalAligmentProperty, AlignmentY.Bottom);
+            else if (this.VerticalContentAlignment == System.Windows.VerticalAlignment.Center)
+                SetValue(HintTextVerticalAligmentProperty, AlignmentY.Center);
+
+            if (this.TextAlignment == System.Windows.TextAlignment.Left)
+                SetValue(HintTextHorizontalAligmentProperty, AlignmentX.Left);
+            else if (this.TextAlignment == System.Windows.TextAlignment.Center)
+                SetValue(HintTextHorizontalAligmentProperty, AlignmentX.Center);
+            else if (this.TextAlignment == System.Windows.TextAlignment.Right)
+                SetValue(HintTextHorizontalAligmentProperty, AlignmentX.Right);
+            #endregion
+
             this.SelectionChanged += this.OnSelectionChanged;
         }
 
@@ -95,7 +128,7 @@ namespace Gestionix.POS
             if (!textBox.changeFromUI)
             {
                 int newValue = (int)args.NewValue;
-                textBox.WritableTextBox.SelectionStart = newValue;
+                textBox.SelectionStart = newValue;
             }
             else
             {
@@ -110,7 +143,7 @@ namespace Gestionix.POS
             if (!textBox.changeFromUI)
             {
                 int newValue = (int)args.NewValue;
-                textBox.WritableTextBox.SelectionLength = newValue;
+                textBox.SelectionLength = newValue;
             }
             else
             {

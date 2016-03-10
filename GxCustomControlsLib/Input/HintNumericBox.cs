@@ -18,7 +18,7 @@ namespace Gestionix.POS
 {
     public class HintNumericBox : HintTextBox
     {
-        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(int), typeof(HintNumericBox), new PropertyMetadata(null));        
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(int), typeof(HintNumericBox), new PropertyMetadata(2));        
 
         [Description("Scale decimal")]
         public int Scale
@@ -34,8 +34,7 @@ namespace Gestionix.POS
 
         public override void OnApplyTemplate()
         {
-            base.OnApplyTemplate();
-            if (Scale == 0) SetValue(ScaleProperty, 2);
+            base.OnApplyTemplate();            
             Text = ValidateInput(Text, FormatNumberInput);
         }
 
