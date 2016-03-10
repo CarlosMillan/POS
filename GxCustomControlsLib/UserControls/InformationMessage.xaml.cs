@@ -21,6 +21,7 @@ namespace Gestionix.POS
     /// </summary>
     public partial class InformationMessage : UserControl
     {
+        #region Properties
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(InformationMessageType), typeof(InformationMessage), new PropertyMetadata(InformationMessageType.Error, new PropertyChangedCallback(OnTypePropertyChanged)));
         public InformationMessageType Type
         {
@@ -60,7 +61,9 @@ namespace Gestionix.POS
         {
             get { return _showbullets; }            
         }
+        #endregion
 
+        #region Ctors
         public InformationMessage()
         {
             _messagecontent = new ObservableCollection<string>();            
@@ -75,7 +78,9 @@ namespace Gestionix.POS
             _showbullets = _messagecontent.Count > 1;
             SetInformationMessageColor();            
         }
+        #endregion
 
+        #region Methods and Events
         public void SetInformationMessageColor()
         {
             if (Type == InformationMessageType.Error)
@@ -102,6 +107,12 @@ namespace Gestionix.POS
         {
             (sender as Gestionix.POS.InformationMessage).SetInformationMessageColor();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+        #endregion
     }
 
     public enum InformationMessageType

@@ -89,8 +89,9 @@
         <TabItem Header="UserControls" IsSelected="True">
             <StackPanel>
                 <GxControls:InformationMessage Margin="30,5" Type="Success" />
-                <GxControls:InformationMessage Margin="30,5" Type="Error" />
-                <GxControls:InformationMessage Margin="30,5" Type="Informative" />
+                <!--<GxControls:InformationMessage Margin="30,5" Type="Error" />
+                <GxControls:InformationMessage Margin="30,5" Type="Informative" />-->
+                <TextBlock  Text="Cuadros de mensajes"/>
             </StackPanel>
         </TabItem>
     </TabControl>
