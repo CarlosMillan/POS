@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -19,8 +21,12 @@ namespace Gestionix.POS
     /// <summary>
     /// Interaction logic for InformationMessage.xaml
     /// </summary>
-    public partial class InformationMessage : UserControl
+    public partial class InformationMessage : UserControl, INotifyPropertyChanged
     {
+        #region Const
+        private const float FADE_ANIMATION_DURATION = 0.5f;  // Time in seconds
+        #endregion
+
         #region Properties
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(InformationMessageType), typeof(InformationMessage), new PropertyMetadata(InformationMessageType.Error, new PropertyChangedCallback(OnTypePropertyChanged)));
         public InformationMessageType Type
@@ -50,10 +56,11 @@ namespace Gestionix.POS
             set { SetValue(InformationMessageIconProperty, value); }
         }
 
-        private ObservableCollection<string> _messagecontent;
-        public ObservableCollection<string> MessageContent
+        public static readonly DependencyProperty MessageContentProperty = DependencyProperty.Register("MessageContent", typeof(List<string>), typeof(InformationMessage), new PropertyMetadata(null));
+        public List<string> MessageContent
         {
-            get { return _messagecontent; }
+            get { return (List<string>)GetValue(MessageContentProperty); }
+            set { SetValue(MessageContentProperty, value); }
         }
 
         private bool _showbullets;
@@ -66,16 +73,10 @@ namespace Gestionix.POS
         #region Ctors
         public InformationMessage()
         {
-            _messagecontent = new ObservableCollection<string>();            
-            //_messagecontent.Add("Probando Error 1");
-            //_messagecontent.Add("Probando Error 2");
-            //_messagecontent.Add("Probando Error 3");
-            //_messagecontent.Add("Probando Error 4");
-            _messagecontent.Add("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget velit mattis, ornare urna at, mollis metus. Sed sed justo posuere odio rutrum viverra sagittis in ligula. Nullam sollicitudin velit eros.");
-            //_messagecontent.Add("nnaa !");
+            
             InitializeComponent();
             this.DataContext = this;
-            _showbullets = _messagecontent.Count > 1;
+            //_showbullets = _messagecontent.Count > 1;
             SetInformationMessageColor();            
         }
         #endregion
@@ -110,7 +111,47 @@ namespace Gestionix.POS
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
+            FadeOutAnimation(FADE_ANIMATION_DURATION, 
+                             new EventHandler((s, er) => 
+                             { 
+                                 this.Visibility = System.Windows.Visibility.Hidden; 
+                             }));
+        }
+
+        private void MessageControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.Visibility == Visibility.Visible)            
+                FadeInAnimation(FADE_ANIMATION_DURATION);            
+        }
+
+        private void FadeInAnimation(float secondsduration, EventHandler oncompleteanimation = null)
+        {
+            FadeAnimation(0, 1, secondsduration, oncompleteanimation);
+        }
+
+        private void FadeOutAnimation(float secondsduration, EventHandler oncompleteanimation = null)
+        {
+            FadeAnimation(1, 0, secondsduration, oncompleteanimation);
+        }
+
+        private void FadeAnimation(int from, int to, float secondsduration, EventHandler oncompleteanimation =  null)
+        {            
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = from;
+            da.To = to;
+            da.Duration = new Duration(TimeSpan.FromSeconds(secondsduration));
+
+            if(oncompleteanimation != null && oncompleteanimation is EventHandler)
+                da.Completed += oncompleteanimation;
+
+            this.BeginAnimation(OpacityProperty, da);            
+        }
+       
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

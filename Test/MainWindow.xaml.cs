@@ -25,6 +25,7 @@ namespace Test
     public partial class MainWindow : Window
     {
         private BackgroundWorker bwtest;
+        public List<string> Meesages;
 
         public MainWindow()
         {
@@ -44,6 +45,14 @@ namespace Test
             names.Add("Efectivo");
             names.Add("Otro");
             //Cmb.ItemsSource = names;
+
+            Meesages = new List<string>();
+            Meesages.Add("mensaje 1");
+            Meesages.Add("mensaje 2");
+            Meesages.Add("mensaje 3");
+            Meesages.Add("mensaje 4");
+            Meesages.Add("mansaje 5");
+            Meesages.Add("mensaje 6");
 
             System.Globalization.CultureInfo C = System.Globalization.CultureInfo.CreateSpecificCulture("es-MX");
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = C;
@@ -118,6 +127,13 @@ namespace Test
         private void TxtP_TextChanged(object sender, TextChangedEventArgs e)
         {
             Console.WriteLine("entró a password");
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SuccessMessage.Visibility = System.Windows.Visibility.Visible;
+            ErrorMessage.Visibility = System.Windows.Visibility.Visible;
+            InfoMessage.Visibility = System.Windows.Visibility.Visible;
         }
     }
 }

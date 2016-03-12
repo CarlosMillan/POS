@@ -119,10 +119,10 @@
         </TabItem>
         <TabItem Header="UserControls">
             <StackPanel>
-                <GxControls:InformationMessage Margin="30,5" Type="Success" />
-                <!--<GxControls:InformationMessage Margin="30,5" Type="Error" />
-                <GxControls:InformationMessage Margin="30,5" Type="Informative" />-->
-                <TextBlock  Text="Cuadros de mensajes"/>
+                <GxControls:InformationMessage Margin="30,5" Type="Success" x:Name="SuccessMessage" MessageContent="{Binding Meesages}" />
+                <GxControls:InformationMessage Margin="30,5" Type="Error" x:Name="ErrorMessage" />
+                <GxControls:InformationMessage Margin="30,5" Type="Informative" x:Name="InfoMessage" />
+                <Button Content="Mostrat mensajes" Click="Button_Click_1"/>
             </StackPanel>
         </TabItem>
     </TabControl>
