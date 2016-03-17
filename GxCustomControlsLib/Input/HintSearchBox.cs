@@ -41,8 +41,8 @@ namespace Gestionix.POS
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            Button CloseActionButton = this.GetTemplateChild("PART_SecundaryIcon") as Button;
-            Button SearchActionButton = this.GetTemplateChild("PART_PrimaryIcon") as Button;
+            StatesButton CloseActionButton = this.GetTemplateChild("PART_SecundaryIcon") as StatesButton;
+            StatesButton SearchActionButton = this.GetTemplateChild("PART_PrimaryIcon") as StatesButton;
             CloseActionButton.Click += CloseActionButton_Click;
             SearchActionButton.Click += SearchActionButton_Click;
         }

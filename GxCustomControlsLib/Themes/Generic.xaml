@@ -397,6 +397,41 @@
     </Style>
     <!--INPUT TEXT END-->
 
+    <!--BUTTONS-->
+    <Style TargetType="{x:Type local:StatesButton}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:StatesButton}">
+                    <Grid>
+                        <Button Panel.ZIndex="1" Name="PART_LockedIcon" Content="Lock" Height="10" Width="10" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed" />
+                        <Border Panel.ZIndex="0" Name="PART_Background" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0.7" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0.5" />
+                            <Setter Property="Cursor" Value="Arrow" />
+                        </Trigger>
+
+                        <Trigger Property="IsLocked" Value="True">
+                            <Setter TargetName="PART_Background" Property="Opacity" Value="0.5" />
+                            <Setter Property="Cursor" Value="Arrow" />
+                            <Setter TargetName="PART_LockedIcon" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--END BUTTONS-->
+    
     <!-- ANIMATED -->   
     <Style TargetType="{x:Type local:ProgressRing}">
         <Setter Property="Template">

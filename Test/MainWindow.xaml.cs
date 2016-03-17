@@ -43,7 +43,7 @@ namespace Test
             names.Add("American Express");
             names.Add("Efectivo");
             names.Add("Otro");
-            Cmb.ItemsSource = names;
+            //Cmb.ItemsSource = names;
 
             System.Globalization.CultureInfo C = System.Globalization.CultureInfo.CreateSpecificCulture("es-MX");
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = C;
@@ -54,14 +54,14 @@ namespace Test
 
         void bwtest_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            TxtSearchingResult.Text = "buscando..." + e.ProgressPercentage.ToString();
+            //TxtSearchingResult.Text = "buscando..." + e.ProgressPercentage.ToString();
         }
 
         void bwtest_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             HintSearchBox T = (HintSearchBox)e.Result;
             T.IsSearching = false;
-            TxtSearchingResult.Text = "ya buscó algo";
+            //TxtSearchingResult.Text = "ya buscó algo";
         }
 
         void bwtest_DoWork(object sender, DoWorkEventArgs e)
@@ -92,12 +92,12 @@ namespace Test
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {
-            RingTest.IsActivated = false;
+            //RingTest.IsActivated = false;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            RingTest.IsActivated = true;
+            //RingTest.IsActivated = true;
         }
 
         private void TxtSeatch_Search(object sender, RoutedEventArgs e)
