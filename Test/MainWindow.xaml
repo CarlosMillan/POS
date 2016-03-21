@@ -4,7 +4,7 @@
         xmlns:GxControls="clr-namespace:Gestionix.POS;assembly=GxWPFControlsLib"        
         Title="MainWindow" Height="680" Width="725"
         Loaded="Window_Loaded" FocusManager.FocusedElement="{Binding ElementName=Cmb}"
-        xmlns:converters="clr-namespace:Test.Converters"
+        xmlns:converters="clr-namespace:Test.Converters" x:Name="window"
         FontFamily="Segoe UI">
     <Window.Resources>
         <converters:StringBoldFilterConverter x:Key="StringBoldFilterConverter" />
@@ -44,7 +44,7 @@
                 <GxControls:HintSearchBox x:Name="TxtSeatchSmall" Height="40" FontSize="14" HintText="Buscar más" Margin="5" KeyDown="TxtSeatch_KeyDown"/>
                 <TextBlock x:Name="TxtSearchingResult" FontSize="15"/>
                 <GxControls:HintComboBox x:Name="Cmb" Margin="5" Height="50" HintText="Busca algo en este ComboBox" FontSize="17"
-                                         IsEditable="True" IsTextSearchEnabled="False" >
+                                         IsEditable="True" IsTextSearchEnabled="False" ItemsSource="{Binding Names}" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Label>
@@ -70,7 +70,7 @@
                 <ContentControl Template="{StaticResource GnuIcon}" />
             </Grid>
         </TabItem>
-        <TabItem Header="Buttons" IsSelected="True">
+        <TabItem Header="Buttons" >
             <StackPanel>
                 <CheckBox x:Name="ChkEnable" Content="Enable|Disable" IsChecked="True"/>
                 <CheckBox x:Name="ChkLocked" Content="Locked|Unlocked" IsChecked="True"/>
@@ -118,12 +118,12 @@
                 <Button Content="activate" Click="Button_Click" />
             </StackPanel>
         </TabItem>
-        <TabItem Header="UserControls">
+        <TabItem Header="UserControls" IsSelected="True">
             <StackPanel>
-                <GxControls:InformationMessage Margin="30,5" Type="Success" x:Name="SuccessMessage" MessageContent="{Binding Meesages}" />
-                <GxControls:InformationMessage Margin="30,5" Type="Error" x:Name="ErrorMessage" />
-                <GxControls:InformationMessage Margin="30,5" Type="Informative" x:Name="InfoMessage" />
-                <Button Content="Mostrat mensajes" Click="Button_Click_1"/>
+                <GxControls:InformationMessage Margin="30,5" Type="Success" x:Name="SuccessMessage" ItemsSource="{Binding ElementName=window, Path=Extras}" IsActive="True" />
+                <GxControls:InformationMessage Margin="30,5" Type="Error" x:Name="ErrorMessage" ItemsSource="{Binding ElementName=window, Path=Extras}"/>
+                <GxControls:InformationMessage Margin="30,5" Type="Informative" x:Name="InfoMessage" ItemsSource="{Binding ElementName=window, Path=SingleMessage}"/>
+                <Button Content="Mostrar mensajes" Click="Button_Click_1"/>
             </StackPanel>
         </TabItem>
     </TabControl>

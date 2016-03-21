@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -24,7 +26,7 @@ namespace Gestionix.POS
     public partial class InformationMessage : UserControl, INotifyPropertyChanged
     {
         #region Const
-        private const float FADE_ANIMATION_DURATION = 0.5f;  // Time in seconds
+        private const float FADE_ANIMATION_DURATION = 0.4f;  // Time in seconds
         #endregion
 
         #region Properties
@@ -33,6 +35,13 @@ namespace Gestionix.POS
         {
             get { return (InformationMessageType)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive", typeof(bool), typeof(InformationMessage), new PropertyMetadata(false, new PropertyChangedCallback(OnIsActivePropertyChanged)));
+        public bool IsActive
+        {
+            get { return (bool)GetValue(IsActiveProperty); }
+            set { SetValue(IsActiveProperty, value); }
         }
 
         public static readonly DependencyProperty InformationMessageBrushProperty = DependencyProperty.Register("InformationMessageBrush", typeof(Brush), typeof(InformationMessage), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
@@ -56,13 +65,45 @@ namespace Gestionix.POS
             set { SetValue(InformationMessageIconProperty, value); }
         }
 
-        public static readonly DependencyProperty MessageContentProperty = DependencyProperty.Register("MessageContent", typeof(List<string>), typeof(InformationMessage), new PropertyMetadata(null));
-        public List<string> MessageContent
+        public IEnumerable ItemsSource
         {
-            get { return (List<string>)GetValue(MessageContentProperty); }
-            set { SetValue(MessageContentProperty, value); }
+            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value);}
         }
 
+        public static readonly DependencyProperty ItemsSourceProperty =
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(InformationMessage), new PropertyMetadata(new PropertyChangedCallback(OnItemsSourcePropertyChanged)));
+
+        private static void OnItemsSourcePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var control = sender as InformationMessage;
+            if (control != null)
+                control.OnItemsSourceChanged((IEnumerable)e.OldValue, (IEnumerable)e.NewValue);
+        }
+
+        private void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
+        {
+            // Remove handler for oldValue.CollectionChanged
+            var oldValueINotifyCollectionChanged = oldValue as INotifyCollectionChanged;
+
+            if (null != oldValueINotifyCollectionChanged)
+            {
+                oldValueINotifyCollectionChanged.CollectionChanged -= new NotifyCollectionChangedEventHandler(newValueINotifyCollectionChanged_CollectionChanged);
+            }
+            // Add handler for newValue.CollectionChanged (if possible)
+            var newValueINotifyCollectionChanged = newValue as INotifyCollectionChanged;
+            if (null != newValueINotifyCollectionChanged)
+            {
+                newValueINotifyCollectionChanged.CollectionChanged += new NotifyCollectionChangedEventHandler(newValueINotifyCollectionChanged_CollectionChanged);
+            }
+
+        }
+
+        void newValueINotifyCollectionChanged_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //Do your stuff here.
+        }
+                
         private bool _showbullets;
         public bool ShowBullets
         {
@@ -72,16 +113,26 @@ namespace Gestionix.POS
 
         #region Ctors
         public InformationMessage()
-        {
-            
+        {            
             InitializeComponent();
             this.DataContext = this;
-            //_showbullets = _messagecontent.Count > 1;
+            this.Visibility = System.Windows.Visibility.Collapsed;
             SetInformationMessageColor();            
         }
         #endregion
 
         #region Methods and Events
+        public override void OnApplyTemplate()
+        {            
+            base.OnApplyTemplate();
+
+            if (this.ItemsSource != null && (ItemsSource as ObservableCollection<string>).Count > 1)
+            {
+                _showbullets = (ItemsSource as ObservableCollection<string>).Count > 1;
+                OnPropertyChanged("ShowBullets");
+            }
+        }
+
         public void SetInformationMessageColor()
         {
             if (Type == InformationMessageType.Error)
@@ -109,19 +160,26 @@ namespace Gestionix.POS
             (sender as Gestionix.POS.InformationMessage).SetInformationMessageColor();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private static void OnIsActivePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            InformationMessage M = (sender as Gestionix.POS.InformationMessage);
+
+            if (M.IsActive)
+            {
+                M.Visibility = Visibility.Visible;
+                M.FadeInAnimation(FADE_ANIMATION_DURATION);
+            }
+            else
+                M.Visibility = Visibility.Collapsed;
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             FadeOutAnimation(FADE_ANIMATION_DURATION, 
                              new EventHandler((s, er) => 
-                             { 
-                                 this.Visibility = System.Windows.Visibility.Hidden; 
+                             {
+                                 this.IsActive = false;                                 
                              }));
-        }
-
-        private void MessageControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (this.Visibility == Visibility.Visible)            
-                FadeInAnimation(FADE_ANIMATION_DURATION);            
         }
 
         private void FadeInAnimation(float secondsduration, EventHandler oncompleteanimation = null)

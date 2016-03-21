@@ -65,7 +65,7 @@ namespace Gestionix.POS
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
+            
             if(EditableTextBox != null)
                 EditableTextBox.PreviewLostKeyboardFocus += EditableTextBox_PreviewLostKeyboardFocus;
         }

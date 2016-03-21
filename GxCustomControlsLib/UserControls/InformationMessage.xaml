@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              x:Name="MessageControl"
              mc:Ignorable="d" d:DesignWidth="400" BorderThickness="1" BorderBrush="{Binding InformationMessageBrush}"
-             IsVisibleChanged="MessageControl_IsVisibleChanged">
+             MinWidth="150">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -31,13 +31,13 @@
     </UserControl.Resources>    
     <DockPanel Background="{Binding InformationMessageBackgroundBrush}">
         <ContentControl Template="{Binding InformationMessageIcon}" Margin="10" MaxWidth="42" />
-        <Button DockPanel.Dock="Right" Style="{StaticResource Quit}" MaxWidth="30" MaxHeight="30" VerticalAlignment="Top" Click="Button_Click"/>
-        <ItemsControl VerticalAlignment="Center" DataContext="{Binding MessageContent}" ItemsSource="{Binding}" Margin="10">
+        <Button DockPanel.Dock="Right" Style="{StaticResource Quit}" MaxWidth="30" MaxHeight="30" VerticalAlignment="Top" Click="Close_Click"/>
+        <ItemsControl VerticalAlignment="Center" Margin="10" DataContext="{Binding ItemsSource}" ItemsSource="{Binding}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <BulletDecorator Width="Auto">
                     <BulletDecorator.Bullet>
-                            <Ellipse Fill="{Binding InformationMessageBrush, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Width="5" Height="5" 
+                            <Ellipse Fill="{Binding InformationMessageBrush, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Width="5" Height="5" Margin="0,1,0,0"
                                      VerticalAlignment="Center" Visibility="{Binding ShowBullets, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}
                                                                              ,Converter={StaticResource VisibilityConverter}}"/>
                     </BulletDecorator.Bullet>
@@ -47,28 +47,4 @@
         </ItemsControl.ItemTemplate>
     </ItemsControl>
     </DockPanel>    
-
-    <!--<UserControl.Triggers>
-        <EventTrigger RoutedEvent="Loaded">
-            <BeginStoryboard>
-                <Storyboard TargetName="MessageControl">
-                    <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                        From="0"
-                        To="1"
-                        Duration="0:0:0.5" />
-                    <SingleAnimation Storyboard.TargetName="MessageControl" Storyboard.TargetProperty="Visibility" To="Collapsed" />
-                </Storyboard>
-            </BeginStoryboard>
-        </EventTrigger>
-
-        <EventTrigger RoutedEvent="Unloaded">
-            <BeginStoryboard>
-                <Storyboard TargetName="MessageControl">
-                    <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                        To="0"
-                        Duration="0:0:0.5" />
-                </Storyboard>
-            </BeginStoryboard>
-        </EventTrigger>
-    </UserControl.Triggers>-->
 </UserControl>

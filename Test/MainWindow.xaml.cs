@@ -16,43 +16,83 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Gestionix;
 using Gestionix.POS;
+using System.Collections.ObjectModel;
 
 namespace Test
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private BackgroundWorker bwtest;
-        public List<string> Meesages;
+        private ObservableCollection<string> _extras = new ObservableCollection<string>();
+        private ObservableCollection<string> _names = new ObservableCollection<string>();
+        private ObservableCollection<string> _singlemessage = new ObservableCollection<string>();
+        public ObservableCollection<string> Extras
+        {
+            get { return _extras; }
+            set
+            {
+                if (value != _extras)
+                {
+                    _extras = value;
+                    OnPropertyChanged("Extras");
+                }
+            }
+        }
+
+        public ObservableCollection<string> Names
+        {
+            get { return _names; }
+            set
+            {
+                if (value != _names)
+                {
+                    _names = value;
+                    OnPropertyChanged("Names");
+                }
+            }
+        }
+
+
+        public ObservableCollection<string> SingleMessage
+        {
+            get { return _singlemessage; }
+            set
+            {
+                if (value != _singlemessage)
+                {
+                    _singlemessage = value;
+                    OnPropertyChanged("SingleMessage");
+                }
+            }
+        }
 
         public MainWindow()
         {
+            _extras.Add("No puedes dejar el campo 'Nombre' en blanco.");
+            _extras.Add("El campo 'edad' tiene el formato incorrecto.");
+            _extras.Add("El RFC ya existe.");
+            _extras.Add("Debes de inroducir al menos un valor para el campo 'Nombre comercial'");
+            _extras.Add("Algo salió mal, contacta al administrador");
+
+            _singlemessage.Add("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel gravida nunc. Curabitur facilisis, neque nec ornare aliquet, arcu sapien bibendum dolor, sit amet scelerisque enim ante at mi. Mauris pharetra mauris magna, eu accumsan lectus tempus at.");
             InitializeComponent();
+            this.DataContext = this;
             
             bwtest = new BackgroundWorker();
             bwtest.DoWork += bwtest_DoWork;
             bwtest.RunWorkerCompleted += bwtest_RunWorkerCompleted;
             bwtest.WorkerReportsProgress = true;
             bwtest.ProgressChanged += bwtest_ProgressChanged;
-
-            List<String> names = new List<string>();
-            names.Add("Transferencia");
-            names.Add("Vales");
-            names.Add("Tarjeta de crédito o débito");
-            names.Add("American Express");
-            names.Add("Efectivo");
-            names.Add("Otro");
-            Cmb.ItemsSource = names;
-
-            Meesages = new List<string>();
-            Meesages.Add("mensaje 1");
-            Meesages.Add("mensaje 2");
-            Meesages.Add("mensaje 3");
-            Meesages.Add("mensaje 4");
-            Meesages.Add("mansaje 5");
-            Meesages.Add("mensaje 6");
+            
+            _names.Add("Transferenciasss");
+            _names.Add("Vales");
+            _names.Add("Tarjeta de crédito o débito");
+            _names.Add("American Express");
+            _names.Add("Efectivo");
+            _names.Add("Otro");            
 
             System.Globalization.CultureInfo C = System.Globalization.CultureInfo.CreateSpecificCulture("es-MX");
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = C;
@@ -86,6 +126,7 @@ namespace Test
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Keyboard.Focus(TxtSeatch);
+            //SuccessMessage.ItemsSource = Extras;
         }
 
         private void TxtSeatch_KeyDown(object sender, KeyEventArgs e)
@@ -131,9 +172,16 @@ namespace Test
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SuccessMessage.Visibility = System.Windows.Visibility.Visible;
-            ErrorMessage.Visibility = System.Windows.Visibility.Visible;
-            InfoMessage.Visibility = System.Windows.Visibility.Visible;
+            SuccessMessage.IsActive = true;
+            ErrorMessage.IsActive = true;
+            InfoMessage.IsActive = true;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
