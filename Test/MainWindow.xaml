@@ -32,14 +32,15 @@
     </Window.Resources>
     <TabControl>
         <TabItem Header="InputText">
-            <!--<StackPanel>                
+            <StackPanel>                
                 <GxControls:HintTextBox x:Name="TxtS" Width="280" HintText="Sugerencia de cuadro de texto" FontSize="18" Margin="5" TextChanged="TxtS_TextChanged"/>
                 <GxControls:HintPasswordBox x:Name="TxtP" Width="150" HintText="Contraseña" Margin="5" TextChanged="TxtP_TextChanged"/>
                 <GxControls:HintNumericBox x:Name="TxtNu" Width="150" HintText="0" Margin="5" TextAlignment="Right"/>
                 <GxControls:HintCurrencyBox Width="150" HintText="$0.00" Margin="5" TextAlignment="Right"/>
                 <GxControls:HintPercentageBox x:Name="TxtPer" Width="150" HintText="0%" Margin="5" TextAlignment="Right"/>
-                <GxControls:HintTextBox x:Name="TxtA" Width="250" HintText="area de texto" FontSize="18" Margin="5" Height="100" TextWrapping="Wrap" VerticalContentAlignment="Top" />
-                <GxControls:HintSearchBox x:Name="TxtSeatch" Height="80" HintText="Buscar" VerticalContentAlignment="Center" FontSize="30" Margin="5" KeyDown="TxtSeatch_KeyDown" Search="TxtSeatch_Search" />
+                <GxControls:HintTextBox x:Name="TxtA" Width="250" HintText="area de texto" FontSize="18" Margin="5" Height="100" TextWrapping="Wrap" VerticalContentAlignment="Top" AcceptsReturn="True" />
+                <GxControls:HintSearchBox x:Name="TxtSeatch" Height="80" HintText="Buscar" VerticalContentAlignment="Center" FontSize="30" Margin="5" KeyDown="TxtSeatch_KeyDown" 
+                                          Search="TxtSeatch_Search" />
                 <GxControls:HintSearchBox x:Name="TxtSeatchSmall" Height="40" FontSize="14" HintText="Buscar más" Margin="5" KeyDown="TxtSeatch_KeyDown"/>
                 <TextBlock x:Name="TxtSearchingResult" FontSize="15"/>
                 <GxControls:HintComboBox x:Name="Cmb" Margin="5" Height="50" HintText="Busca algo en este ComboBox" FontSize="17"
@@ -62,7 +63,7 @@
                     <ComboBoxItem Content="opcioón 2"/>
                     <ComboBoxItem Content="opción 3"/>
                 </GxControls:HintComboBox>
-            </StackPanel>-->
+            </StackPanel>
         </TabItem>
         <TabItem Header="SVG">
             <Grid>
@@ -112,7 +113,7 @@
         </TabItem>
         <TabItem Header="Animated">
             <StackPanel Background="LightBlue">
-                <!--<GxControls:ProgressRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>-->
+                <GxControls:ProgressRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>
                 <Button Content="desactivate" Click="ToggleButton_Click" />
                 <Button Content="activate" Click="Button_Click" />
             </StackPanel>
