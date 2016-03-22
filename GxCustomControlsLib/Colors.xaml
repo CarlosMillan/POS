@@ -13,5 +13,5 @@
 
     <!--GREEN-->
     <SolidColorBrush x:Key="Green1" Color="#47771F" />
-    <SolidColorBrush x:Key="Green2" Color="#E5F6D8" />
+    <SolidColorBrush x:Key="Green2" Color="#E5F6D8" />    
 </ResourceDictionary>

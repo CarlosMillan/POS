@@ -25,6 +25,7 @@ namespace Test
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private CancellationTokenSource _cts;
         private BackgroundWorker bwtest;
         private ObservableCollection<string> _extras = new ObservableCollection<string>();
         private ObservableCollection<string> _names = new ObservableCollection<string>();
@@ -71,6 +72,7 @@ namespace Test
 
         public MainWindow()
         {
+            _cts = new CancellationTokenSource();
             _extras.Add("No puedes dejar el campo 'Nombre' en blanco.");
             _extras.Add("El campo 'edad' tiene el formato incorrecto.");
             _extras.Add("El RFC ya existe.");
@@ -182,6 +184,110 @@ namespace Test
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void StatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            var progressIndicator = new Progress<int>(ReportProgress);
+
+            try
+            {
+                StartActionAction((sender as StatesButton), Txtb1, 2, progressIndicator, _cts.Token);
+            }
+            catch(OperationCanceledException ex)
+            { 
+            }
+        }
+
+        void ReportProgress(int value)
+        {
+            Txtb1.Text = value.ToString();
+        }
+
+        void ReportProgress2(int value)
+        {
+            Txtb2.Text = value.ToString();
+        }
+
+        void ReportProgress3(int value)
+        {
+            Txtb3.Text = value.ToString();
+        }
+
+        void ReportProgress4(int value)
+        {
+            Txtb4.Text = value.ToString();
+        }
+
+        void ReportProgress5(int value)
+        {
+            Txtb5.Text = value.ToString();
+        }
+
+        private async void StartActionAction(StatesButton f, TextBlock t, int seconds, IProgress<int> progress, CancellationToken ct)
+        {
+            try
+            {
+                t.Text = String.Empty;
+                await ExecuteSometing(seconds, progress, ct);
+                t.Text = "se tardó " + seconds + " segundos";
+            }
+            catch (OperationCanceledException ex)
+            {
+                t.Text = ex.Message;
+            }
+            finally
+            {
+                f.IsBussy = false;
+                _cts = new CancellationTokenSource();
+            }
+        }
+
+        private Task ExecuteSometing(int seconds, IProgress<int> progress, CancellationToken ct)
+        {
+            return Task.Run(() => {
+                int s = 0;
+                while ((seconds * 1000) != s)
+                {
+                    try
+                    {
+                        ct.ThrowIfCancellationRequested();
+                        progress.Report((int)s / 1000);
+                        Thread.Sleep(1000);
+                        s += 1000;
+                    }
+                    catch { throw; }
+                }
+            });
+        }
+
+        private void StatesButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            var progressIndicator = new Progress<int>(ReportProgress2);
+            StartActionAction((sender as StatesButton), Txtb2, 3, progressIndicator, _cts.Token);
+        }
+
+        private void StatesButton_Click_2(object sender, RoutedEventArgs e)
+        {
+            var progressIndicator = new Progress<int>(ReportProgress3);
+            StartActionAction((sender as StatesButton), Txtb3, 1, progressIndicator, _cts.Token);
+        }
+
+        private void StatesButton_Click_3(object sender, RoutedEventArgs e)
+        {
+            var progressIndicator = new Progress<int>(ReportProgress4);
+            StartActionAction((sender as StatesButton), Txtb4, 5, progressIndicator, _cts.Token);
+        }
+
+        private void StatesButton_Click_4(object sender, RoutedEventArgs e)
+        {
+            var progressIndicator = new Progress<int>(ReportProgress5);
+            StartActionAction((sender as StatesButton), Txtb5, 10, progressIndicator, _cts.Token);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            _cts.Cancel();
         }
     }
 }

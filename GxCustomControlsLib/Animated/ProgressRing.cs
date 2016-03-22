@@ -148,14 +148,14 @@ namespace Gestionix.POS
                     /*Group render transforms*/
                     GroupT.Children.Add(TranslateT);
                     GroupT.Children.Add(RotateT);
-                    Particle.RenderTransform = GroupT;
+                    Particle.RenderTransform = GroupT;                    
 
                     /*Starts animation*/
                     DoubleAnimationKeyFrames.RepeatBehavior = RepeatBehavior.Forever;
                     RotateT.BeginAnimation(RotateTransform.AngleProperty, DoubleAnimationKeyFrames);
 
                     /*Delay between particles*/
-                    BegintTimeSpan = BegintTimeSpan.Add(TimeSpan.FromSeconds(WAITING_TIME_FRAME_SECONDS_DURATION));
+                    BegintTimeSpan = BegintTimeSpan.Add(TimeSpan.FromSeconds(WAITING_TIME_FRAME_SECONDS_DURATION));                    
                 }
 
                 Visibility = Visibility.Visible;

@@ -46,16 +46,80 @@ namespace Gestionix.POS
     /// </summary>
     public class StatesButton : Button
     {
-        public static readonly DependencyProperty IsLockedProperty = DependencyProperty.Register("IsLocked", typeof(bool), typeof(StatesButton), new PropertyMetadata(false));
+        public ProgressRing Ring
+        {
+            get { return this.GetTemplateChild("PART_Loading") as ProgressRing; }
+        }
+
+        public static readonly DependencyProperty IsLockedProperty = DependencyProperty.Register("IsLocked", typeof(bool), typeof(StatesButton), new PropertyMetadata(new PropertyChangedCallback(OnLockedPropertyChanged)));
         public bool IsLocked
         {
             get { return (bool)GetValue(IsLockedProperty); }
             set { SetValue(IsLockedProperty, value); }
         }
 
+        public static readonly DependencyProperty IsBussyProperty = DependencyProperty.Register("IsBussy", typeof(bool), typeof(StatesButton), new PropertyMetadata(new PropertyChangedCallback(OnBussyPropertyChanged)));
+        public bool IsBussy
+        {
+            get { return (bool)GetValue(IsBussyProperty); }
+            set { SetValue(IsBussyProperty, value); }
+        }
+
+        private static void OnLockedPropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs a)
+        {
+            StatesButton B = (o as StatesButton);
+
+            if (!B.IsBussy)
+            {
+                if (B.IsLocked) B.IsEnabled = false;
+                else B.IsEnabled = true;
+            }
+        }
+
+        private static void OnBussyPropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs a)
+        {
+            StatesButton B = (o as StatesButton);
+
+            if (B.IsBussy)
+            {
+                B.IsEnabled = false;
+                B.Ring.IsActivated = true;
+            }
+            else
+            {
+                B.IsEnabled = true;
+                B.Ring.IsActivated = false;
+            }
+        }
+
+        protected override void OnPreviewTouchDown(TouchEventArgs e)
+        {
+            base.OnPreviewTouchDown(e);
+            ExecuteClick();
+        }
+
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseLeftButtonDown(e);
+            ExecuteClick();
+        }
+
         static StatesButton()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(StatesButton), new FrameworkPropertyMetadata(typeof(StatesButton)));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();            
+            Ring.Width = this.Height / 2;
+            Ring.Height = this.Height / 2;
+        }
+
+        private void ExecuteClick()
+        {
+            this.IsBussy = true;
+            this.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); 
         }
     }
 }

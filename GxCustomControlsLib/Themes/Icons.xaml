@@ -161,4 +161,34 @@
             </Canvas>
         </Viewbox>
     </ControlTemplate>
+    
+    <ControlTemplate x:Key="PadLockIcon">
+        <Viewbox Stretch="Uniform">
+            <Canvas Name="svg2" Width="50" Height="50">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Canvas.Resources/>
+                <Canvas Name="layer1">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="-1002.3622"/>
+                    </Canvas.RenderTransform>
+                    <Path Name="rect4168" Fill="#FF666666">
+                        <Path.Data>
+                            <PathGeometry Figures="M 0 -0.17773438 C 0 -0.17773438 16.613468 15.883166 24.107422 23.572266 C 33.145018 32.845266 50.177734 50 50.177734 50 L 50 -0.17773438 L 0 -0.17773438 z " FillRule="NonZero"/>
+                        </Path.Data>
+                        <Path.RenderTransform>
+                            <TranslateTransform X="0" Y="1002.3622"/>
+                        </Path.RenderTransform>
+                    </Path>
+                    <Path Name="rect3350" Fill="#FFCCCCCC">
+                        <Path.Data>
+                            <PathGeometry Figures="m 29.259826 1006.665 0 5.7903 -0.956812 0 0 6.203 0 6.2031 8.572762 0 8.569258 0 0 -6.2031 0 -6.203 -0.91826 0 0 -5.7903 -15.266948 0 z m 1.906616 2.0699 11.450211 0 0 3.7204 -5.740877 0 -5.709334 0 0 -3.7204 z m 4.198761 7.2364 3.05269 0 0 5.3775 -3.05269 0 0 -5.3775 z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+                <Canvas Name="layer2"/>
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
 </ResourceDictionary>

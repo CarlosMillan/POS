@@ -70,55 +70,89 @@
                 <ContentControl Template="{StaticResource GnuIcon}" />
             </Grid>
         </TabItem>
-        <TabItem Header="Buttons" >
+        <TabItem Header="Buttons" IsSelected="True">
             <StackPanel>
-                <CheckBox x:Name="ChkEnable" Content="Enable|Disable" IsChecked="True"/>
-                <CheckBox x:Name="ChkLocked" Content="Locked|Unlocked" IsChecked="True"/>
-                <Button Width="250" Padding="8" Height="60" Margin="5" IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}">
+                <CheckBox x:Name="ChkEnable" Content="Activo" IsChecked="True" />
+                <CheckBox x:Name="ChkLocked" Content="Sin permiso" IsChecked="False" />
+                <Button Content="Cancelar proceso" Width="100" Height="30" HorizontalAlignment="Left" Click="Button_Click_2"/>
+                <!--<Button Width="250" Padding="8" Height="60" Margin="5" IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}">
                     <DockPanel>
                         <ContentControl Template="{StaticResource GnuIcon}" DockPanel.Dock="Right"/>
                         <TextBlock Text="Botón con icono" VerticalAlignment="Center" Margin="20,0" />
                     </DockPanel>
-                </Button>
-                <GxControls:StatesButton Content="asd" 
+                </Button>-->
+
+
+                <GxControls:StatesButton Content="Botón simple, con algún texto de fondo" 
+                                         HorizontalContentAlignment="Center"
+                                         Margin="5"                                                                                  
+                                         Height="50" 
+                                         Width="300"
+                                         IsLocked="{Binding ElementName=ChkLocked, Path=IsChecked}"
+                                         IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"
+                                         VerticalContentAlignment="Center" 
+                                         Click="StatesButton_Click"
+                                         Padding="10" />
+                <TextBlock x:Name="Txtb1" Width="300" />
+                
+                <GxControls:StatesButton Content="Botón verde" 
                                          Margin="5"
-                                         Background="Green" 
+                                         Background="#39A935" 
                                          Foreground="White" 
                                          Height="50" 
                                          VerticalContentAlignment="Center" 
                                          Padding="10"
+                                         Width="300"
                                          IsLocked="{Binding ElementName=ChkLocked, Path=IsChecked}"
-                                         IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"/>
+                                         IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"
+                                         Click="StatesButton_Click_1"/>
+                <TextBlock x:Name="Txtb2" Width="300" />
 
-                <GxControls:StatesButton Content="asd" 
+                <GxControls:StatesButton Content="Botón azul" 
                                          Margin="5"
                                          IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"
                                          IsLocked="{Binding ElementName=ChkLocked, Path=IsChecked}"
-                                         Background="Blue" 
+                                         Background="#2672EC" 
                                          Foreground="White" 
-                                         Height="50" 
+                                         Height="100" 
+                                         Width="300"
                                          VerticalContentAlignment="Center" 
-                                         Padding="10" />
+                                         Padding="10" Click="StatesButton_Click_2" />
+                <TextBlock x:Name="Txtb3" Width="300" />
 
-                <GxControls:StatesButton Content="asd" 
+                <GxControls:StatesButton Content="Botón rojo" 
                                          Margin="5"
-                                         Background="Red" 
+                                         Background="#BD182D" 
                                          Foreground="White" 
                                          Height="50" 
+                                         Width="300"
                                          IsLocked="{Binding ElementName=ChkLocked, Path=IsChecked}"
                                          IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"
                                          VerticalContentAlignment="Center" 
-                                         Padding="10" />
+                                         Padding="10" Click="StatesButton_Click_3" />
+                <TextBlock x:Name="Txtb4" Width="300" />
+
+                <GxControls:StatesButton Content="Botón gris" 
+                                         Margin="5"
+                                         Background="#777777" 
+                                         Foreground="White" 
+                                         Height="50" 
+                                         Width="300"
+                                         IsLocked="{Binding ElementName=ChkLocked, Path=IsChecked}"
+                                         IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"
+                                         VerticalContentAlignment="Center" 
+                                         Padding="10" Click="StatesButton_Click_4"/>
+                <TextBlock x:Name="Txtb5" Width="300" />
             </StackPanel>
         </TabItem>
         <TabItem Header="Animated">
             <StackPanel Background="LightBlue">
                 <GxControls:ProgressRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>
-                <Button Content="desactivate" Click="ToggleButton_Click" />
-                <Button Content="activate" Click="Button_Click" />
+                <Button Content="Desactivar" Click="ToggleButton_Click" Height="40" Width="200" Margin="5"/>
+                <Button Content="Activar" Click="Button_Click" Height="40" Width="200" Margin="5" />
             </StackPanel>
         </TabItem>
-        <TabItem Header="UserControls" IsSelected="True">
+        <TabItem Header="UserControls">
             <StackPanel>
                 <GxControls:InformationMessage Margin="30,5" Type="Success" x:Name="SuccessMessage" ItemsSource="{Binding ElementName=window, Path=Extras}" IsActive="True" />
                 <GxControls:InformationMessage Margin="30,5" Type="Error" x:Name="ErrorMessage" ItemsSource="{Binding ElementName=window, Path=Extras}"/>
