@@ -81,14 +81,7 @@
                 <CheckBox x:Name="ChkEnable" Content="Activo" IsChecked="True" />
                 <CheckBox x:Name="ChkLocked" Content="Sin permiso" IsChecked="False" />
                 <Button Content="Cancelar proceso" Width="100" Height="30" HorizontalAlignment="Left" Click="Button_Click_2"/>
-                <!--<Button Width="250" Padding="8" Height="60" Margin="5" IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}">
-                    <DockPanel>
-                        <ContentControl Template="{StaticResource GnuIcon}" DockPanel.Dock="Right"/>
-                        <TextBlock Text="Botón con icono" VerticalAlignment="Center" Margin="20,0" />
-                    </DockPanel>
-                </Button>-->
-
-
+  
                 <GxControls:StatesButton Content="Botón simple, con algún texto de fondo" 
                                          HorizontalContentAlignment="Center"
                                          Margin="5"                                                                                  
@@ -195,6 +188,8 @@
                 <GxControls:ProgressRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>
                 <Button Content="Desactivar" Click="ToggleButton_Click" Height="40" Width="200" Margin="5"/>
                 <Button Content="Activar" Click="Button_Click" Height="40" Width="200" Margin="5" />
+                <TextBlock Text="Falta animación de bolitas horizontales" TextAlignment="Center"/>
+                <TextBlock Text="Falta animación de sincronización" TextAlignment="Center"/>
             </StackPanel>
         </TabItem>
         <TabItem Header="UserControls">
