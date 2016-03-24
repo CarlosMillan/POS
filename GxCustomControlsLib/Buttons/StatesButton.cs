@@ -58,18 +58,25 @@ namespace Gestionix.POS
             set { SetValue(IsLockedProperty, value); }
         }
 
-        public static readonly DependencyProperty IsBussyProperty = DependencyProperty.Register("IsBussy", typeof(bool), typeof(StatesButton), new PropertyMetadata(new PropertyChangedCallback(OnBussyPropertyChanged)));
-        public bool IsBussy
+        public static readonly DependencyProperty IsBusyProperty = DependencyProperty.Register("IsBusy", typeof(bool), typeof(StatesButton), new PropertyMetadata(new PropertyChangedCallback(OnBussyPropertyChanged)));
+        public bool IsBusy
         {
-            get { return (bool)GetValue(IsBussyProperty); }
-            set { SetValue(IsBussyProperty, value); }
+            get { return (bool)GetValue(IsBusyProperty); }
+            set { SetValue(IsBusyProperty, value); }
+        }
+
+        public static readonly DependencyProperty NoAsyncAnimationProperty = DependencyProperty.Register("NoAsyncAnimation", typeof(bool), typeof(StatesButton), new PropertyMetadata(false));
+        public bool NoAsyncAnimation
+        {
+            get { return (bool)GetValue(NoAsyncAnimationProperty); }
+            set { SetValue(NoAsyncAnimationProperty, value); }
         }
 
         private static void OnLockedPropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs a)
         {
             StatesButton B = (o as StatesButton);
 
-            if (!B.IsBussy)
+            if (!B.IsBusy)
             {
                 if (B.IsLocked) B.IsEnabled = false;
                 else B.IsEnabled = true;
@@ -80,7 +87,7 @@ namespace Gestionix.POS
         {
             StatesButton B = (o as StatesButton);
 
-            if (B.IsBussy)
+            if (B.IsBusy)
             {
                 B.IsEnabled = false;
                 B.Ring.IsActivated = true;
@@ -95,13 +102,13 @@ namespace Gestionix.POS
         protected override void OnPreviewTouchDown(TouchEventArgs e)
         {
             base.OnPreviewTouchDown(e);
-            ExecuteClick();
+            ExecuteAnimation();
         }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseLeftButtonDown(e);
-            ExecuteClick();
+            ExecuteAnimation();            
         }
 
         static StatesButton()
@@ -116,10 +123,13 @@ namespace Gestionix.POS
             Ring.Height = this.Height / 2;
         }
 
-        private void ExecuteClick()
+        private void ExecuteAnimation()
         {
-            this.IsBussy = true;
-            this.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); 
+            if (!this.NoAsyncAnimation)
+            {
+                this.IsBusy = true;
+                this.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            }
         }
     }
 }

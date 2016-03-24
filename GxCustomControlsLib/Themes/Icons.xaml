@@ -186,9 +186,64 @@
                             <PathGeometry Figures="m 29.259826 1006.665 0 5.7903 -0.956812 0 0 6.203 0 6.2031 8.572762 0 8.569258 0 0 -6.2031 0 -6.203 -0.91826 0 0 -5.7903 -15.266948 0 z m 1.906616 2.0699 11.450211 0 0 3.7204 -5.740877 0 -5.709334 0 0 -3.7204 z m 4.198761 7.2364 3.05269 0 0 5.3775 -3.05269 0 0 -5.3775 z" FillRule="NonZero"/>
                         </Path.Data>
                     </Path>
-                </Canvas>
-                <Canvas Name="layer2"/>
+                </Canvas>                
             </Canvas>
         </Viewbox>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="BackwardArrowIcon">
+        <Viewbox Stretch="Uniform">
+            <Canvas Name="svg2" Width="50" Height="50">
+                <Canvas.RenderTransform>                   
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Canvas.Resources/>
+                <Canvas Name="layer3">
+                    <Rectangle Canvas.Left="18.482143" Canvas.Top="16.964285" Width="16.517857" Height="15.892858" RadiusY="0.0171827" RadiusX="0.0171827" Name="rect4152" Fill="#FF333333" StrokeThickness="5" Stroke="#FFFF00FF" StrokeMiterLimit="4" Opacity="0"/>
+                    <Canvas Name="g4293">
+                        <Path Name="path4141" StrokeThickness="4.5" Stroke="#F8FFFFFF" StrokeMiterLimit="4">
+                            <Path.Data>
+                                <PathGeometry Figures="M 46.735849 24.999983 A 21.735849 21.735849 0 0 1 25 46.735832 21.735849 21.735849 0 0 1 3.2641506 24.999983 21.735849 21.735849 0 0 1 25 3.2641335 21.735849 21.735849 0 0 1 46.735849 24.999983 Z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                        <Path Name="rect423535" Fill="#FFFFFFFF" StrokeThickness="3.79007554" Stroke="#F8FFFFFF" StrokeMiterLimit="4" Opacity="1">
+                            <Path.Data>
+                                <PathGeometry Figures="m 14.46866 24.925507 8.838834 8.838836 c 0.139052 0.139053 0.139052 0.362941 0 0.501993 -0.139052 0.139052 -0.36294 0.139052 -0.501993 0 L 13.966667 25.4275 c -0.139051 -0.139052 -0.139051 -0.362941 1e-6 -0.501993 0.139052 -0.139051 0.36294 -0.139051 0.501992 0 z m -0.412708 -0.357594 8.838834 -8.838834 c 0.139052 -0.139052 0.36294 -0.139052 0.501992 0 0.139052 0.139052 0.139053 0.362941 10e-7 0.501993 l -8.838834 8.838834 c -0.139052 0.139052 -0.362941 0.139051 -0.501993 -1e-6 -0.139052 -0.139052 -0.139052 -0.36294 0 -0.501992 z m 0.191844 0.403511 22.499998 0 c 0.128327 -10e-7 0.231639 0.103311 0.231639 0.231639 0 0.128327 -0.103311 0.231638 -0.231639 0.231638 l -22.499998 0 c -0.128326 1e-6 -0.231638 -0.103311 -0.231638 -0.231638 10e-7 -0.128327 0.103312 -0.231638 0.231638 -0.231639 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ForwardArrowIcon">
+        <Viewbox Stretch="Uniform">
+            <Canvas Name="svg2" Width="50" Height="50">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Canvas.Resources/>
+                <Canvas Name="layer3">
+                    <Rectangle Canvas.Left="18.482143" Canvas.Top="16.964285" Width="16.517857" Height="15.892858" RadiusY="0.0171827" RadiusX="0.0171827" Name="rect4152" Fill="#FF333333" StrokeThickness="5" Stroke="#FFFF00FF" StrokeMiterLimit="4" Opacity="0"/>
+                    <Canvas Name="g4293">
+                        <Canvas.RenderTransform>
+                            <MatrixTransform Matrix="-1 0 0 1 50 0"/>
+                        </Canvas.RenderTransform>
+                        <Path Name="path4141" StrokeThickness="4.5" Stroke="#F8FFFFFF" StrokeMiterLimit="4">
+                            <Path.Data>
+                                <PathGeometry Figures="M 46.735849 24.999983 A 21.735849 21.735849 0 0 1 25 46.735832 21.735849 21.735849 0 0 1 3.2641506 24.999983 21.735849 21.735849 0 0 1 25 3.2641335 21.735849 21.735849 0 0 1 46.735849 24.999983 Z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                        <Path Name="rect423535" Fill="#FFFFFFFF" StrokeThickness="3.79007554" Stroke="#F8FFFFFF" StrokeMiterLimit="4" Opacity="1">
+                            <Path.Data>
+                                <PathGeometry Figures="m 14.46866 24.925507 8.838834 8.838836 c 0.139052 0.139053 0.139052 0.362941 0 0.501993 -0.139052 0.139052 -0.36294 0.139052 -0.501993 0 L 13.966667 25.4275 c -0.139051 -0.139052 -0.139051 -0.362941 1e-6 -0.501993 0.139052 -0.139051 0.36294 -0.139051 0.501992 0 z m -0.412708 -0.357594 8.838834 -8.838834 c 0.139052 -0.139052 0.36294 -0.139052 0.501992 0 0.139052 0.139052 0.139053 0.362941 10e-7 0.501993 l -8.838834 8.838834 c -0.139052 0.139052 -0.362941 0.139051 -0.501993 -1e-6 -0.139052 -0.139052 -0.139052 -0.36294 0 -0.501992 z m 0.191844 0.403511 22.499998 0 c 0.128327 -10e-7 0.231639 0.103311 0.231639 0.231639 0 0.128327 -0.103311 0.231638 -0.231639 0.231638 l -22.499998 0 c -0.128326 1e-6 -0.231638 -0.103311 -0.231638 -0.231638 10e-7 -0.128327 0.103312 -0.231638 0.231638 -0.231639 z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+
     </ControlTemplate>
 </ResourceDictionary>

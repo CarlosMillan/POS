@@ -406,7 +406,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:StatesButton}">
                     <Grid>
-                        <local:ProgressRing Name="PART_Loading" Panel.ZIndex="2" IsActivated="False" Visibility="Collapsed"/>
+                        <local:ProgressRing Name="PART_Loading" Panel.ZIndex="2" IsActivated="False" Visibility="Collapsed" HorizontalAlignment="Center"/>
                         <ContentControl Panel.ZIndex="1" Name="PART_LockedIcon" Template="{StaticResource PadLockIcon}" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed" Height="35" Width="35"/>
                         <Border Panel.ZIndex="0" Name="PART_Background" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" BorderThickness="0">
                             <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
@@ -423,15 +423,10 @@
                             <Setter Property="Cursor" Value="Arrow" />
                         </Trigger>
 
-                        <!--<Trigger Property="IsBussy" Value="True">
-                            <Setter TargetName="PART_Loading" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="PART_Loading" Property="IsActivated" Value="True"/>
-                        </Trigger>-->
-
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsLocked" Value="True"/>
-                                <Condition Property="IsBussy" Value="False" />
+                                <Condition Property="IsBusy" Value="False" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter TargetName="PART_LockedIcon" Property="Visibility" Value="Visible"/>
@@ -441,7 +436,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>    
     <!--END BUTTONS-->
     
     <!-- ANIMATED -->   

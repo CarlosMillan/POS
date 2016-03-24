@@ -26,6 +26,7 @@ namespace Test
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private CancellationTokenSource _cts;
+        private int _counter;
         private BackgroundWorker bwtest;
         private ObservableCollection<string> _extras = new ObservableCollection<string>();
         private ObservableCollection<string> _names = new ObservableCollection<string>();
@@ -73,6 +74,7 @@ namespace Test
         public MainWindow()
         {
             _cts = new CancellationTokenSource();
+            _counter = 0;
             _extras.Add("No puedes dejar el campo 'Nombre' en blanco.");
             _extras.Add("El campo 'edad' tiene el formato incorrecto.");
             _extras.Add("El RFC ya existe.");
@@ -224,6 +226,15 @@ namespace Test
             Txtb5.Text = value.ToString();
         }
 
+        void ReportProgress6(int value)
+        {
+            Txtb7.Text = value.ToString();
+        }
+        void ReportProgress7(int value)
+        {
+            Txtb6.Text = value.ToString();
+        }
+
         private async void StartActionAction(StatesButton f, TextBlock t, int seconds, IProgress<int> progress, CancellationToken ct)
         {
             try
@@ -238,7 +249,7 @@ namespace Test
             }
             finally
             {
-                f.IsBussy = false;
+                f.IsBusy = false;
                 _cts = new CancellationTokenSource();
             }
         }
@@ -288,6 +299,25 @@ namespace Test
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             _cts.Cancel();
+        }
+
+        private void StatesButton_Click_5(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(_counter);
+            Txtb8.Text = _counter.ToString();
+            _counter += 1;
+        }
+
+        private void StatesButton_Click_6(object sender, RoutedEventArgs e)
+        {
+            var progressIndicator = new Progress<int>(ReportProgress6);
+            StartActionAction((sender as StatesButton), Txtb7, 10, progressIndicator, _cts.Token);
+        }
+
+        private void StatesButton_Click_7(object sender, RoutedEventArgs e)
+        {
+            var progressIndicator = new Progress<int>(ReportProgress7);
+            StartActionAction((sender as StatesButton), Txtb6, 10, progressIndicator, _cts.Token);
         }
     }
 }
