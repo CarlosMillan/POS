@@ -13,7 +13,7 @@
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
   
     <Style x:Key="HintTextBoxBaseStyle" TargetType="{x:Type local:HintTextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderBrush" Value="Black"/>        
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="Template">
@@ -24,8 +24,10 @@
                             <VisualBrush x:Name="CueBannerBrush" AlignmentX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintTextHorizontalAligment}" 
                                          AlignmentY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintTextVerticalAligment}" Stretch="None">
                                 <VisualBrush.Visual>
-                                    <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintText}" Background="Transparent" 
-                                               Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintTextBrush}" Padding="7,5"/>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintText}" Background="White" Padding="7,5" 
+                                               Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=TextBox}}"
+                                               Height="{Binding Path=ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=TextBox}}"
+                                               Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HintTextBrush}" />
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </Border.Background>
@@ -34,7 +36,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text.IsEmpty}" Value="False">
-                            <Setter TargetName="PART_Border" Property="Background" Value="{x:Null}" />
+                            <Setter TargetName="PART_Border" Property="Background" Value="White" />
                         </DataTrigger>                        
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="PART_Border" Value="0.56"/>

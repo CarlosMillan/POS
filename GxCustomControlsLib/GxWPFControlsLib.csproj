@@ -70,6 +70,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\ModalPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buttons\StatesButton.cs" />
@@ -87,6 +91,9 @@
     <AppDesigner Include="Properties\" />
     <Compile Include="UserControls\InformationMessage.xaml.cs">
       <DependentUpon>InformationMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ModalPopup.xaml.cs">
+      <DependentUpon>ModalPopup.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

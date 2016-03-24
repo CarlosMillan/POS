@@ -319,5 +319,15 @@ namespace Test
             var progressIndicator = new Progress<int>(ReportProgress7);
             StartActionAction((sender as StatesButton), Txtb6, 10, progressIndicator, _cts.Token);
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Modal1.IsActive = true;
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Modal1.IsActive = false;            
+        }
     }
 }

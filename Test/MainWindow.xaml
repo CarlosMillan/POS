@@ -38,7 +38,7 @@
     </Window.Resources>
     <TabControl>
         <TabItem Header="InputText">
-            <StackPanel>                
+            <StackPanel Background="DarkGray">
                 <GxControls:HintTextBox x:Name="TxtS" Width="280" HintText="Sugerencia de cuadro de texto" FontSize="18" Margin="5" TextChanged="TxtS_TextChanged"/>
                 <GxControls:HintPasswordBox x:Name="TxtP" Width="150" HintText="Contraseña" Margin="5" TextChanged="TxtP_TextChanged"/>
                 <GxControls:HintNumericBox x:Name="TxtNu" Width="150" HintText="0" Margin="5" TextAlignment="Right"/>
@@ -76,8 +76,8 @@
                 <ContentControl Template="{StaticResource GnuIcon}" />
             </Grid>
         </TabItem>
-        <TabItem Header="Buttons" IsSelected="True">
-            <StackPanel>
+        <TabItem Header="Buttons">
+            <StackPanel Background="DarkGray">
                 <CheckBox x:Name="ChkEnable" Content="Activo" IsChecked="True" />
                 <CheckBox x:Name="ChkLocked" Content="Sin permiso" IsChecked="False" />
                 <Button Content="Cancelar proceso" Width="100" Height="30" HorizontalAlignment="Left" Click="Button_Click_2"/>
@@ -192,13 +192,27 @@
                 <TextBlock Text="Falta animación de sincronización" TextAlignment="Center"/>
             </StackPanel>
         </TabItem>
-        <TabItem Header="UserControls">
+        <TabItem Header="Mensajes">
             <StackPanel>
                 <GxControls:InformationMessage Margin="30,5" Type="Success" x:Name="SuccessMessage" ItemsSource="{Binding ElementName=window, Path=Extras}" IsActive="True" />
                 <GxControls:InformationMessage Margin="30,5" Type="Error" x:Name="ErrorMessage" ItemsSource="{Binding ElementName=window, Path=Extras}"/>
                 <GxControls:InformationMessage Margin="30,5" Type="Informative" x:Name="InfoMessage" ItemsSource="{Binding ElementName=window, Path=SingleMessage}"/>
                 <Button Content="Mostrar mensajes" Click="Button_Click_1"/>
             </StackPanel>
+        </TabItem>
+        <TabItem Header="Popups"  IsSelected="True" >
+            <Grid>
+                <StackPanel x:Name="targettest">
+                    <Button Content="Abrir popup" Width="100" Height="30" VerticalAlignment="Top" Click="Button_Click_3" />
+                </StackPanel>
+                <GxControls:ModalPopup x:Name="Modal1" Target="{Binding ElementName=targettest}">
+                    <StackPanel Background="Orange" Height="200">
+                        <GxControls:HintTextBox HintText="Usuario" Width="200" Margin="5,10" />
+                        <GxControls:HintPasswordBox HintText="Contraseña" Width="200" Margin="5,10" />
+                        <GxControls:StatesButton Height="50" Content="Desbloquear" Click="Button_Click_4" Width="150" Margin="5,10" NoAsyncAnimation="True" />
+                    </StackPanel>
+                </GxControls:ModalPopup>
+            </Grid>
         </TabItem>
     </TabControl>
 </Window>
