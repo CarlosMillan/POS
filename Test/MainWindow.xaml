@@ -179,7 +179,8 @@
 
                 <GxControls:StatesButton Content="Normal" Height="50" Width="200" Background="#39A935" Foreground="White" NoAsyncAnimation="True" Click="StatesButton_Click_5"
                                          IsLocked="{Binding ElementName=ChkLocked, Path=IsChecked}"
-                                         IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"/>
+                                         IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"
+                                         HoverBrush="Aqua"/>
                 <TextBlock x:Name="Txtb8" Width="300" />
             </StackPanel>            
         </TabItem>

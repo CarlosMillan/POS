@@ -72,6 +72,13 @@ namespace Gestionix.POS
             set { SetValue(NoAsyncAnimationProperty, value); }
         }
 
+        public static readonly DependencyProperty HoverBrushProperty = DependencyProperty.Register("HoverBrush", typeof(Brush), typeof(StatesButton), new PropertyMetadata(null));
+        public Brush HoverBrush
+        {
+            get { return (Brush)GetValue(HoverBrushProperty); }
+            set { SetValue(HoverBrushProperty, value); }
+        }
+
         private static void OnLockedPropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs a)
         {
             StatesButton B = (o as StatesButton);
