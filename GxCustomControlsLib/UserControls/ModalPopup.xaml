@@ -6,19 +6,4 @@
              mc:Ignorable="d" Margin="0" BorderThickness="0"
              d:DesignHeight="300" d:DesignWidth="300"
              Background="Black">
-    <UserControl.Style>
-        <Style TargetType="{x:Type UserControl}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsActive}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To=".7" Duration="0:0:.3" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Style>
 </UserControl>

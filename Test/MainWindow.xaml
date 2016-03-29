@@ -50,7 +50,7 @@
                 <GxControls:HintSearchBox x:Name="TxtSeatchSmall" Height="40" FontSize="14" HintText="Buscar más" Margin="5" KeyDown="TxtSeatch_KeyDown"/>
                 <TextBlock x:Name="TxtSearchingResult" FontSize="15"/>
                 <GxControls:HintComboBox x:Name="Cmb" Margin="5" Height="50" HintText="Busca algo en este ComboBox" FontSize="17"
-                                         IsEditable="True" IsTextSearchEnabled="False" ItemsSource="{Binding Names}" >
+                                         IsEditable="True" ItemsSource="{Binding Names}" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Label>
@@ -179,8 +179,7 @@
 
                 <GxControls:StatesButton Content="Normal" Height="50" Width="200" Background="#39A935" Foreground="White" NoAsyncAnimation="True" Click="StatesButton_Click_5"
                                          IsLocked="{Binding ElementName=ChkLocked, Path=IsChecked}"
-                                         IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"
-                                         HoverBrush="Aqua"/>
+                                         IsEnabled="{Binding ElementName=ChkEnable, Path=IsChecked}"/>
                 <TextBlock x:Name="Txtb8" Width="300" />
             </StackPanel>            
         </TabItem>
@@ -210,7 +209,7 @@
                     <StackPanel Background="Orange" Height="200">
                         <GxControls:HintTextBox HintText="Usuario" Width="200" Margin="5,10" />
                         <GxControls:HintPasswordBox HintText="Contraseña" Width="200" Margin="5,10" />
-                        <GxControls:StatesButton Height="50" Content="Desbloquear" Click="Button_Click_4" Width="150" Margin="5,10" NoAsyncAnimation="True" />
+                        <GxControls:StatesButton Height="50" Background="#39A935" Foreground="White" Content="Desbloquear" Click="Button_Click_4" Width="150" Margin="5,10" NoAsyncAnimation="True" />
                     </StackPanel>
                 </GxControls:ModalPopup>
             </Grid>

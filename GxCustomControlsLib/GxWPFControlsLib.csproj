@@ -77,7 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buttons\StatesButton.cs" />
-    <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Input\HintComboBox.cs" />
     <Compile Include="Input\HintCurrencyBox.cs" />
     <Compile Include="Input\HintNumericBox.cs" />
