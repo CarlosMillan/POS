@@ -435,10 +435,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:WaitingBar}">
                     <Viewbox Stretch="Uniform">
-                        <Canvas x:Name="PART_Container" 
-                                Width="{TemplateBinding Width}"
-                                Height="{TemplateBinding Height}"
-                                Background="{TemplateBinding Background}"/>
+                        <Border x:Name="PART_BorderContainer" Background="{TemplateBinding Background}" Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}">
+                            <Canvas x:Name="PART_Container" Height="{TemplateBinding Height}"
+                                    Width="{TemplateBinding Width}"/>
+                        </Border>
                     </Viewbox>
                 </ControlTemplate>
             </Setter.Value>

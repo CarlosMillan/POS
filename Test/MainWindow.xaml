@@ -183,12 +183,12 @@
                 <TextBlock x:Name="Txtb8" Width="300" />
             </StackPanel>            
         </TabItem>
-        <TabItem Header="Animated">
-            <StackPanel Background="LightBlue">
+        <TabItem Header="Animated" IsSelected="True">
+            <StackPanel Background="LightBlue" Name="StkAni">
                 <GxControls:WaitingRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>
                 <Button Content="Desactivar" Click="ToggleButton_Click" Height="40" Width="200" Margin="5"/>
                 <Button Content="Activar" Click="Button_Click" Height="40" Width="200" Margin="5" />
-                <GxControls:WaitingBar x:Name="BarTest" IsActivated="True"/>
+                <GxControls:WaitingBar x:Name="BarTest" IsActivated="True" Background="Red" ParticleColor="Yellow" Width="{Binding ActualWidth, ElementName=StkAni}"/>
                 <TextBlock Text="Falta animación de sincronización" TextAlignment="Center"/>
             </StackPanel>
         </TabItem>
@@ -200,7 +200,7 @@
                 <Button Content="Mostrar mensajes" Click="Button_Click_1"/>
             </StackPanel>
         </TabItem>
-        <TabItem Header="Popups"  IsSelected="True" >
+        <TabItem Header="Popups" >
             <Grid>
                 <StackPanel x:Name="targettest">
                     <Button Content="Abrir popup" Width="100" Height="30" VerticalAlignment="Top" Click="Button_Click_3" />

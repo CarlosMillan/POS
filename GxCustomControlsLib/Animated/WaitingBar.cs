@@ -27,11 +27,13 @@ namespace Gestionix.POS
         private const double FIRST_FRAME_SECONDS_DURATION = .3;
         private const double SECOND_FRAME_SECONDS_DURATION = 1;
         private const double THIRD_FRAME_SECONDS_DURATION = .3;
-        private const double WAITING_TIME_FRAME_SECONDS_DURATION = .2;  // Time to wait between particles in seconds
+        private const double WAITING_TIME_FRAME_SECONDS_DURATION = .2;      // Time to wait between particles in seconds
+        private const double WAITING_TIME_MOVEMENT_SECONDS_DURATION = 2;  // Time to wait between movement through x axis in seconds
         #endregion
 
         #region Properties
         protected bool _pending;
+        protected double _particleheight;
 
         protected Canvas Container
         {
@@ -40,6 +42,15 @@ namespace Gestionix.POS
                 return this.GetTemplateChild("PART_Container") as Canvas;
             }
         }
+
+        protected Border BorderContainer
+        {
+            get
+            {
+                return this.GetTemplateChild("PART_BorderContainer") as Border;
+            }
+        }
+
         #endregion
 
         #region Dependency properties
@@ -105,6 +116,9 @@ namespace Gestionix.POS
         {
             if (Container != null)
             {
+                _particleheight = (BorderContainer.Height * SIZE_PARTICLE_PERCENTAGE);
+                Container.Height = _particleheight;
+
                 if (Particles == 0)
                     Particles = DEFAULT_PARTICLES;
 
@@ -115,7 +129,8 @@ namespace Gestionix.POS
                 {
                     Ellipse EllipseParticle = new Ellipse();
                     EllipseParticle.Fill = ParticleColor;
-                    EllipseParticle.Width = EllipseParticle.Height = (Container.Height * SIZE_PARTICLE_PERCENTAGE);
+                    
+                    EllipseParticle.Width = EllipseParticle.Height = _particleheight;
                     Container.Children.Add(EllipseParticle);
                 }
             }
@@ -125,6 +140,8 @@ namespace Gestionix.POS
         {
             if (Container != null)
             {
+                Storyboard StBoard = new Storyboard();
+
                 TimeSpan BegintTimeSpan = TimeSpan.FromSeconds(0);
                 KeyTime FirstFrame = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(FIRST_FRAME_SECONDS_DURATION));
                 KeyTime SecondFrame = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(FIRST_FRAME_SECONDS_DURATION + SECOND_FRAME_SECONDS_DURATION));
@@ -135,42 +152,42 @@ namespace Gestionix.POS
 
                 foreach (UIElement Element in Container.Children)
                 {
-                    /*Necessary instances*/
+                    ///*Necessary instances*/
                     Ellipse Particle = (Ellipse)Element;
-                    TransformGroup GroupT = new TransformGroup();
-                    //RotateTransform RotateT = new RotateTransform();
                     TranslateTransform TranslateT = new TranslateTransform();
                     DoubleAnimationUsingKeyFrames DoubleAnimationKeyFrames = new DoubleAnimationUsingKeyFrames();
 
-                    ///*Point of reference to animate the particle*/
-                    Particle.RenderTransformOrigin = new Point(0, 0);
-
-                    ///*The article ratates in three frames*/
-                    DoubleAnimationKeyFrames.BeginTime = BegintTimeSpan;
+                    /////*The article ratates in three frames*/
                     DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(FirstFrameXproperty, FirstFrame));
                     DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(SecondFrameXproperty, SecondFrame));
                     DoubleAnimationKeyFrames.KeyFrames.Add(new LinearDoubleKeyFrame(ThirdFrameXproperty, ThirdFrame));
 
-                    ///*Around this point the particles will rotate*/
-                    //RotateT.CenterX = _container.ActualWidth / 2;
-                    //RotateT.CenterY = _container.ActualHeight / 2;
+                    Particle.RenderTransform = TranslateT;
+          
+                    DoubleAnimation VisibilityAnimationIn = new DoubleAnimation(0,1, TimeSpan.FromSeconds(0));
+                    DoubleAnimation VisibilityAnimationOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0));
 
-                    /*This is initial point*/
-                    TranslateT.X = 0;
-                    TranslateT.Y = (Container.ActualHeight / 2) - (Particle.ActualHeight / 2);
+                    Storyboard.SetTarget(VisibilityAnimationIn, Particle);
+                    Storyboard.SetTargetProperty(VisibilityAnimationIn, new PropertyPath("Opacity"));
+                    VisibilityAnimationIn.BeginTime = BegintTimeSpan.Add(TimeSpan.FromSeconds(0.1));
 
-                    ///*Group render transforms*/
-                    GroupT.Children.Add(TranslateT);
-                    //GroupT.Children.Add(RotateT);
-                    Particle.RenderTransform = GroupT;
+                    Storyboard.SetTarget(DoubleAnimationKeyFrames, Particle);
+                    Storyboard.SetTargetProperty(DoubleAnimationKeyFrames, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
+                    DoubleAnimationKeyFrames.BeginTime = BegintTimeSpan;
 
-                    ///*Starts animation*/
-                    DoubleAnimationKeyFrames.RepeatBehavior = RepeatBehavior.Forever;
-                    TranslateT.BeginAnimation(TranslateTransform.XProperty, DoubleAnimationKeyFrames);
-                    //Particle.Visibility = System.Windows.Visibility.Visible;
-                    /*Delay between particles*/
+                    Storyboard.SetTarget(VisibilityAnimationOut, Particle);
+                    Storyboard.SetTargetProperty(VisibilityAnimationOut, new PropertyPath("Opacity"));
+                    VisibilityAnimationOut.BeginTime = BegintTimeSpan.Add(TimeSpan.FromSeconds(WAITING_TIME_MOVEMENT_SECONDS_DURATION));
+
+                    StBoard.Children.Add(VisibilityAnimationIn);
+                    StBoard.Children.Add(DoubleAnimationKeyFrames);
+                    StBoard.Children.Add(VisibilityAnimationOut);
+
                     BegintTimeSpan = BegintTimeSpan.Add(TimeSpan.FromSeconds(WAITING_TIME_FRAME_SECONDS_DURATION));
                 }
+
+                StBoard.RepeatBehavior = RepeatBehavior.Forever;
+                StBoard.Begin();
 
                 Visibility = Visibility.Visible;
             }
