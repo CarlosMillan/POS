@@ -46,9 +46,9 @@ namespace Gestionix.POS
     /// </summary>
     public class StatesButton : Button
     {
-        public ProgressRing Ring
+        public WaitingRing Ring
         {
-            get { return this.GetTemplateChild("PART_Loading") as ProgressRing; }
+            get { return this.GetTemplateChild("PART_Loading") as WaitingRing; }
         }
 
         public static readonly DependencyProperty IsLockedProperty = DependencyProperty.Register("IsLocked", typeof(bool), typeof(StatesButton), new PropertyMetadata(new PropertyChangedCallback(OnLockedPropertyChanged)));

@@ -76,6 +76,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animated\WaitingBar.cs" />
     <Compile Include="Buttons\StatesButton.cs" />
     <Compile Include="Input\HintComboBox.cs" />
     <Compile Include="Input\HintCurrencyBox.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="Input\HintPercentageBox.cs" />
     <Compile Include="Input\HintSearchBox.cs" />
     <Compile Include="Input\HintTextBox.cs" />
-    <Compile Include="Animated\ProgressRing.cs" />
+    <Compile Include="Animated\WaitingRing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

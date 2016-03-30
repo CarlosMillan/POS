@@ -185,10 +185,10 @@
         </TabItem>
         <TabItem Header="Animated">
             <StackPanel Background="LightBlue">
-                <GxControls:ProgressRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>
+                <GxControls:WaitingRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>
                 <Button Content="Desactivar" Click="ToggleButton_Click" Height="40" Width="200" Margin="5"/>
                 <Button Content="Activar" Click="Button_Click" Height="40" Width="200" Margin="5" />
-                <TextBlock Text="Falta animación de bolitas horizontales" TextAlignment="Center"/>
+                <GxControls:WaitingBar x:Name="BarTest" IsActivated="True"/>
                 <TextBlock Text="Falta animación de sincronización" TextAlignment="Center"/>
             </StackPanel>
         </TabItem>

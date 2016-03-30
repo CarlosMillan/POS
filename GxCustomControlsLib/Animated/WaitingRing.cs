@@ -17,14 +17,13 @@ using System.Windows.Shapes;
 
 namespace Gestionix.POS
 {    
-    public class ProgressRing : Control
+    public class WaitingRing : Control
     {
         private const int DEFAULT_PARTICLES = 5;
-        private const int SIZE_PARTICLE_PERCENTAGE = 13;                // 10% of Canvas size
-        private const int HUNDRED_PERCENTAGE = 100;
+        private const float SIZE_PARTICLE_PERCENTAGE = .13f;                // 13% of Canvas size
         private const int FIRST_FRAME_DEGREES = 70;                  
         private const int SECOND_FRAME_DEGREES = 150;
-        private const int THIRD_FRAME_DEGREES = 360;                   
+        private const int THIRD_FRAME_DEGREES = 360;
         private const int FRAMES_BY_PARTICLES = 3;                      // First frame goes to 0° - 70°, second frame goes to 70° - 150°, third goes to 150° - 360°
         private const double FIRST_FRAME_SECONDS_DURATION = .3;
         private const double SECOND_FRAME_SECONDS_DURATION = .7;
@@ -34,9 +33,9 @@ namespace Gestionix.POS
         private Canvas _container;
         private bool _pending;
 
-        public static readonly DependencyProperty ParticleColorProperty = DependencyProperty.Register("ParticleColor", typeof(Brush), typeof(ProgressRing), new PropertyMetadata(null));
-        public static readonly DependencyProperty ParticlesProperty = DependencyProperty.Register("Particles", typeof(int), typeof(ProgressRing), new PropertyMetadata(null));
-        public static readonly DependencyProperty IsActivatedProperty = DependencyProperty.Register("IsActivated", typeof(bool), typeof(ProgressRing), new FrameworkPropertyMetadata(false, OnIsActivatePropertyChanged));
+        public static readonly DependencyProperty ParticleColorProperty = DependencyProperty.Register("ParticleColor", typeof(Brush), typeof(WaitingRing), new PropertyMetadata(null));
+        public static readonly DependencyProperty ParticlesProperty = DependencyProperty.Register("Particles", typeof(int), typeof(WaitingRing), new PropertyMetadata(5));
+        public static readonly DependencyProperty IsActivatedProperty = DependencyProperty.Register("IsActivated", typeof(bool), typeof(WaitingRing), new FrameworkPropertyMetadata(false, OnIsActivatePropertyChanged));
 
         [Description("Color particle")]
         public Brush ParticleColor
@@ -59,9 +58,9 @@ namespace Gestionix.POS
             set { SetValue(IsActivatedProperty, value); }
         }
 
-        static ProgressRing()
+        static WaitingRing()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressRing), new FrameworkPropertyMetadata(typeof(ProgressRing)));            
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(WaitingRing), new FrameworkPropertyMetadata(typeof(WaitingRing)));            
         }
         
         public override void OnApplyTemplate()
@@ -85,9 +84,9 @@ namespace Gestionix.POS
         private static void OnIsActivatePropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
             if (Boolean.Parse(e.NewValue.ToString()))
-                ((ProgressRing)source).StartAnimation();
+                ((WaitingRing)source).StartAnimation();
             else if (!Boolean.Parse(e.NewValue.ToString()))
-                ((ProgressRing)source).StopAnimation();
+                ((WaitingRing)source).StopAnimation();
         }
         
         private void InitializeParticles()
@@ -104,7 +103,7 @@ namespace Gestionix.POS
                 {
                     Ellipse EllipseParticle = new Ellipse();
                     EllipseParticle.Fill = ParticleColor;
-                    EllipseParticle.Width = EllipseParticle.Height = (_container.Width * SIZE_PARTICLE_PERCENTAGE) / HUNDRED_PERCENTAGE;
+                    EllipseParticle.Width = EllipseParticle.Height = (_container.Width * SIZE_PARTICLE_PERCENTAGE);
                     _container.Children.Add(EllipseParticle);
                 }
             }
