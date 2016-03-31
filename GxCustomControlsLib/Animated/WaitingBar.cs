@@ -20,7 +20,7 @@ namespace Gestionix.POS
     public class WaitingBar : Control
     {
         #region Const
-        private const int DEFAULT_PARTICLES = 5;
+        private const int DEFAULT_PARTICLES = 1;
         private const float SIZE_PARTICLE_PERCENTAGE = .50f;                // 25% of Canvas size
         private const float FIRST_FRAME_XPROPERTY_PERCENTAGE = .40f;        // 40% of Width
         private const float SECOND_FRAME_XPROPERTY_PERCENTAGE = .20f;       // 20% of Width
@@ -28,12 +28,13 @@ namespace Gestionix.POS
         private const double SECOND_FRAME_SECONDS_DURATION = 1;
         private const double THIRD_FRAME_SECONDS_DURATION = .3;
         private const double WAITING_TIME_FRAME_SECONDS_DURATION = .2;      // Time to wait between particles in seconds
-        private const double WAITING_TIME_MOVEMENT_SECONDS_DURATION = 2;  // Time to wait between movement through x axis in seconds
+        private const double WAITING_TIME_MOVEMENT_SECONDS_DURATION = 1.8;  // Time to wait between movement through x axis in seconds
         #endregion
 
         #region Properties
         protected bool _pending;
         protected double _particleheight;
+        protected Storyboard _stBoard;
 
         protected Canvas Container
         {
@@ -140,8 +141,7 @@ namespace Gestionix.POS
         {
             if (Container != null)
             {
-                Storyboard StBoard = new Storyboard();
-
+                _stBoard = new Storyboard();
                 TimeSpan BegintTimeSpan = TimeSpan.FromSeconds(0);
                 KeyTime FirstFrame = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(FIRST_FRAME_SECONDS_DURATION));
                 KeyTime SecondFrame = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(FIRST_FRAME_SECONDS_DURATION + SECOND_FRAME_SECONDS_DURATION));
@@ -179,16 +179,15 @@ namespace Gestionix.POS
                     Storyboard.SetTargetProperty(VisibilityAnimationOut, new PropertyPath("Opacity"));
                     VisibilityAnimationOut.BeginTime = BegintTimeSpan.Add(TimeSpan.FromSeconds(WAITING_TIME_MOVEMENT_SECONDS_DURATION));
 
-                    StBoard.Children.Add(VisibilityAnimationIn);
-                    StBoard.Children.Add(DoubleAnimationKeyFrames);
-                    StBoard.Children.Add(VisibilityAnimationOut);
+                    _stBoard.Children.Add(VisibilityAnimationIn);
+                    _stBoard.Children.Add(DoubleAnimationKeyFrames);
+                    _stBoard.Children.Add(VisibilityAnimationOut);
 
                     BegintTimeSpan = BegintTimeSpan.Add(TimeSpan.FromSeconds(WAITING_TIME_FRAME_SECONDS_DURATION));
                 }
 
-                StBoard.RepeatBehavior = RepeatBehavior.Forever;
-                StBoard.Begin();
-
+                _stBoard.RepeatBehavior = RepeatBehavior.Forever;
+                _stBoard.Begin();
                 Visibility = Visibility.Visible;
             }
             else
@@ -204,6 +203,7 @@ namespace Gestionix.POS
         {
             if (Container != null)
             {
+                _stBoard.Stop();
                 Container.Children.Clear();
                 OnApplyTemplate();
             }
