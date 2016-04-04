@@ -185,11 +185,11 @@
         </TabItem>
         <TabItem Header="Animated" IsSelected="True">
             <StackPanel Background="LightBlue" Name="StkAni">
-                <GxControls:WaitingRing x:Name="RingTest" Width="50" Height="50" IsActivated="True"/>
+                <GxControls:WaitingRing x:Name="RingTest" Width="50" Height="50" IsActivated="False"/>
                 <Button Content="Desactivar" Click="ToggleButton_Click" Height="40" Width="200" Margin="5"/>
                 <Button Content="Activar" Click="Button_Click" Height="40" Width="200" Margin="5" />
-                <GxControls:WaitingBar x:Name="BarTest" IsActivated="True" Background="Red" ParticleColor="Yellow" Width="{Binding ActualWidth, ElementName=StkAni}"/>
-                <TextBlock Text="Falta animación de sincronización" TextAlignment="Center"/>
+                <!--<GxControls:WaitingBar x:Name="BarTest" IsActivated="True" Background="Red" ParticleColor="Yellow" Width="{Binding ActualWidth, ElementName=StkAni}" />-->
+                <GxControls:SyncRing Template="{DynamicResource SyncRingControlTemplate1}" />
             </StackPanel>
         </TabItem>
         <TabItem Header="Mensajes">

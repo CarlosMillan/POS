@@ -76,6 +76,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animated\SyncRing.cs" />
     <Compile Include="Animated\WaitingBar.cs" />
     <Compile Include="Buttons\StatesButton.cs" />
     <Compile Include="Input\HintComboBox.cs" />
