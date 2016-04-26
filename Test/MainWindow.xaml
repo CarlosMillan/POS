@@ -201,11 +201,11 @@
             </StackPanel>
         </TabItem>
         <TabItem Header="Popups" >
-            <Grid>
+            <Grid Background="Red">
                 <StackPanel x:Name="targettest">
                     <Button Content="Abrir popup" Width="100" Height="30" VerticalAlignment="Top" Click="Button_Click_3" />
                 </StackPanel>
-                <GxControls:ModalPopup x:Name="Modal1" Target="{Binding ElementName=targettest}">
+                <GxControls:ModalPopup x:Name="Modal1" Target="{Binding ElementName=targettest}" IsActive="{Binding OpenPopup, Mode=TwoWay}">
                     <StackPanel Background="Orange" Height="200">
                         <GxControls:HintTextBox HintText="Usuario" Width="200" Margin="5,10" />
                         <GxControls:HintPasswordBox HintText="Contraseña" Width="200" Margin="5,10" />

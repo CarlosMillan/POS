@@ -55,8 +55,8 @@ namespace Gestionix.POS
                 }
                 else
                 {
-                    M.FadeOutAnimation(.3f, 
-                                       new EventHandler((s, er) => 
+                    M.FadeOutAnimation(.3f,
+                                       new EventHandler((s, er) =>
                                        {
                                            M.Visibility = Visibility.Collapsed;
                                            M.Target.IsEnabled = true;
@@ -67,12 +67,6 @@ namespace Gestionix.POS
             else
                 throw new Exception("Dependency property Target must be assigned");
         }
-
-        //private static void TargetChangedProperty(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        //{
-        //    ModalPopup M = (o as ModalPopup);
-
-        //}
         #endregion
 
         #region Methods
@@ -96,13 +90,12 @@ namespace Gestionix.POS
             if (oncompleteanimation != null && oncompleteanimation is EventHandler)
                 da.Completed += oncompleteanimation;
 
-            this.BeginAnimation(OpacityProperty, da);
+            this.Background.BeginAnimation(Brush.OpacityProperty, da);
         }
         #endregion
 
         public ModalPopup()
         {
-            this.DataContext = this;
             InitializeComponent();
             this.Visibility = System.Windows.Visibility.Collapsed;
         }

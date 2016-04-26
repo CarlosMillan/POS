@@ -31,6 +31,21 @@ namespace Test
         private ObservableCollection<string> _extras = new ObservableCollection<string>();
         private ObservableCollection<string> _names = new ObservableCollection<string>();
         private ObservableCollection<string> _singlemessage = new ObservableCollection<string>();
+        private bool _openpopup;
+
+        public bool OpenPopup
+        {
+            get { return _openpopup; }
+            set
+            {
+                if(_openpopup != value)
+                {
+                    _openpopup = value;
+                    OnPropertyChanged("OpenPopup");
+                }
+            }
+        }
+ 
         public ObservableCollection<string> Extras
         {
             get { return _extras; }
@@ -103,6 +118,7 @@ namespace Test
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = C;
 
             GestionixPOSCulture.SetPOSCulture(SupportedCultures.MEXICO);
+            
         }
 
         void bwtest_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -322,12 +338,14 @@ namespace Test
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            Modal1.IsActive = true;
+            //Modal1.IsActive = true;
+            OpenPopup = true;
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            Modal1.IsActive = false;            
+            //Modal1.IsActive = false;            
+            OpenPopup = false;
         }
     }
 }
