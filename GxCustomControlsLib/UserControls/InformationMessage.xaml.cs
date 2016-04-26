@@ -113,9 +113,9 @@ namespace Gestionix.POS
 
         #region Ctors
         public InformationMessage()
-        {            
-            InitializeComponent();
+        {
             this.DataContext = this;
+            InitializeComponent();
             this.Visibility = System.Windows.Visibility.Collapsed;
             SetInformationMessageColor();            
         }

@@ -194,7 +194,9 @@
         </TabItem>
         <TabItem Header="Mensajes">
             <StackPanel>
-                <GxControls:InformationMessage Margin="30,5" Type="Success" x:Name="SuccessMessage" ItemsSource="{Binding ElementName=window, Path=Extras}" IsActive="True" />
+                <GxControls:InformationMessage Margin="30,5" x:Name="SuccessMessage" 
+                                               ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=Extras}" 
+                                               IsActive="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=OpenPopup}"  />
                 <GxControls:InformationMessage Margin="30,5" Type="Error" x:Name="ErrorMessage" ItemsSource="{Binding ElementName=window, Path=Extras}"/>
                 <GxControls:InformationMessage Margin="30,5" Type="Informative" x:Name="InfoMessage" ItemsSource="{Binding ElementName=window, Path=SingleMessage}"/>
                 <Button Content="Mostrar mensajes" Click="Button_Click_1"/>

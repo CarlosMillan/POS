@@ -49,14 +49,6 @@ namespace Test
         public ObservableCollection<string> Extras
         {
             get { return _extras; }
-            set
-            {
-                if (value != _extras)
-                {
-                    _extras = value;
-                    OnPropertyChanged("Extras");
-                }
-            }
         }
 
         public ObservableCollection<string> Names
@@ -192,9 +184,10 @@ namespace Test
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SuccessMessage.IsActive = true;
-            ErrorMessage.IsActive = true;
-            InfoMessage.IsActive = true;
+            //SuccessMessage.IsActive = true;
+            //ErrorMessage.IsActive = true;
+            //InfoMessage.IsActive = true;
+            OpenPopup = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
