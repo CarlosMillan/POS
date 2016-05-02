@@ -46,6 +46,7 @@ namespace Gestionix.POS
     /// </summary>
     public class StatesButton : Button
     {
+
         public WaitingRing Ring
         {
             get { return this.GetTemplateChild("PART_Loading") as WaitingRing; }
@@ -58,7 +59,7 @@ namespace Gestionix.POS
             set { SetValue(IsLockedProperty, value); }
         }
 
-        public static readonly DependencyProperty IsBusyProperty = DependencyProperty.Register("IsBusy", typeof(bool), typeof(StatesButton), new PropertyMetadata(new PropertyChangedCallback(OnBussyPropertyChanged)));
+        public static readonly DependencyProperty IsBusyProperty = DependencyProperty.Register("IsBusy", typeof(bool), typeof(StatesButton), new PropertyMetadata(false, new PropertyChangedCallback(OnBussyPropertyChanged)));
         public bool IsBusy
         {
             get { return (bool)GetValue(IsBusyProperty); }
@@ -108,14 +109,21 @@ namespace Gestionix.POS
 
         protected override void OnPreviewTouchDown(TouchEventArgs e)
         {
-            base.OnPreviewTouchDown(e);
             ExecuteAnimation();
+            base.OnPreviewTouchDown(e);
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            ExecuteAnimation();
+            base.OnKeyDown(e);
         }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
+            ExecuteAnimation();
             base.OnPreviewMouseLeftButtonDown(e);
-            ExecuteAnimation();            
+            OnClick();
         }
 
         static StatesButton()
@@ -127,7 +135,7 @@ namespace Gestionix.POS
         {
             base.OnApplyTemplate();
 
-            if(HoverBrush == null) SetValue(HoverBrushProperty, IncreasedColor((SolidColorBrush)this.Background));
+            if (HoverBrush == null) SetValue(HoverBrushProperty, Functions.IncreasedColor((SolidColorBrush)this.Background));
 
             Ring.Width = this.Height / 2;
             Ring.Height = this.Height / 2;
@@ -136,10 +144,7 @@ namespace Gestionix.POS
         private void ExecuteAnimation()
         {
             if (!this.NoAsyncAnimation)
-            {
                 this.IsBusy = true;
-                this.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-            }
         }
 
         private Brush IncreasedColor(SolidColorBrush basecolor)
