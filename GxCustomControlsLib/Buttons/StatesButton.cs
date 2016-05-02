@@ -107,23 +107,16 @@ namespace Gestionix.POS
             }
         }
 
-        protected override void OnPreviewTouchDown(TouchEventArgs e)
-        {
-            ExecuteAnimation();
-            base.OnPreviewTouchDown(e);
-        }
-
         protected override void OnKeyDown(KeyEventArgs e)
         {
             ExecuteAnimation();
             base.OnKeyDown(e);
         }
 
-        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        protected override void OnClick()
         {
             ExecuteAnimation();
-            base.OnPreviewMouseLeftButtonDown(e);
-            OnClick();
+            base.OnClick();
         }
 
         static StatesButton()
