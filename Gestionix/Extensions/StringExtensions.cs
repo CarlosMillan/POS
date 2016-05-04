@@ -48,15 +48,13 @@ namespace Gestionix
         [DebuggerStepThrough]
         public static decimal PercentageFormatToDecimal(this string input)
         {
-            decimal DecimalRepresentacion;
-            string StringWithoutPercentgeSymbol = String.Empty;
-            int PercentageSymbolIndex = input.IndexOf(GestionixPOSCulture.GestionixCurrentNumberFormat.PercentSymbol);            
+            try
+            {
+                return decimal.Parse(input.TrimEnd(new char[] { GestionixPOSCulture.GestionixCurrentNumberFormat.PercentSymbol.FirstOrDefault(), ' ' }), GestionixPOSCulture.GestionixCurrentNumberFormat);
+            }
+            catch { }
 
-            if(PercentageSymbolIndex > -1)
-                StringWithoutPercentgeSymbol = input.Remove(PercentageSymbolIndex, 1);
-
-            Decimal.TryParse(StringWithoutPercentgeSymbol, NumberStyles.Number, GestionixPOSCulture.GestionixCurrentNumberFormat, out DecimalRepresentacion);
-            return DecimalRepresentacion;
+            return 0;
         }
     }
 }

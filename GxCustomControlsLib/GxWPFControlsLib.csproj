@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,9 +7,9 @@
     <ProjectGuid>{2F884167-6901-4E6A-B1E2-B75BFBE9F606}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gestionix.POS</RootNamespace>
+    <RootNamespace>Gestionix.POS.GUI</RootNamespace>
     <AssemblyName>GxWPFControlsLib</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -54,7 +54,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Colors.xaml">
+    <Page Include="Themes\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -66,11 +66,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\InformationMessage.xaml">
+    <Page Include="UserControls\UCInformationMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ModalPopup.xaml">
+    <Page Include="UserControls\UCModalPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -79,6 +79,7 @@
     <Compile Include="Animated\SyncRing.cs" />
     <Compile Include="Animated\WaitingBar.cs" />
     <Compile Include="Buttons\StatesButton.cs" />
+    <Compile Include="Functions.cs" />
     <Compile Include="Input\HintComboBox.cs" />
     <Compile Include="Input\HintCurrencyBox.cs" />
     <Compile Include="Input\HintNumericBox.cs" />
@@ -91,11 +92,11 @@
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
-    <Compile Include="UserControls\InformationMessage.xaml.cs">
-      <DependentUpon>InformationMessage.xaml</DependentUpon>
+    <Compile Include="UserControls\UCInformationMessage.xaml.cs">
+      <DependentUpon>UCInformationMessage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ModalPopup.xaml.cs">
-      <DependentUpon>ModalPopup.xaml</DependentUpon>
+    <Compile Include="UserControls\UCModalPopup.xaml.cs">
+      <DependentUpon>UCModalPopup.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

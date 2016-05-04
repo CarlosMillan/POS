@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace Gestionix.POS
+namespace Gestionix.POS.GUI
 {
     /// <summary>
     /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
@@ -109,8 +99,13 @@ namespace Gestionix.POS
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            ExecuteAnimation();
-            base.OnKeyDown(e);
+            if (e.Key == Key.Enter || e.Key == Key.Space)
+            {
+                ExecuteAnimation();
+                base.OnKeyDown(e);
+            }
+            else
+                e.Handled = true;
         }
 
         protected override void OnClick()
@@ -138,25 +133,6 @@ namespace Gestionix.POS
         {
             if (!this.NoAsyncAnimation)
                 this.IsBusy = true;
-        }
-
-        private Brush IncreasedColor(SolidColorBrush basecolor)
-        {
-            float IncrementPercentage = .20f;
-            int[] RGB = new int[3];
-            RGB[0] = basecolor.Color.R;
-            RGB[1] = basecolor.Color.G;
-            RGB[2] = basecolor.Color.B;
-
-            RGB[0] += (int)(RGB[0] * IncrementPercentage);
-            RGB[1] += (int)(RGB[1] * IncrementPercentage);
-            RGB[2] += (int)(RGB[2] * IncrementPercentage);
-
-            RGB[0] = RGB[0] > 255 ? 255 : RGB[0];
-            RGB[1] = RGB[1] > 255 ? 255 : RGB[1];
-            RGB[2] = RGB[2] > 255 ? 255 : RGB[2];
-            
-            return new SolidColorBrush(Color.FromRgb((byte)RGB[0], (byte)RGB[1], (byte)RGB[2]));
         }
     }
 }

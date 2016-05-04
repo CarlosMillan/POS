@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Gestionix.POS
+namespace Gestionix.POS.GUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

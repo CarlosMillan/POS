@@ -1,64 +1,54 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace Gestionix.POS
+namespace Gestionix.POS.GUI
 {
     /// <summary>
     /// Interaction logic for InformationMessage.xaml
     /// </summary>
-    public partial class InformationMessage : UserControl, INotifyPropertyChanged
+    public partial class UCInformationMessage : UserControl, INotifyPropertyChanged
     {
         #region Const
         private const float FADE_ANIMATION_DURATION = 0.4f;  // Time in seconds
         #endregion
 
         #region Properties
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(InformationMessageType), typeof(InformationMessage), new PropertyMetadata(InformationMessageType.Error, new PropertyChangedCallback(OnTypePropertyChanged)));
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(InformationMessageType), typeof(UCInformationMessage), new PropertyMetadata(InformationMessageType.Error, new PropertyChangedCallback(OnTypePropertyChanged)));
         public InformationMessageType Type
         {
             get { return (InformationMessageType)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
         }
 
-        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive", typeof(bool), typeof(InformationMessage), new PropertyMetadata(false, new PropertyChangedCallback(OnIsActivePropertyChanged)));
+        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive", typeof(bool), typeof(UCInformationMessage), new PropertyMetadata(false, new PropertyChangedCallback(OnIsActivePropertyChanged)));
         public bool IsActive
         {
             get { return (bool)GetValue(IsActiveProperty); }
             set { SetValue(IsActiveProperty, value); }
         }
 
-        public static readonly DependencyProperty InformationMessageBrushProperty = DependencyProperty.Register("InformationMessageBrush", typeof(Brush), typeof(InformationMessage), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
+        public static readonly DependencyProperty InformationMessageBrushProperty = DependencyProperty.Register("InformationMessageBrush", typeof(Brush), typeof(UCInformationMessage), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
         public Brush InformationMessageBrush 
         {
             get { return (Brush)GetValue(InformationMessageBrushProperty); }
             set { SetValue(InformationMessageBrushProperty, value); }
         }
 
-        public static readonly DependencyProperty InformationMessageBackgroundBrushProperty = DependencyProperty.Register("InformationMessageBackgroundBrush", typeof(Brush), typeof(InformationMessage), new PropertyMetadata(new SolidColorBrush(Colors.LightPink)));
+        public static readonly DependencyProperty InformationMessageBackgroundBrushProperty = DependencyProperty.Register("InformationMessageBackgroundBrush", typeof(Brush), typeof(UCInformationMessage), new PropertyMetadata(new SolidColorBrush(Colors.LightPink)));
         public Brush InformationMessageBackgroundBrush
         {
             get { return (Brush)GetValue(InformationMessageBackgroundBrushProperty); }
             set { SetValue(InformationMessageBackgroundBrushProperty, value); }
         }
 
-        public static readonly DependencyProperty InformationMessageIconProperty = DependencyProperty.Register("InformationMessageIcon", typeof(ControlTemplate), typeof(InformationMessage), new PropertyMetadata(null, new PropertyChangedCallback(OnTypePropertyChanged)));
+        public static readonly DependencyProperty InformationMessageIconProperty = DependencyProperty.Register("InformationMessageIcon", typeof(ControlTemplate), typeof(UCInformationMessage), new PropertyMetadata(null, new PropertyChangedCallback(OnTypePropertyChanged)));
         public ControlTemplate InformationMessageIcon
         {
             get { return (ControlTemplate)GetValue(InformationMessageIconProperty); }
@@ -72,11 +62,11 @@ namespace Gestionix.POS
         }
 
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(InformationMessage), new PropertyMetadata(new PropertyChangedCallback(OnItemsSourcePropertyChanged)));
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(UCInformationMessage), new PropertyMetadata(new PropertyChangedCallback(OnItemsSourcePropertyChanged)));
 
         private static void OnItemsSourcePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var control = sender as InformationMessage;
+            var control = sender as UCInformationMessage;
             if (control != null)
                 control.OnItemsSourceChanged((IEnumerable)e.OldValue, (IEnumerable)e.NewValue);
         }
@@ -112,7 +102,7 @@ namespace Gestionix.POS
         #endregion
 
         #region Ctors
-        public InformationMessage()
+        public UCInformationMessage()
         {
             this.DataContext = this;
             InitializeComponent();
@@ -157,12 +147,12 @@ namespace Gestionix.POS
 
         private static void OnTypePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            (sender as Gestionix.POS.InformationMessage).SetInformationMessageColor();
+            (sender as Gestionix.POS.GUI.UCInformationMessage).SetInformationMessageColor();
         }
 
         private static void OnIsActivePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            InformationMessage M = (sender as Gestionix.POS.InformationMessage);
+            UCInformationMessage M = (sender as Gestionix.POS.GUI.UCInformationMessage);
 
             if (M.IsActive)
             {

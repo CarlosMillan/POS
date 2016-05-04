@@ -2,12 +2,12 @@
     x:Class="GXWPFControlsLib.Generic"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Gestionix.POS"    
+    xmlns:local="clr-namespace:Gestionix.POS.GUI"    
     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GxWPFControlsLib;component/Themes/Icons.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GxWPFControlsLib;component/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GxWPFControlsLib;component/Themes/Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />

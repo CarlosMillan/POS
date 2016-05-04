@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace Gestionix.POS
+namespace Gestionix.POS.GUI
 {
     /// <summary>
     /// Interaction logic for App.xaml
