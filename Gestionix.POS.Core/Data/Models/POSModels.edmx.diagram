@@ -6,6 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e897788e96cc4eca886faa9dd1d451aa" Name="Diagram1">
         <EntityTypeShape EntityType="POSDBModel.Profile" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.ApiKey" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="POSDBModel.User" Width="1.5" PointX="0.75" PointY="3" />
+        <AssociationConnector Association="POSDBModel.FK_ApiKey_0_0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -26,5 +26,7 @@ namespace Gestionix.POS.Core.Data.Models
         }
     
         public virtual DbSet<Profile> Profiles { get; set; }
+        public virtual DbSet<ApiKey> ApiKeys { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

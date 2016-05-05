@@ -71,6 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Controllers\PCAccess.cs" />
+    <Compile Include="Data\Models\ApiKey.cs">
+      <DependentUpon>POSModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Models\POSModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +90,9 @@
       <DependentUpon>POSModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="Data\Models\Profile.cs">
+      <DependentUpon>POSModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Models\User.cs">
       <DependentUpon>POSModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
