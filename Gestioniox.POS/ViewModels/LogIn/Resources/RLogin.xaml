@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Gestionix.POS.GUI.ViewModels.Login">
+    
+    <DataTemplate DataType="{x:Type local:VMLogin}">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="10">
+            <Hyperlink>Link adf adf adf asdf asdfa sdfa sdf asdf</Hyperlink>
+            </TextBlock>
+            <StackPanel DockPanel.Dock="Right" Width="300">
+                <TextBlock DockPanel.Dock="Top" Text="{StaticResource D_Login}" Margin="5,80" FontSize="32"/>
+                <TextBox Text="Username" Width="250" HorizontalAlignment="Left"/>
+                <TextBox Text="Password" Width="250" HorizontalAlignment="Left"/>
+                <Button Content="{StaticResource D_Login}" Style="{StaticResource GreenButton}" Width="200" HorizontalAlignment="Left" Margin="5,40"/>
+            </StackPanel>
+            <Separator DockPanel.Dock="Right" Background="LightGray" Width="350" Height="10">
+                <Separator.LayoutTransform>
+                    <RotateTransform Angle="90" />
+                </Separator.LayoutTransform>
+            </Separator>
+            <Image DockPanel.Dock="Right" Source="Pack://Application:,,,/Gestionix.POS.GUI;component/Resources/Images/Logo.png" Width="500" Height="150" HorizontalAlignment="Right"/>
+        </DockPanel>
+    </DataTemplate>
+</ResourceDictionary>
