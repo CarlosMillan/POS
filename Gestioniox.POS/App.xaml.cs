@@ -12,5 +12,37 @@ namespace Gestionix.POS.GUI
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            LoadResources();
+        }
+
+        #region Helpers
+        private void LoadResources()
+        {
+            try
+            {
+                if (POSResources.Strings == null)
+                {
+                    POSResources.Strings = new System.Windows.ResourceDictionary()
+                    {
+                        Source = new Uri("pack://application:,,,/Resources/Dictionaries/Dictionary-ES-MX.xaml")
+                    };
+                }
+
+                if (POSResources.SolidColors == null)
+                {
+                    POSResources.SolidColors = new System.Windows.ResourceDictionary()
+                    {
+                        Source = new Uri("pack://application:,,,/Resources/Dictionaries/Colors.xaml")
+                    };
+                }
+            }
+            catch(Exception ex)
+            {
+                ErrorsManager.SaveException(ex);
+            }
+        }
+        #endregion
     }
 }

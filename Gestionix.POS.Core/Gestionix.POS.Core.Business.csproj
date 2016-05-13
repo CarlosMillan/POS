@@ -38,29 +38,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.101.0\lib\net46\System.Data.SQLite.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.101.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.101.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -70,31 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\Controllers\PCAccess.cs" />
-    <Compile Include="Data\Models\ApiKey.cs">
-      <DependentUpon>POSModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Models\POSModels.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>POSModels.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Models\POSModels.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>POSModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Models\POSModels.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>POSModels.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Models\Profile.cs">
-      <DependentUpon>POSModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Models\User.cs">
-      <DependentUpon>POSModels.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\PCAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,27 +59,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Models\POSModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>POSModels.edmx</DependentUpon>
-      <LastGenOutput>POSModels.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\Models\POSModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>POSModels.edmx</DependentUpon>
-      <LastGenOutput>POSModels.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
-    <None Include="Data\DataBase\POSDB" />
-    <EntityDeploy Include="Data\Models\POSModels.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>POSModels.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Data\Models\POSModels.edmx.diagram">
-      <DependentUpon>POSModels.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

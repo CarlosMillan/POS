@@ -1,0 +1,16 @@
+﻿<Window x:Class="Gestionix.POS.GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="550" Width="950"
+        xmlns:ViewModels="clr-namespace:Gestionix.POS.GUI.ViewModels.POS"      
+        ResizeMode="{Binding IsResizable, Converter={StaticResource ResizableWindowBooleanConverter}}"
+        WindowState="{Binding IsMaximized, Converter={StaticResource MaximizedWindowBooleanConverter}, Mode=OneWay}"
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding TxtTitle}">
+       
+    <Window.DataContext>
+        <ViewModels:VMPOS />
+    </Window.DataContext>
+
+    <ContentControl Content="{Binding MainView}"/>
+</Window>

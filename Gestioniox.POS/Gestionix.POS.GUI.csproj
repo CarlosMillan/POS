@@ -57,8 +57,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\POS\MaximizedWindowBooleanConverter.cs" />
+    <Compile Include="Converters\POS\ResizableWindowBooleanConverter.cs" />
+    <Compile Include="Global\GenericCommand.cs" />
+    <Compile Include="Global\POSResources.cs" />
     <Compile Include="ViewModels\LogIn\VMLogin.cs" />
-    <Page Include="Login.xaml">
+    <Compile Include="ViewModels\POS\VMPOS.cs" />
+    <Compile Include="ViewModels\VMBase.cs" />
+    <Page Include="POS.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -66,8 +72,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="POS.xaml.cs">
+      <DependentUpon>POS.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\Dictionaries\Colors.xaml">
@@ -82,7 +88,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewModels\LogIn\Resources\RLogin.xaml">
+    <Page Include="ViewModels\LogIn\Views\RLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,9 +101,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gestionix.POS.Core\Gestionix.POS.Core.csproj">
+    <ProjectReference Include="..\Gestionix.POS.Core\Gestionix.POS.Core.Business.csproj">
       <Project>{58d2a7d9-17ef-4960-bbaa-e5bf9fafd80d}</Project>
-      <Name>Gestionix.POS.Core</Name>
+      <Name>Gestionix.POS.Core.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gestionix\Gestionix.csproj">
       <Project>{b5862873-513f-43ff-bc19-21f07de39b64}</Project>
@@ -112,9 +118,7 @@
     <Resource Include="Resources\Images\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Converters\" />
     <Folder Include="ViewModels\Sale\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

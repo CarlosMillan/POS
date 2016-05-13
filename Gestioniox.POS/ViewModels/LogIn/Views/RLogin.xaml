@@ -11,14 +11,14 @@
                 <TextBlock DockPanel.Dock="Top" Text="{StaticResource D_Login}" Margin="5,80" FontSize="32"/>
                 <TextBox Text="Username" Width="250" HorizontalAlignment="Left"/>
                 <TextBox Text="Password" Width="250" HorizontalAlignment="Left"/>
-                <Button Content="{StaticResource D_Login}" Style="{StaticResource GreenButton}" Width="200" HorizontalAlignment="Left" Margin="5,40"/>
+                <Button Content="{StaticResource D_Login}" Style="{StaticResource GreenButton}" Width="200" HorizontalAlignment="Left" Margin="5,40" Command="{Binding InCommand}"/>
             </StackPanel>
             <Separator DockPanel.Dock="Right" Background="LightGray" Width="350" Height="10">
                 <Separator.LayoutTransform>
                     <RotateTransform Angle="90" />
                 </Separator.LayoutTransform>
             </Separator>
-            <Image DockPanel.Dock="Right" Source="Pack://Application:,,,/Gestionix.POS.GUI;component/Resources/Images/Logo.png" Width="500" Height="150" HorizontalAlignment="Right"/>
+            <Image DockPanel.Dock="Right" Source="Pack://Application:,,,/Resources/Images/Logo.png" Width="500" Height="150" HorizontalAlignment="Right"/>
         </DockPanel>
     </DataTemplate>
 </ResourceDictionary>

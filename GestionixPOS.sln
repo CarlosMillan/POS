@@ -5,11 +5,13 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestionix", "Gestionix\Gestionix.csproj", "{B5862873-513F-43FF-BC19-21F07DE39B64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestionix.POS.Core", "Gestionix.POS.Core\Gestionix.POS.Core.csproj", "{58D2A7D9-17EF-4960-BBAA-E5BF9FAFD80D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestionix.POS.Core.Business", "Gestionix.POS.Core\Gestionix.POS.Core.Business.csproj", "{58D2A7D9-17EF-4960-BBAA-E5BF9FAFD80D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestionix.POS.GUI", "Gestioniox.POS\Gestionix.POS.GUI.csproj", "{ECDDA150-CE5F-459F-A95C-40896C93D3E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GxWPFControlsLib", "GxCustomControlsLib\GxWPFControlsLib.csproj", "{2F884167-6901-4E6A-B1E2-B75BFBE9F606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestionix.POS.Core.Data", "Gestionix.POS.Core.Data\Gestionix.POS.Core.Data.csproj", "{8200F4DB-5F2F-49C1-B8E0-A0F433F9BDBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2F884167-6901-4E6A-B1E2-B75BFBE9F606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F884167-6901-4E6A-B1E2-B75BFBE9F606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F884167-6901-4E6A-B1E2-B75BFBE9F606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8200F4DB-5F2F-49C1-B8E0-A0F433F9BDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8200F4DB-5F2F-49C1-B8E0-A0F433F9BDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8200F4DB-5F2F-49C1-B8E0-A0F433F9BDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8200F4DB-5F2F-49C1-B8E0-A0F433F9BDBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
