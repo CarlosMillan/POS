@@ -4,8 +4,7 @@
     {
         #region Ctors
         public PCAccess()
-        {
-            
+        {                        
         }
         #endregion
 

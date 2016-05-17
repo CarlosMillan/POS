@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ec880f069b443bbb60d4f17d674a881" Name="Diagram1">
+        <EntityTypeShape EntityType="POSDBModel.ApiKey" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.BackOfficeError" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.BranchOffice" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.BranchOfficeType" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.CashMovement" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.CashMovementType" Width="1.5" PointX="3.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.User" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.VCompanyRelationship" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.ApiKeyAppSetting" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSDBModel.SynchronizationLog" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <AssociationConnector Association="POSDBModel.FK_ApiKey_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_ApiKey_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_ApiKey_2_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_ApiKeyAppSettings_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_SynchronizationLog_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_BranchOffice_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_CashMovement_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_VCompanyRelationship_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_CashMovement_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_CashMovement_2_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_CashMovement_3_0" ManuallyRouted="false" />
+        <AssociationConnector Association="POSDBModel.FK_VCompanyRelationship_0_0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
