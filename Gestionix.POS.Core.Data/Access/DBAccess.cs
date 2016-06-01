@@ -5,5 +5,9 @@
         #region Ctors
         public DBAccess() { }
         #endregion
+
+        #region Public Methods
+
+        #endregion
     }
 }
