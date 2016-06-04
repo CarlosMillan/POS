@@ -17,13 +17,13 @@ namespace Gestionix.POS.Core.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CashMovementType()
         {
-            this.CashMovements = new HashSet<CashMovement>();
+            this.CashMovements = new HashSet<PMCashMovement>();
         }
     
         public string Type { get; set; }
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CashMovement> CashMovements { get; set; }
+        public virtual ICollection<PMCashMovement> CashMovements { get; set; }
     }
 }

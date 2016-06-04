@@ -12,14 +12,14 @@ namespace Gestionix.POS.Core.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class BranchOffice
+    public partial class PMBranchOffice
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BranchOffice()
+        public PMBranchOffice()
         {
-            this.ApiKeys = new HashSet<ApiKey>();
-            this.CashMovements = new HashSet<CashMovement>();
-            this.VCompanyRelationships = new HashSet<VCompanyRelationship>();
+            this.ApiKeys = new HashSet<PMApiKey>();
+            this.CashMovements = new HashSet<PMCashMovement>();
+            this.VCompanyRelationships = new HashSet<PMVCompanyRelationship>();
         }
     
         public string Branch { get; set; }
@@ -43,11 +43,11 @@ namespace Gestionix.POS.Core.Data
         public string Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApiKey> ApiKeys { get; set; }
-        public virtual BranchOfficeType BranchOfficeType { get; set; }
+        public virtual ICollection<PMApiKey> ApiKeys { get; set; }
+        public virtual PMBranchOfficeType BranchOfficeType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CashMovement> CashMovements { get; set; }
+        public virtual ICollection<PMCashMovement> CashMovements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VCompanyRelationship> VCompanyRelationships { get; set; }
+        public virtual ICollection<PMVCompanyRelationship> VCompanyRelationships { get; set; }
     }
 }

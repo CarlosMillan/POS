@@ -12,12 +12,12 @@ namespace Gestionix.POS.Core.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class SynchronizationLog
+    public partial class PMSynchronizationLog
     {
         public string ApiKey { get; set; }
         public long LocalRegisterDate { get; set; }
         public long ServerRegisterDate { get; set; }
     
-        public virtual ApiKey ApiKey1 { get; set; }
+        public virtual PMApiKey ApiKey1 { get; set; }
     }
 }

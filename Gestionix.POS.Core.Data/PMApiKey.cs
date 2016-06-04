@@ -12,18 +12,24 @@ namespace Gestionix.POS.Core.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class BranchOfficeType
+    public partial class PMApiKey
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BranchOfficeType()
+        public PMApiKey()
         {
-            this.BranchOffices = new HashSet<BranchOffice>();
+            this.SynchronizationLogs = new HashSet<PMSynchronizationLog>();
         }
     
-        public string Type { get; set; }
-        public Nullable<long> Description { get; set; }
+        public string ApiKey1 { get; set; }
+        public string Company { get; set; }
+        public string Branch { get; set; }
+        public string User { get; set; }
     
+        public virtual PMVCompanyRelationship VCompanyRelationship { get; set; }
+        public virtual PMBranchOffice BranchOffice { get; set; }
+        public virtual PMUser User1 { get; set; }
+        public virtual PMApiKeyAppSetting ApiKeyAppSetting { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BranchOffice> BranchOffices { get; set; }
+        public virtual ICollection<PMSynchronizationLog> SynchronizationLogs { get; set; }
     }
 }

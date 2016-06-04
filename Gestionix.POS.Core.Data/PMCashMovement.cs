@@ -12,7 +12,7 @@ namespace Gestionix.POS.Core.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class CashMovement
+    public partial class PMCashMovement
     {
         public string Movement { get; set; }
         public string CashMovementType { get; set; }
@@ -25,9 +25,9 @@ namespace Gestionix.POS.Core.Data
         public string Company { get; set; }
         public string Branch { get; set; }
     
-        public virtual BranchOffice BranchOffice { get; set; }
+        public virtual PMBranchOffice BranchOffice { get; set; }
         public virtual CashMovementType CashMovementType1 { get; set; }
-        public virtual VCompanyRelationship VCompanyRelationship { get; set; }
-        public virtual User User1 { get; set; }
+        public virtual PMVCompanyRelationship VCompanyRelationship { get; set; }
+        public virtual PMUser User1 { get; set; }
     }
 }

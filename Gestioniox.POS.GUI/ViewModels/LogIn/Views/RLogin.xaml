@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Gestionix.POS.GUI.ViewModels.Login">
+                    xmlns:local="clr-namespace:Gestionix.POS.GUI.ViewModels.Login"
+                    xmlns:GxControls="clr-namespace:Gestionix.POS.GUI;assembly=GxWPFControlsLib">
     
     <DataTemplate DataType="{x:Type local:VMLogin}">
         <DockPanel>
@@ -9,9 +10,10 @@
             </TextBlock>
             <StackPanel DockPanel.Dock="Right" Width="300">
                 <TextBlock DockPanel.Dock="Top" Text="{StaticResource D_Login}" Margin="5,80" FontSize="32"/>
-                <TextBox Text="Username" Width="250" HorizontalAlignment="Left"/>
-                <TextBox Text="Password" Width="250" HorizontalAlignment="Left"/>
-                <Button Content="{StaticResource D_Login}" Style="{StaticResource GreenButton}" Width="200" HorizontalAlignment="Left" Margin="5,40" Command="{Binding InCommand}"/>
+                <GxControls:HintTextBox HintText="Usuario" Text="{Binding TxtUsername, Mode=TwoWay}" Width="250" HorizontalAlignment="Left"/>
+                <GxControls:HintPasswordBox HintText="Contraseña" Text="{Binding TxtPassword, Mode=TwoWay}" Width="250" HorizontalAlignment="Left"/>
+                <GxControls:StatesButton Content="{StaticResource D_Login}" Background="{StaticResource Button_BGGreenColor}" Width="200" HorizontalAlignment="Left" Margin="5,40" Command="{Binding LogInCommand}"
+                                         IsBusy="{Binding IsLogging, Mode=TwoWay}"/>
             </StackPanel>
             <Separator DockPanel.Dock="Right" Background="LightGray" Width="350" Height="10">
                 <Separator.LayoutTransform>

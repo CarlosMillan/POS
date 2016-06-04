@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="POSDBModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Users\carlos\github\POS\Gestionix.POS.Core.Data\DataBase\POSDB" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Models.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Users\carlos\github\POS\Gestionix.POS.Core.Data\DataBase\POSDB" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ApiKey">
           <Key>
             <PropertyRef Name="ApiKey" />
@@ -286,7 +286,7 @@ warning 6002: The table/view 'main.SynchronizationLog' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="POSDBModelStoreContainer">
+        <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="ApiKey" EntityType="Self.ApiKey" store:Type="Tables" />
           <EntitySet Name="BackOfficeError" EntityType="Self.BackOfficeError" store:Type="Tables" />
           <EntitySet Name="BranchOffice" EntityType="Self.BranchOffice" store:Type="Tables" />
@@ -365,12 +365,11 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
             <End Role="VCompanyRelationship" EntitySet="VCompanyRelationship" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="POSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ApiKey">
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PMApiKey">
           <Key>
             <PropertyRef Name="ApiKey1" />
           </Key>
@@ -384,7 +383,7 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           <NavigationProperty Name="ApiKeyAppSetting" Relationship="Self.FK_ApiKeyAppSettings_0_0" FromRole="ApiKey" ToRole="ApiKeyAppSettings" />
           <NavigationProperty Name="SynchronizationLogs" Relationship="Self.FK_SynchronizationLog_0_0" FromRole="ApiKey" ToRole="SynchronizationLog" />
         </EntityType>
-        <EntityType Name="BackOfficeError">
+        <EntityType Name="PMBackOfficeError">
           <Key>
             <PropertyRef Name="Error" />
           </Key>
@@ -396,7 +395,7 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           <Property Name="StackTrace" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="RegisterDate" Type="Int64" />
         </EntityType>
-        <EntityType Name="BranchOffice">
+        <EntityType Name="PMBranchOffice">
           <Key>
             <PropertyRef Name="Branch" />
           </Key>
@@ -424,7 +423,7 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           <NavigationProperty Name="CashMovements" Relationship="Self.FK_CashMovement_1_0" FromRole="BranchOffice" ToRole="CashMovement" />
           <NavigationProperty Name="VCompanyRelationships" Relationship="Self.FK_VCompanyRelationship_1_0" FromRole="BranchOffice" ToRole="VCompanyRelationship" />
         </EntityType>
-        <EntityType Name="BranchOfficeType">
+        <EntityType Name="PMBranchOfficeType">
           <Key>
             <PropertyRef Name="Type" />
           </Key>
@@ -432,7 +431,7 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           <Property Name="Description" Type="Int64" />
           <NavigationProperty Name="BranchOffices" Relationship="Self.FK_BranchOffice_0_0" FromRole="BranchOfficeType" ToRole="BranchOffice" />
         </EntityType>
-        <EntityType Name="CashMovement">
+        <EntityType Name="PMCashMovement">
           <Key>
             <PropertyRef Name="Movement" />
           </Key>
@@ -459,7 +458,7 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           <Property Name="Description" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CashMovements" Relationship="Self.FK_CashMovement_0_0" FromRole="CashMovementType" ToRole="CashMovement" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="PMUser">
           <Key>
             <PropertyRef Name="User1" />
           </Key>
@@ -477,7 +476,7 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           <NavigationProperty Name="CashMovements" Relationship="Self.FK_CashMovement_3_0" FromRole="User" ToRole="CashMovement" />
           <NavigationProperty Name="VCompanyRelationships" Relationship="Self.FK_VCompanyRelationship_0_0" FromRole="User" ToRole="VCompanyRelationship" />
         </EntityType>
-        <EntityType Name="VCompanyRelationship">
+        <EntityType Name="PMVCompanyRelationship">
           <Key>
             <PropertyRef Name="Company" />
           </Key>
@@ -500,7 +499,7 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           <NavigationProperty Name="CashMovements" Relationship="Self.FK_CashMovement_2_0" FromRole="VCompanyRelationship" ToRole="CashMovement" />
           <NavigationProperty Name="User1" Relationship="Self.FK_VCompanyRelationship_0_0" FromRole="VCompanyRelationship" ToRole="User" />
         </EntityType>
-        <EntityType Name="ApiKeyAppSetting">
+        <EntityType Name="PMApiKeyAppSetting">
           <Key>
             <PropertyRef Name="ApiKey" />
           </Key>
@@ -516,7 +515,7 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           <Property Name="UseTare" Type="Int64" />
           <NavigationProperty Name="ApiKey1" Relationship="Self.FK_ApiKeyAppSettings_0_0" FromRole="ApiKeyAppSettings" ToRole="ApiKey" />
         </EntityType>
-        <EntityType Name="SynchronizationLog">
+        <EntityType Name="PMSynchronizationLog">
           <Key>
             <PropertyRef Name="ApiKey" />
             <PropertyRef Name="LocalRegisterDate" />
@@ -528,8 +527,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           <NavigationProperty Name="ApiKey1" Relationship="Self.FK_SynchronizationLog_0_0" FromRole="SynchronizationLog" ToRole="ApiKey" />
         </EntityType>
         <Association Name="FK_ApiKey_0_0">
-          <End Role="VCompanyRelationship" Type="Self.VCompanyRelationship" Multiplicity="1" />
-          <End Role="ApiKey" Type="Self.ApiKey" Multiplicity="*" />
+          <End Role="VCompanyRelationship" Type="Models.PMVCompanyRelationship" Multiplicity="1" />
+          <End Role="ApiKey" Type="Models.PMApiKey" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="VCompanyRelationship">
               <PropertyRef Name="Company" />
@@ -540,8 +539,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ApiKey_1_0">
-          <End Role="BranchOffice" Type="Self.BranchOffice" Multiplicity="1" />
-          <End Role="ApiKey" Type="Self.ApiKey" Multiplicity="*" />
+          <End Role="BranchOffice" Type="Models.PMBranchOffice" Multiplicity="1" />
+          <End Role="ApiKey" Type="Models.PMApiKey" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BranchOffice">
               <PropertyRef Name="Branch" />
@@ -552,8 +551,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ApiKey_2_0">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ApiKey" Type="Self.ApiKey" Multiplicity="*" />
+          <End Role="User" Type="Models.PMUser" Multiplicity="1" />
+          <End Role="ApiKey" Type="Models.PMApiKey" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="User1" />
@@ -564,8 +563,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ApiKeyAppSettings_0_0">
-          <End Role="ApiKey" Type="Self.ApiKey" Multiplicity="1" />
-          <End Role="ApiKeyAppSettings" Type="Self.ApiKeyAppSetting" Multiplicity="0..1" />
+          <End Role="ApiKey" Type="Models.PMApiKey" Multiplicity="1" />
+          <End Role="ApiKeyAppSettings" Type="Models.PMApiKeyAppSetting" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="ApiKey">
               <PropertyRef Name="ApiKey1" />
@@ -576,8 +575,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SynchronizationLog_0_0">
-          <End Role="ApiKey" Type="Self.ApiKey" Multiplicity="1" />
-          <End Role="SynchronizationLog" Type="Self.SynchronizationLog" Multiplicity="*" />
+          <End Role="ApiKey" Type="Models.PMApiKey" Multiplicity="1" />
+          <End Role="SynchronizationLog" Type="Models.PMSynchronizationLog" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ApiKey">
               <PropertyRef Name="ApiKey1" />
@@ -588,8 +587,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BranchOffice_0_0">
-          <End Role="BranchOfficeType" Type="Self.BranchOfficeType" Multiplicity="0..1" />
-          <End Role="BranchOffice" Type="Self.BranchOffice" Multiplicity="*" />
+          <End Role="BranchOfficeType" Type="Models.PMBranchOfficeType" Multiplicity="0..1" />
+          <End Role="BranchOffice" Type="Models.PMBranchOffice" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BranchOfficeType">
               <PropertyRef Name="Type" />
@@ -600,8 +599,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CashMovement_1_0">
-          <End Role="BranchOffice" Type="Self.BranchOffice" Multiplicity="1" />
-          <End Role="CashMovement" Type="Self.CashMovement" Multiplicity="*" />
+          <End Role="BranchOffice" Type="Models.PMBranchOffice" Multiplicity="1" />
+          <End Role="CashMovement" Type="Models.PMCashMovement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BranchOffice">
               <PropertyRef Name="Branch" />
@@ -612,8 +611,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VCompanyRelationship_1_0">
-          <End Role="BranchOffice" Type="Self.BranchOffice" Multiplicity="1" />
-          <End Role="VCompanyRelationship" Type="Self.VCompanyRelationship" Multiplicity="*" />
+          <End Role="BranchOffice" Type="Models.PMBranchOffice" Multiplicity="1" />
+          <End Role="VCompanyRelationship" Type="Models.PMVCompanyRelationship" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BranchOffice">
               <PropertyRef Name="Branch" />
@@ -625,7 +624,7 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
         </Association>
         <Association Name="FK_CashMovement_0_0">
           <End Role="CashMovementType" Type="Self.CashMovementType" Multiplicity="1" />
-          <End Role="CashMovement" Type="Self.CashMovement" Multiplicity="*" />
+          <End Role="CashMovement" Type="Models.PMCashMovement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CashMovementType">
               <PropertyRef Name="Type" />
@@ -636,8 +635,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CashMovement_2_0">
-          <End Role="VCompanyRelationship" Type="Self.VCompanyRelationship" Multiplicity="1" />
-          <End Role="CashMovement" Type="Self.CashMovement" Multiplicity="*" />
+          <End Role="VCompanyRelationship" Type="Models.PMVCompanyRelationship" Multiplicity="1" />
+          <End Role="CashMovement" Type="Models.PMCashMovement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="VCompanyRelationship">
               <PropertyRef Name="Company" />
@@ -648,8 +647,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CashMovement_3_0">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="CashMovement" Type="Self.CashMovement" Multiplicity="*" />
+          <End Role="User" Type="Models.PMUser" Multiplicity="1" />
+          <End Role="CashMovement" Type="Models.PMCashMovement" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="User1" />
@@ -660,8 +659,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VCompanyRelationship_0_0">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="VCompanyRelationship" Type="Self.VCompanyRelationship" Multiplicity="*" />
+          <End Role="User" Type="Models.PMUser" Multiplicity="1" />
+          <End Role="VCompanyRelationship" Type="Models.PMVCompanyRelationship" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="User1" />
@@ -672,63 +671,63 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ApiKeys" EntityType="Self.ApiKey" />
-          <EntitySet Name="BackOfficeErrors" EntityType="Self.BackOfficeError" />
-          <EntitySet Name="BranchOffices" EntityType="Self.BranchOffice" />
-          <EntitySet Name="BranchOfficeTypes" EntityType="Self.BranchOfficeType" />
-          <EntitySet Name="CashMovements" EntityType="Self.CashMovement" />
+          <EntitySet Name="PMApiKeys" EntityType="Models.PMApiKey" />
+          <EntitySet Name="PMBackOfficeErrors" EntityType="Models.PMBackOfficeError" />
+          <EntitySet Name="PMBranchOffices" EntityType="Models.PMBranchOffice" />
+          <EntitySet Name="PMBranchOfficeTypes" EntityType="Models.PMBranchOfficeType" />
+          <EntitySet Name="PMCashMovements" EntityType="Models.PMCashMovement" />
           <EntitySet Name="CashMovementTypes" EntityType="Self.CashMovementType" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="VCompanyRelationships" EntityType="Self.VCompanyRelationship" />
-          <EntitySet Name="ApiKeyAppSettings" EntityType="Self.ApiKeyAppSetting" />
-          <EntitySet Name="SynchronizationLogs" EntityType="Self.SynchronizationLog" />
+          <EntitySet Name="PMUsers" EntityType="Models.PMUser" />
+          <EntitySet Name="PMVCompanyRelationships" EntityType="Models.PMVCompanyRelationship" />
+          <EntitySet Name="PMApiKeyAppSettings" EntityType="Models.PMApiKeyAppSetting" />
+          <EntitySet Name="PMSynchronizationLogs" EntityType="Models.PMSynchronizationLog" />
           <AssociationSet Name="FK_ApiKey_0_0" Association="Self.FK_ApiKey_0_0">
-            <End Role="VCompanyRelationship" EntitySet="VCompanyRelationships" />
-            <End Role="ApiKey" EntitySet="ApiKeys" />
+            <End Role="VCompanyRelationship" EntitySet="PMVCompanyRelationships" />
+            <End Role="ApiKey" EntitySet="PMApiKeys" />
           </AssociationSet>
           <AssociationSet Name="FK_ApiKey_1_0" Association="Self.FK_ApiKey_1_0">
-            <End Role="BranchOffice" EntitySet="BranchOffices" />
-            <End Role="ApiKey" EntitySet="ApiKeys" />
+            <End Role="BranchOffice" EntitySet="PMBranchOffices" />
+            <End Role="ApiKey" EntitySet="PMApiKeys" />
           </AssociationSet>
           <AssociationSet Name="FK_ApiKey_2_0" Association="Self.FK_ApiKey_2_0">
-            <End Role="User" EntitySet="Users" />
-            <End Role="ApiKey" EntitySet="ApiKeys" />
+            <End Role="User" EntitySet="PMUsers" />
+            <End Role="ApiKey" EntitySet="PMApiKeys" />
           </AssociationSet>
           <AssociationSet Name="FK_ApiKeyAppSettings_0_0" Association="Self.FK_ApiKeyAppSettings_0_0">
-            <End Role="ApiKey" EntitySet="ApiKeys" />
-            <End Role="ApiKeyAppSettings" EntitySet="ApiKeyAppSettings" />
+            <End Role="ApiKey" EntitySet="PMApiKeys" />
+            <End Role="ApiKeyAppSettings" EntitySet="PMApiKeyAppSettings" />
           </AssociationSet>
           <AssociationSet Name="FK_SynchronizationLog_0_0" Association="Self.FK_SynchronizationLog_0_0">
-            <End Role="ApiKey" EntitySet="ApiKeys" />
-            <End Role="SynchronizationLog" EntitySet="SynchronizationLogs" />
+            <End Role="ApiKey" EntitySet="PMApiKeys" />
+            <End Role="SynchronizationLog" EntitySet="PMSynchronizationLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_BranchOffice_0_0" Association="Self.FK_BranchOffice_0_0">
-            <End Role="BranchOfficeType" EntitySet="BranchOfficeTypes" />
-            <End Role="BranchOffice" EntitySet="BranchOffices" />
+            <End Role="BranchOfficeType" EntitySet="PMBranchOfficeTypes" />
+            <End Role="BranchOffice" EntitySet="PMBranchOffices" />
           </AssociationSet>
           <AssociationSet Name="FK_CashMovement_1_0" Association="Self.FK_CashMovement_1_0">
-            <End Role="BranchOffice" EntitySet="BranchOffices" />
-            <End Role="CashMovement" EntitySet="CashMovements" />
+            <End Role="BranchOffice" EntitySet="PMBranchOffices" />
+            <End Role="CashMovement" EntitySet="PMCashMovements" />
           </AssociationSet>
           <AssociationSet Name="FK_VCompanyRelationship_1_0" Association="Self.FK_VCompanyRelationship_1_0">
-            <End Role="BranchOffice" EntitySet="BranchOffices" />
-            <End Role="VCompanyRelationship" EntitySet="VCompanyRelationships" />
+            <End Role="BranchOffice" EntitySet="PMBranchOffices" />
+            <End Role="VCompanyRelationship" EntitySet="PMVCompanyRelationships" />
           </AssociationSet>
           <AssociationSet Name="FK_CashMovement_0_0" Association="Self.FK_CashMovement_0_0">
             <End Role="CashMovementType" EntitySet="CashMovementTypes" />
-            <End Role="CashMovement" EntitySet="CashMovements" />
+            <End Role="CashMovement" EntitySet="PMCashMovements" />
           </AssociationSet>
           <AssociationSet Name="FK_CashMovement_2_0" Association="Self.FK_CashMovement_2_0">
-            <End Role="VCompanyRelationship" EntitySet="VCompanyRelationships" />
-            <End Role="CashMovement" EntitySet="CashMovements" />
+            <End Role="VCompanyRelationship" EntitySet="PMVCompanyRelationships" />
+            <End Role="CashMovement" EntitySet="PMCashMovements" />
           </AssociationSet>
           <AssociationSet Name="FK_CashMovement_3_0" Association="Self.FK_CashMovement_3_0">
-            <End Role="User" EntitySet="Users" />
-            <End Role="CashMovement" EntitySet="CashMovements" />
+            <End Role="User" EntitySet="PMUsers" />
+            <End Role="CashMovement" EntitySet="PMCashMovements" />
           </AssociationSet>
           <AssociationSet Name="FK_VCompanyRelationship_0_0" Association="Self.FK_VCompanyRelationship_0_0">
-            <End Role="User" EntitySet="Users" />
-            <End Role="VCompanyRelationship" EntitySet="VCompanyRelationships" />
+            <End Role="User" EntitySet="PMUsers" />
+            <End Role="VCompanyRelationship" EntitySet="PMVCompanyRelationships" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -736,9 +735,9 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="POSDBModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="ApiKeys">
-            <EntityTypeMapping TypeName="POSDBModel.ApiKey">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="PMApiKeys">
+            <EntityTypeMapping TypeName="Models.PMApiKey">
               <MappingFragment StoreEntitySet="ApiKey">
                 <ScalarProperty Name="ApiKey1" ColumnName="ApiKey" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
@@ -747,8 +746,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BackOfficeErrors">
-            <EntityTypeMapping TypeName="POSDBModel.BackOfficeError">
+          <EntitySetMapping Name="PMBackOfficeErrors">
+            <EntityTypeMapping TypeName="Models.PMBackOfficeError">
               <MappingFragment StoreEntitySet="BackOfficeError">
                 <ScalarProperty Name="Error" ColumnName="Error" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
@@ -760,8 +759,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BranchOffices">
-            <EntityTypeMapping TypeName="POSDBModel.BranchOffice">
+          <EntitySetMapping Name="PMBranchOffices">
+            <EntityTypeMapping TypeName="Models.PMBranchOffice">
               <MappingFragment StoreEntitySet="BranchOffice">
                 <ScalarProperty Name="Branch" ColumnName="Branch" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
@@ -785,16 +784,16 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BranchOfficeTypes">
-            <EntityTypeMapping TypeName="POSDBModel.BranchOfficeType">
+          <EntitySetMapping Name="PMBranchOfficeTypes">
+            <EntityTypeMapping TypeName="Models.PMBranchOfficeType">
               <MappingFragment StoreEntitySet="BranchOfficeType">
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CashMovements">
-            <EntityTypeMapping TypeName="POSDBModel.CashMovement">
+          <EntitySetMapping Name="PMCashMovements">
+            <EntityTypeMapping TypeName="Models.PMCashMovement">
               <MappingFragment StoreEntitySet="CashMovement">
                 <ScalarProperty Name="Movement" ColumnName="Movement" />
                 <ScalarProperty Name="CashMovementType" ColumnName="CashMovementType" />
@@ -810,15 +809,15 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CashMovementTypes">
-            <EntityTypeMapping TypeName="POSDBModel.CashMovementType">
+            <EntityTypeMapping TypeName="Models.CashMovementType">
               <MappingFragment StoreEntitySet="CashMovementType">
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="POSDBModel.User">
+          <EntitySetMapping Name="PMUsers">
+            <EntityTypeMapping TypeName="Models.PMUser">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="User1" ColumnName="User" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -833,8 +832,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VCompanyRelationships">
-            <EntityTypeMapping TypeName="POSDBModel.VCompanyRelationship">
+          <EntitySetMapping Name="PMVCompanyRelationships">
+            <EntityTypeMapping TypeName="Models.PMVCompanyRelationship">
               <MappingFragment StoreEntitySet="VCompanyRelationship">
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="Branch" ColumnName="Branch" />
@@ -853,8 +852,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ApiKeyAppSettings">
-            <EntityTypeMapping TypeName="POSDBModel.ApiKeyAppSetting">
+          <EntitySetMapping Name="PMApiKeyAppSettings">
+            <EntityTypeMapping TypeName="Models.PMApiKeyAppSetting">
               <MappingFragment StoreEntitySet="ApiKeyAppSettings">
                 <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
                 <ScalarProperty Name="Serie" ColumnName="Serie" />
@@ -869,8 +868,8 @@ FROM [SynchronizationLog] AS [SynchronizationLog]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SynchronizationLogs">
-            <EntityTypeMapping TypeName="POSDBModel.SynchronizationLog">
+          <EntitySetMapping Name="PMSynchronizationLogs">
+            <EntityTypeMapping TypeName="Models.PMSynchronizationLog">
               <MappingFragment StoreEntitySet="SynchronizationLog">
                 <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
                 <ScalarProperty Name="LocalRegisterDate" ColumnName="LocalRegisterDate" />

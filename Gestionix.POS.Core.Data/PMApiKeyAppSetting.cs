@@ -12,7 +12,7 @@ namespace Gestionix.POS.Core.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ApiKeyAppSetting
+    public partial class PMApiKeyAppSetting
     {
         public string ApiKey { get; set; }
         public string Serie { get; set; }
@@ -25,6 +25,6 @@ namespace Gestionix.POS.Core.Data
         public Nullable<long> BulkSales { get; set; }
         public Nullable<long> UseTare { get; set; }
     
-        public virtual ApiKey ApiKey1 { get; set; }
+        public virtual PMApiKey ApiKey1 { get; set; }
     }
 }

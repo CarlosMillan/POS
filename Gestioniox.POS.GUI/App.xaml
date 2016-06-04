@@ -1,7 +1,7 @@
 ﻿<Application x:Class="Gestionix.POS.GUI.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"             
-             xmlns:POSConverters="clr-namespace:Gestionix.POS.GUI.Converters.POS"
+             xmlns:POSConverters="clr-namespace:Gestionix.POS.GUI.Converters.POS"             
              StartupUri="POS.xaml" Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
@@ -16,6 +16,7 @@
 
             <Style TargetType="{x:Type Window}">
                 <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="13" />
             </Style>
         </ResourceDictionary>        
     </Application.Resources>

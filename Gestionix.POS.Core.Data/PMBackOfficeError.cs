@@ -12,7 +12,7 @@ namespace Gestionix.POS.Core.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class BackOfficeError
+    public partial class PMBackOfficeError
     {
         public string Error { get; set; }
         public string Company { get; set; }

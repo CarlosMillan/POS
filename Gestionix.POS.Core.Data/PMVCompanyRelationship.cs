@@ -12,13 +12,13 @@ namespace Gestionix.POS.Core.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VCompanyRelationship
+    public partial class PMVCompanyRelationship
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public VCompanyRelationship()
+        public PMVCompanyRelationship()
         {
-            this.ApiKeys = new HashSet<ApiKey>();
-            this.CashMovements = new HashSet<CashMovement>();
+            this.ApiKeys = new HashSet<PMApiKey>();
+            this.CashMovements = new HashSet<PMCashMovement>();
         }
     
         public string Company { get; set; }
@@ -37,10 +37,10 @@ namespace Gestionix.POS.Core.Data
         public string ApiKey { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApiKey> ApiKeys { get; set; }
-        public virtual BranchOffice BranchOffice { get; set; }
+        public virtual ICollection<PMApiKey> ApiKeys { get; set; }
+        public virtual PMBranchOffice BranchOffice { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CashMovement> CashMovements { get; set; }
-        public virtual User User1 { get; set; }
+        public virtual ICollection<PMCashMovement> CashMovements { get; set; }
+        public virtual PMUser User1 { get; set; }
     }
 }

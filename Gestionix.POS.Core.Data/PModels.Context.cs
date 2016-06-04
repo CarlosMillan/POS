@@ -25,15 +25,15 @@ namespace Gestionix.POS.Core.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ApiKey> ApiKeys { get; set; }
-        public virtual DbSet<BackOfficeError> BackOfficeErrors { get; set; }
-        public virtual DbSet<BranchOffice> BranchOffices { get; set; }
-        public virtual DbSet<BranchOfficeType> BranchOfficeTypes { get; set; }
-        public virtual DbSet<CashMovement> CashMovements { get; set; }
+        public virtual DbSet<PMApiKey> PMApiKeys { get; set; }
+        public virtual DbSet<PMBackOfficeError> PMBackOfficeErrors { get; set; }
+        public virtual DbSet<PMBranchOffice> PMBranchOffices { get; set; }
+        public virtual DbSet<PMBranchOfficeType> PMBranchOfficeTypes { get; set; }
+        public virtual DbSet<PMCashMovement> PMCashMovements { get; set; }
         public virtual DbSet<CashMovementType> CashMovementTypes { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<VCompanyRelationship> VCompanyRelationships { get; set; }
-        public virtual DbSet<ApiKeyAppSetting> ApiKeyAppSettings { get; set; }
-        public virtual DbSet<SynchronizationLog> SynchronizationLogs { get; set; }
+        public virtual DbSet<PMUser> PMUsers { get; set; }
+        public virtual DbSet<PMVCompanyRelationship> PMVCompanyRelationships { get; set; }
+        public virtual DbSet<PMApiKeyAppSetting> PMApiKeyAppSettings { get; set; }
+        public virtual DbSet<PMSynchronizationLog> PMSynchronizationLogs { get; set; }
     }
 }

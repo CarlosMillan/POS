@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gestionix.POS.GUI.ViewModels
 {
@@ -60,6 +56,12 @@ namespace Gestionix.POS.GUI.ViewModels
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected void RaiseEvent(object sender, EventHandler e)
+        {
+            if (e != null)
+                e(sender, new EventArgs());
         }
         #endregion
     }

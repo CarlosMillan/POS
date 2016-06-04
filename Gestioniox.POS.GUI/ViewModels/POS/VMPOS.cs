@@ -6,11 +6,14 @@ namespace Gestionix.POS.GUI.ViewModels.POS
 {
     public class VMPOS : VMBase
     {
-        #region Fields
-        private GenericCommand _loginaction;
+        #region Fields        
+        #region Views
+        private VMLogin _loginview;
+        #endregion
         private string _title;
         private bool _isresizable;
         private bool _ismaximized;
+        private bool _islogged;
         #endregion
 
         #region Properties        
@@ -55,10 +58,6 @@ namespace Gestionix.POS.GUI.ViewModels.POS
         #endregion
 
         #region Commands
-        public ICommand InCommand
-        {
-            get { return _loginaction; }
-        }
         #endregion
 
         #region Ctors
@@ -68,7 +67,7 @@ namespace Gestionix.POS.GUI.ViewModels.POS
         }
         #endregion
 
-        #region Helpers
+        #region Actions
         private void LoginAction()
         {
             TxtTitle = "Gestionox Punto de venta";
@@ -82,12 +81,23 @@ namespace Gestionix.POS.GUI.ViewModels.POS
         private void Initialize()
         {
             _title = POSResources.S("D_Login");
-            _loginaction = new GenericCommand(LoginAction);
-            VMLogin LoginView = new VMLogin();
-            LoginView.InCommand = _loginaction;
-            _mainview = LoginView;
+            _loginview = new VMLogin();
+            _loginview.OnLogIn += _loginview_OnLogIn;
+            _mainview = _loginview;
             _isresizable = false;
             _ismaximized = false;
+        }
+
+        private void _loginview_OnLogIn(object sender, EventArgs e)
+        {
+            try
+            {
+                LoginAction();
+            }
+            catch(Exception ex)
+            {
+                ErrorsManager.SaveException(ex);
+            }
         }
         #endregion
     }

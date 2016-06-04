@@ -24,7 +24,7 @@ namespace Gestionix.POS.GUI
         private Canvas _container;
         private bool _pending;
 
-        public static readonly DependencyProperty ParticleColorProperty = DependencyProperty.Register("ParticleColor", typeof(Brush), typeof(WaitingRing), new PropertyMetadata(null));
+        public static readonly DependencyProperty ParticleColorProperty = DependencyProperty.Register("ParticleColor", typeof(Brush), typeof(WaitingRing), new PropertyMetadata(Brushes.Black));
         public static readonly DependencyProperty ParticlesProperty = DependencyProperty.Register("Particles", typeof(int), typeof(WaitingRing), new PropertyMetadata(5));
         public static readonly DependencyProperty IsActivatedProperty = DependencyProperty.Register("IsActivated", typeof(bool), typeof(WaitingRing), new FrameworkPropertyMetadata(false, OnIsActivatePropertyChanged));
 

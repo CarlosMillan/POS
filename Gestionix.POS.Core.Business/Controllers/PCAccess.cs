@@ -1,4 +1,9 @@
-﻿namespace Gestionix.POS.Core.Controllers
+﻿using Gestionix.POS.Core.Data;
+using Gestionix.POS.Core.Data.Access;
+using System;
+using System.Security.Cryptography;
+
+namespace Gestionix.POS.Core.Controllers
 {
     public class PCAccess
     {
@@ -11,7 +16,19 @@
         #region Public Methods
         public bool Authenticate(string username, string password)
         {
-            //TODO:
+            try
+            {
+                DBAccess Db = new DBAccess();                
+                PMUser User = Db.GetUser(username, Functions.CreateMD5(password));
+
+                if(!String.IsNullOrEmpty(User.User1))
+                    return true;
+            }
+            catch(Exception ex)
+            {
+                ErrorsManager.SaveException(ex);
+            }
+
             return false;
         }
 
