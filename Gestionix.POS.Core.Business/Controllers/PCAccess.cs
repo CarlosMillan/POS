@@ -7,9 +7,14 @@ namespace Gestionix.POS.Core.Controllers
 {
     public class PCAccess
     {
+        #region Fields
+        private DBAccess _dbaccess;
+        #endregion
+
         #region Ctors
         public PCAccess()
-        {                        
+        {
+            _dbaccess = new DBAccess();
         }
         #endregion
 
@@ -17,9 +22,8 @@ namespace Gestionix.POS.Core.Controllers
         public bool Authenticate(string username, string password)
         {
             try
-            {
-                DBAccess Db = new DBAccess();                
-                PMUser User = Db.GetUser(username, Functions.CreateMD5(password));
+            {                               
+                PMUser User = _dbaccess.GetUser(username, Functions.CreateMD5(password));
 
                 if(!String.IsNullOrEmpty(User.User1))
                     return true;
@@ -34,7 +38,8 @@ namespace Gestionix.POS.Core.Controllers
 
         public void LogIn(string username, string password)
         {
-            //TODO:
+            if (IsFirstUser())
+                DownloadInitalUserInfo(username, password);
         }
 
         public void OpenCashRegister()
@@ -49,9 +54,30 @@ namespace Gestionix.POS.Core.Controllers
         #endregion
 
         #region Helpers
-        private void DownloadInitalUserInfo()
+        private bool IsFirstUser()
         {
-            //TOOD:
+            try
+            {
+                return !_dbaccess.AreThereUsers();
+            }
+            catch(Exception ex)
+            {
+                ErrorsManager.SaveException(ex);
+            }
+
+            return true;
+        }
+
+        private void DownloadInitalUserInfo(string username, string password)
+        {
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                ErrorsManager.SaveException(ex);
+            }
         }
 
         /// <summary>

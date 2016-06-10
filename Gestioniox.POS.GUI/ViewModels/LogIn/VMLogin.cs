@@ -66,14 +66,14 @@ namespace Gestionix.POS.GUI.ViewModels.Login
         {
             try
             {                
-                bool IsAuthenticated = await System.Threading.Tasks.Task.Run(() =>  _accesscontroller.Authenticate(TxtUsername, TxtPassword) );                
+                await System.Threading.Tasks.Task.Run(() =>  _accesscontroller.LogIn(TxtUsername, TxtPassword) );                
 
-                if (IsAuthenticated)
-                {
-                    //TODO:
-                    IsLogged = true;
-                }
-                else
+                //if (IsAuthenticated)
+                //{
+                //    //TODO:
+                //    IsLogged = true;
+                //}
+                //else
                     IsLogging = false;
             }
             catch (Exception ex)

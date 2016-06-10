@@ -6,9 +6,6 @@ namespace Gestionix.POS.Core.Data.Access
 {
     public class DBAccess
     {
-        //static readonly Func<Entities, IQueryable<PMUser>> s_compiledQuery1 =
-        //                CompiledQuery.Compile<Entities, IQueryable<PMUser>>(ctx => (IQueryable<PMUser>)ctx.PMUsers.First());
-
         #region Ctors
         public DBAccess() { }
         #endregion
@@ -18,12 +15,31 @@ namespace Gestionix.POS.Core.Data.Access
         {
             try
             {
-                using (var DBEntities = new Entities())
-                {                    
-                    IQueryable<PMUser> Result = DBEntities.PMUsers.Where(u => u.Email == username && u.Password == md5password);                    
+                using (Entities DBEntities = new Entities())
+                {
+                    IQueryable<PMUser> Result = DBEntities.PMUsers.Where(u => u.Email == username && u.Password == md5password);
 
                     if (Result.Count() > 0)
                         return Result.First();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorsManager.SaveException(ex);
+            }
+
+            return new PMUser();
+        }
+
+        public bool AreThereUsers()
+        {
+            bool Response = false;
+
+            try
+            {
+                using (Entities DBEntities = new Entities())
+                {
+                    Response = DBEntities.PMUsers.Count() == 0 ? false:true;
                 }
             }
             catch(Exception ex)
@@ -31,7 +47,7 @@ namespace Gestionix.POS.Core.Data.Access
                 ErrorsManager.SaveException(ex);
             }
 
-            return new PMUser();
+            return Response;
         }
         #endregion
     }
