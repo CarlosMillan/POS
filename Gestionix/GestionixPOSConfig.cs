@@ -3,7 +3,7 @@
     public static class GestionixPOSConfig
     {
         #region Fields
-        public static readonly decimal ErrorRange = 0.1M;
+        public static readonly decimal ErrorRange = 0.02M;
         #endregion
 
         #region Properties
@@ -17,6 +17,7 @@
         public static string POSVerionId { get; set; }
         public static System.Collections.Specialized.StringCollection RecentClients { get; set; }
         public static string Currency { get; set; }
+        public static bool EFInitialized { get; set; }
         #endregion
     }
 }

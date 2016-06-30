@@ -80,6 +80,7 @@ namespace Gestionix.POS.GUI.ViewModels.POS
         #region Helpers
         private void Initialize()
         {
+            GestionixPOSConfig.EFInitialized = false;
             _title = POSResources.S("D_Login");
             _loginview = new VMLogin();
             _loginview.OnLogIn += _loginview_OnLogIn;

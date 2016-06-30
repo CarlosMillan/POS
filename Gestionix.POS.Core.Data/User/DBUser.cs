@@ -2,12 +2,12 @@
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 
-namespace Gestionix.POS.Core.Data.Access
+namespace Gestionix.POS.Core.Data.User
 {
-    public class DBAccess
+    public class DBUser
     {
         #region Ctors
-        public DBAccess() { }
+        public DBUser() { }
         #endregion
 
         #region Public Methods   

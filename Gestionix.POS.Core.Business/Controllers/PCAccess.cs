@@ -1,5 +1,6 @@
-﻿using Gestionix.POS.Core.Data;
-using Gestionix.POS.Core.Data.Access;
+﻿using Gestionix.POS.Core.Business.Sync;
+using Gestionix.POS.Core.Data;
+using Gestionix.POS.Core.Data.User;
 using System;
 using System.Security.Cryptography;
 
@@ -8,22 +9,37 @@ namespace Gestionix.POS.Core.Controllers
     public class PCAccess
     {
         #region Fields
-        private DBAccess _dbaccess;
+        private DBUser _dbuser;
         #endregion
 
         #region Ctors
         public PCAccess()
         {
-            _dbaccess = new DBAccess();
+            _dbuser = new DBUser();            
         }
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// Se ejecuta cualquier instrucción SQL para que se inicialize el Entity Framewoark (EF), de lo contrario al hacer uso de la primera consulta a base de datos se tarda mucho. (Cold Query)
+        /// </summary>
+        public void InitializeEF()
+        {
+            try
+            {                
+                PMUser User = _dbuser.GetUser(String.Empty, String.Empty);
+            }
+            catch (Exception ex)
+            {
+                ErrorsManager.SaveException(ex);
+            }            
+        }
+
         public bool Authenticate(string username, string password)
         {
             try
             {                               
-                PMUser User = _dbaccess.GetUser(username, Functions.CreateMD5(password));
+                PMUser User = _dbuser.GetUser(username, Functions.CreateMD5(password));
 
                 if(!String.IsNullOrEmpty(User.User1))
                     return true;
@@ -58,7 +74,7 @@ namespace Gestionix.POS.Core.Controllers
         {
             try
             {
-                return !_dbaccess.AreThereUsers();
+                return !_dbuser.AreThereUsers();
             }
             catch(Exception ex)
             {
@@ -72,7 +88,8 @@ namespace Gestionix.POS.Core.Controllers
         {
             try
             {
-
+                SyncManager SManager = new SyncManager();
+                SManager.DownlodUserInfo(username, password);
             }
             catch(Exception ex)
             {

@@ -58,6 +58,12 @@ namespace Gestionix.POS.GUI.ViewModels.Login
             _islogged = false;
             _accesscontroller = new PCAccess();
             _logingcommand = new GenericCommand(LogInAction);
+
+            if (!GestionixPOSConfig.EFInitialized)
+            {
+                GestionixPOSConfig.EFInitialized = true;
+                _accesscontroller.InitializeEF();
+            }
         }
         #endregion
 
